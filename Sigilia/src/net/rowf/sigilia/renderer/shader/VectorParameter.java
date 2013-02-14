@@ -1,9 +1,14 @@
 package net.rowf.sigilia.renderer.shader;
 
+import java.nio.FloatBuffer;
+
 import android.opengl.GLES20;
 
-public enum MatrixParameter implements ShaderParameter<float[]> {
-	TRANSFORMATION ("uniform mat4", "uTransform", true, false);
+public enum VectorParameter implements ShaderParameter<FloatBuffer> {
+	VERTEX ("attribute vec4", "vPosition", true, false, 3),
+	NORMAL ("attribute vec4", "vNormal", true, false, 3),
+	TEXTURE_COORD ("attribute vec2", "vTexCoord", true, false, 2)	
+	
 	;
 	/* Note: This is mostly boilerplate for the 
 	 * various sorts of specific parameters. Any 
@@ -12,12 +17,14 @@ public enum MatrixParameter implements ShaderParameter<float[]> {
 	private String   decl;
 	private boolean  frag;
 	private boolean  vert;
+	private int      count;
 	
-	private MatrixParameter(String decl, String name, boolean frag, boolean vert) {
+	private VectorParameter(String decl, String name, boolean frag, boolean vert, int count) {
 		this.decl = decl;
 		this.name = name;
 		this.frag = frag;
 		this.vert = vert;
+		this.count = count;
 	}
 	
 	@Override
@@ -36,18 +43,20 @@ public enum MatrixParameter implements ShaderParameter<float[]> {
 	public boolean usedByVertex() {
 		return vert;
 	}
+	
 
 	@Override
-	public void set(float[] matrix, int location) {		
-		GLES20.glUniformMatrix4fv(location, 1, false, matrix, 0);
+	public void set(FloatBuffer object, int location) {
+		GLES20.glVertexAttribPointer(location, count, GLES20.GL_FLOAT, false, count * 4, object);
 	}
 
 	@Override
 	public void unset(int location) {
+		GLES20.glDisableVertexAttribArray(location);
 	}
 
 	@Override
-	public int getLocationIn(int program) {
-		return GLES20.glGetUniformLocation(program,name);
+	public int getLocationIn(int program) {		
+		return GLES20.glGetAttribLocation(program, name);
 	}
 }

@@ -1,6 +1,11 @@
 package net.rowf.sigilia.renderer.shader;
 
-public enum SamplerParameter implements ShaderParameter {
+import java.nio.FloatBuffer;
+
+import net.rowf.sigilia.renderer.model.Texture;
+import android.opengl.GLES20;
+
+public enum SamplerParameter implements ShaderParameter<Texture> {
 	TEXTURE ("uniform sampler2D", "uTexture", false, true);
 	;
 	/* Note: This is mostly boilerplate for the 
@@ -34,4 +39,22 @@ public enum SamplerParameter implements ShaderParameter {
 	public boolean usedByVertex() {
 		return vert;
 	}
+	
+	@Override
+	public void set(Texture texture, int location) {
+		// TODO: Using ordinal is risky if heavily multi-textured
+	    GLES20.glActiveTexture(GLES20.GL_TEXTURE0 + ordinal());
+	    GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, texture.handle);
+		GLES20.glUniform1i(location, ordinal());
+	}
+
+	@Override
+	public void unset(int location) {
+	}
+
+	@Override
+	public int getLocationIn(int program) {		
+		return GLES20.glGetUniformLocation(program, name);
+	}
+
 }
