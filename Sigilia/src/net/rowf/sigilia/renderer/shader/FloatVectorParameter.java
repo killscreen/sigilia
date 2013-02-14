@@ -1,7 +1,10 @@
 package net.rowf.sigilia.renderer.shader;
 
-public enum MatrixParameter implements ShaderParameter {
-	TRANSFORMATION ("uniform mat4", "uTransform", true, false);
+public enum FloatVectorParameter implements ShaderParameter {
+	POSITION ("attribute vec4", "vPosition", true, false),
+	NORMAL ("attribute vec4", "vNormal", true, false),
+	TEXTURE_COORD ("attribute vec2", "vTexCoord", true, false)	
+	
 	;
 	/* Note: This is mostly boilerplate for the 
 	 * various sorts of specific parameters. Any 
@@ -11,7 +14,7 @@ public enum MatrixParameter implements ShaderParameter {
 	private boolean  frag;
 	private boolean  vert;
 	
-	private MatrixParameter(String decl, String name, boolean frag, boolean vert) {
+	private FloatVectorParameter(String decl, String name, boolean frag, boolean vert) {
 		this.decl = decl;
 		this.name = name;
 		this.frag = frag;
