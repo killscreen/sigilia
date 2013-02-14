@@ -30,13 +30,16 @@ public class StandardRenderable implements Renderable {
 		Matrix.multiplyMM(matrix, 0, viewMatrix, 0, transform, 0);
 		
 		program.begin();
-		// TODO - convert to use a ParameterizedProgram?
+
 		program.set(MatrixParameter.TRANSFORMATION, matrix);
 		program.set(SamplerParameter.TEXTURE, texture);
 		program.set(VectorParameter.VERTEX, model.getVertexes());
 		program.set(VectorParameter.TEXTURE_COORD, model.getTexCoords());
+
+		// TODO: May as well move this to program?
 		GLES20.glDrawElements(GLES20.GL_TRIANGLES, model.getTriangleCount(), 
 				              GLES20.GL_UNSIGNED_SHORT, model.getDrawingOrder());
-		// TODO: GLES20.glDisableVertexAttribArray(vPosition);
+		
+		program.end();
 	}
 }
