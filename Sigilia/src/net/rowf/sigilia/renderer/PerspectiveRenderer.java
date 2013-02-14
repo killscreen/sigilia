@@ -4,8 +4,8 @@ import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
 import android.opengl.GLES20;
-import android.opengl.Matrix;
 import android.opengl.GLSurfaceView.Renderer;
+import android.opengl.Matrix;
 
 
 public class PerspectiveRenderer implements Renderer {
@@ -42,11 +42,11 @@ public class PerspectiveRenderer implements Renderer {
 
 	@Override
 	public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-		GLES20.glClearColor(0.0f, 0.0f, 0.75f, 1.0f);
+		GLES20.glClearColor(0.25f, 0.0f, 0.25f, 1.0f);
 		GLES20.glEnable(GLES20.GL_BLEND);
 		GLES20.glBlendFunc(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE_MINUS_SRC_ALPHA);
-		GLES20.glEnable(GLES20.GL_CULL_FACE);
-		GLES20.glCullFace(GLES20.GL_BACK);
+		GLES20.glDisable(GLES20.GL_CULL_FACE);
+		//GLES20.glCullFace(GLES20.GL_BACK);
 		initializer.initialize();
 	}
 	
@@ -57,7 +57,7 @@ public class PerspectiveRenderer implements Renderer {
         float[] look   = camera.getLookAt();
                 
         Matrix.frustumM(fovMatrix, 0, -aspect/2f, aspect/2f, -.5f, .5f, 1, 100);
-        Matrix.setLookAtM(eyeMatrix, 0, eye[0], eye[1], eye[2], look[0], look[1], look[2], up[0], up[1], up[2]);
+        Matrix.setLookAtM(eyeMatrix, 0, eye[0], eye[1], eye[2], look[0], look[1], look[2], up[0], up[1], up[2]);        
         Matrix.multiplyMM(viewMatrix, 0, fovMatrix, 0, eyeMatrix, 0);
 	}
 	

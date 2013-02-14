@@ -47,6 +47,7 @@ public enum VectorParameter implements ShaderParameter<FloatBuffer> {
 
 	@Override
 	public void set(FloatBuffer object, int location) {
+		GLES20.glEnableVertexAttribArray(location);
 		GLES20.glVertexAttribPointer(location, count, GLES20.GL_FLOAT, false, count * 4, object);
 	}
 

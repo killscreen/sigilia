@@ -50,6 +50,7 @@ public class ParameterizedProgram extends Program {
 			if ( isVertex && param.usedByVertex  ()) buf.append(param.getFullDeclaration());
 			if (!isVertex && param.usedByFragment()) buf.append(param.getFullDeclaration());
 		}
+		buf.append("precision mediump float;");
 		buf.append("void main() {");
 		buf.append(snippet);
 		buf.append("}");

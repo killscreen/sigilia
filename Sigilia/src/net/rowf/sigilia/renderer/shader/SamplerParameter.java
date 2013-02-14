@@ -1,7 +1,5 @@
 package net.rowf.sigilia.renderer.shader;
 
-import java.nio.FloatBuffer;
-
 import net.rowf.sigilia.renderer.model.Texture;
 import android.opengl.GLES20;
 
@@ -54,7 +52,7 @@ public enum SamplerParameter implements ShaderParameter<Texture> {
 
 	@Override
 	public int getLocationIn(int program) {		
-		return GLES20.glGetUniformLocation(program, name);
+		return GLES20.glGetAttribLocation(program, name);
 	}
 
 }
