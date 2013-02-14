@@ -16,7 +16,7 @@ public enum SamplerParameter implements ShaderParameter<Texture> {
 	private boolean  frag;
 	private boolean  vert;
 	
-	private SamplerParameter(String decl, String name, boolean frag, boolean vert) {
+	private SamplerParameter(String decl, String name, boolean vert, boolean frag) {
 		this.decl = decl;
 		this.name = name;
 		this.frag = frag;

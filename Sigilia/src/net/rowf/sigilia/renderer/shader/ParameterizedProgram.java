@@ -8,6 +8,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import android.opengl.GLES20;
+import android.util.Log;
 
 public class ParameterizedProgram extends Program {
 	private Set<ShaderParameter<?>> parameters = new HashSet<ShaderParameter<?>>();

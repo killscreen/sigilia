@@ -30,7 +30,7 @@ public class Billboard implements Model {
 		float w = width / 2;
 		float h = height / 2;
 		vertexes = BufferUtil.toBuffer(new float[] { 
-				-w,h, w,h, -w,-h, w,-h 
+				-w,h,5, w,h,5, -w,-h,5, w,-h,5 
 		}); 				
 	}
 	

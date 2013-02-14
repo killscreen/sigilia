@@ -10,19 +10,23 @@ import android.opengl.GLSurfaceView.Renderer;
 
 public class PerspectiveRenderer implements Renderer {
 	private RenderableProvider provider;
+	private RenderableInitializer initializer;
 	private Camera             camera;
 	private float[]            viewMatrix = new float[16];
     private float[]            fovMatrix = new float[16];
     private float[]            eyeMatrix = new float[16];
 	private int                width, height;
 	
-	public PerspectiveRenderer(RenderableProvider provider) {
+	public PerspectiveRenderer(RenderableProvider provider, RenderableInitializer initializer) {
 		super();
 		this.provider = provider;
+		this.initializer = initializer;
+		this.camera = new StandardCamera();
 	}
 
 	@Override
 	public void onDrawFrame(GL10 gl) {
+		GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);
 		computeViewMatrix();
 		for (Renderable r : provider.getOrderedRenderables(camera)) {
 			r.render(viewMatrix);
@@ -38,11 +42,12 @@ public class PerspectiveRenderer implements Renderer {
 
 	@Override
 	public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-		GLES20.glClearColor(0.0f, 0.0f, 0.25f, 1.0f);
+		GLES20.glClearColor(0.0f, 0.0f, 0.75f, 1.0f);
 		GLES20.glEnable(GLES20.GL_BLEND);
 		GLES20.glBlendFunc(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE_MINUS_SRC_ALPHA);
 		GLES20.glEnable(GLES20.GL_CULL_FACE);
 		GLES20.glCullFace(GLES20.GL_BACK);
+		initializer.initialize();
 	}
 	
 	private void computeViewMatrix() {        
@@ -58,6 +63,10 @@ public class PerspectiveRenderer implements Renderer {
 	
 	public interface RenderableProvider {
 		public Iterable<Renderable> getOrderedRenderables(Camera camera);
+	}
+	
+	public interface RenderableInitializer {
+		public void initialize();
 	}
 	
 	public interface Renderable {

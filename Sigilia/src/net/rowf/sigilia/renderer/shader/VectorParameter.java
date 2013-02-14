@@ -19,7 +19,7 @@ public enum VectorParameter implements ShaderParameter<FloatBuffer> {
 	private boolean  vert;
 	private int      count;
 	
-	private VectorParameter(String decl, String name, boolean frag, boolean vert, int count) {
+	private VectorParameter(String decl, String name, boolean vert, boolean frag, int count) {
 		this.decl = decl;
 		this.name = name;
 		this.frag = frag;

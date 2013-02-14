@@ -37,7 +37,7 @@ public class StandardRenderable implements Renderable {
 		program.set(VectorParameter.TEXTURE_COORD, model.getTexCoords());
 
 		// TODO: May as well move this to program?
-		GLES20.glDrawElements(GLES20.GL_TRIANGLES, model.getTriangleCount(), 
+		GLES20.glDrawElements(GLES20.GL_TRIANGLES, model.getTriangleCount() * 3, 
 				              GLES20.GL_UNSIGNED_SHORT, model.getDrawingOrder());
 		
 		program.end();

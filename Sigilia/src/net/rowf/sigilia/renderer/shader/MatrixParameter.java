@@ -13,7 +13,7 @@ public enum MatrixParameter implements ShaderParameter<float[]> {
 	private boolean  frag;
 	private boolean  vert;
 	
-	private MatrixParameter(String decl, String name, boolean frag, boolean vert) {
+	private MatrixParameter(String decl, String name, boolean vert, boolean frag) {
 		this.decl = decl;
 		this.name = name;
 		this.frag = frag;
