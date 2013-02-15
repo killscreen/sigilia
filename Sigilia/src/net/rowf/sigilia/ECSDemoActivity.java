@@ -6,7 +6,10 @@ import java.util.List;
 import net.rowf.sigilia.background.Background;
 import net.rowf.sigilia.game.Engine;
 import net.rowf.sigilia.game.Entity;
+import net.rowf.sigilia.game.component.Position;
+import net.rowf.sigilia.game.component.physical.Motion;
 import net.rowf.sigilia.game.component.visual.Representation;
+import net.rowf.sigilia.game.engine.MotionEngine;
 import net.rowf.sigilia.game.engine.RenderingEngine;
 import net.rowf.sigilia.game.entity.StandardEntity;
 import net.rowf.sigilia.renderer.PerspectiveRenderer;
@@ -20,8 +23,8 @@ import net.rowf.sigilia.renderer.shader.Program;
 import net.rowf.sigilia.renderer.shader.program.FlatTextureShader;
 import android.app.Activity;
 import android.graphics.BitmapFactory;
-import android.opengl.GLSurfaceView.Renderer;
 import android.opengl.GLSurfaceView;
+import android.opengl.GLSurfaceView.Renderer;
 import android.opengl.Matrix;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -36,6 +39,7 @@ public class ECSDemoActivity extends Activity {
         
         final RenderingEngine renderingEngine = new RenderingEngine();
         final AssetInitializer initializer = new AssetInitializer();
+        final MotionEngine motion = new MotionEngine();
         
         Renderer r = new PerspectiveRenderer(renderingEngine, initializer);
         
@@ -46,13 +50,15 @@ public class ECSDemoActivity extends Activity {
         
         final List<Entity> entities = new ArrayList<Entity>();
         
+        
         new Thread() {
         	@Override
         	public void run() {
         		while (true) {
-	        		float timeStamp = SystemClock.elapsedRealtime() / 1000f;
+	        		float timeStamp = ((float) SystemClock.uptimeMillis()) / 1000f;
 	        		initializer.runCycle(entities, timeStamp);
 	        		renderingEngine.runCycle(entities, timeStamp);
+	        		motion.runCycle(entities, timeStamp);
         		}
         	}
         }.start();
@@ -100,20 +106,37 @@ public class ECSDemoActivity extends Activity {
     			final Texture           texture = new Texture(BitmapFactory.decodeResource(getResources(), R.drawable.cave_background));
     			final Model             model   = Billboard.UNIT;
     			for (int i = 0; i < 30; i++) {
-    				float x = -5f + 10f * ((float) i)/30f;
+    				final float x = -5f + 10f * ((float) i)/30f;
     				float y = -1f + 2f * ((float) i)/30f;
     				float z = 5;
-    				final float[] mat = new float[16];
-    				Matrix.setIdentityM(mat, 0);
-    				Matrix.translateM(mat, 0, x, y, z);
+//    				final float[] mat = new float[16];
+//    				Matrix.setIdentityM(mat, 0);
+//    				Matrix.translateM(mat, 0, x, y, z);
     				Representation rep = new Representation() {
+						float[] mat = new float[16];
 						@Override
 						public Renderable makeRenderable(Entity e) {
+							Matrix.setIdentityM(mat, 0);
+							Position p = e.getComponent(Position.class);
+							if (p != null) {
+								Matrix.translateM(mat, 0, p.getX(), p.getY(), p.getZ());
+							}
+//							Matrix.translateM(mat, 0, x, 0f, (float) Math.sin((float) SystemClock.uptimeMillis() / 1000f)*4 + 5f);
 							return new StandardRenderable(shader, model, mat, texture);
+						}    					
+    				};
+    				Motion motion = new Motion() {
+						@Override
+						public void move(Entity e, float timeStamp) {
+							Position p = e.getComponent(Position.class);
+							p.shift(0.0f, 0.0f,
+									(float) Math.sin(timeStamp) / 4f);
 						}    					
     				};
     				Entity ent = new StandardEntity();
     				ent.setComponent(Representation.class, rep);
+    				ent.setComponent(Position.class, new Position(x,-y,z));
+    				ent.setComponent(Motion.class, motion);
     				toIntroduce.add(ent);
     			}    			
     			initialized = true;

@@ -46,6 +46,7 @@ public class RenderingEngine implements Engine, RenderableProvider {
 		if (lastTimestamp + (1/MAXIMUM_FPS) > timeStamp) {
 			return;
 		}
+		lastTimestamp = timeStamp;
 
 		// TODO: Consider a double-buffer of these lists
 		//       (new ArrayList may mean a lot of allocations)

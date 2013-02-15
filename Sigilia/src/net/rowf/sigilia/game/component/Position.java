@@ -5,7 +5,7 @@ import net.rowf.sigilia.geometry.Vector;
 
 public class Position extends Vector implements Component {
 
-	protected Position(float x, float y, float z) {
+	public Position(float x, float y, float z) {
 		super(x, y, z);
 	}
 
