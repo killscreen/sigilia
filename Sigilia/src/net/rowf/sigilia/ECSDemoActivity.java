@@ -16,6 +16,7 @@ import net.rowf.sigilia.renderer.PerspectiveRenderer;
 import net.rowf.sigilia.renderer.PerspectiveRenderer.Renderable;
 import net.rowf.sigilia.renderer.PerspectiveRenderer.RenderableInitializer;
 import net.rowf.sigilia.renderer.StandardRenderable;
+import net.rowf.sigilia.renderer.model.Backdrop;
 import net.rowf.sigilia.renderer.model.Billboard;
 import net.rowf.sigilia.renderer.model.Model;
 import net.rowf.sigilia.renderer.model.Texture;
@@ -28,7 +29,6 @@ import android.opengl.GLSurfaceView.Renderer;
 import android.opengl.Matrix;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -103,23 +103,24 @@ public class ECSDemoActivity extends Activity {
 
     			
     			final FlatTextureShader shader  = new FlatTextureShader();
-    			final Texture           texture = new Texture(BitmapFactory.decodeResource(getResources(), R.drawable.cave_background));
-    			final Model             model   = Billboard.UNIT;
-    			for (int i = 0; i < 30; i++) {
-    				final float x = -5f + 10f * ((float) i)/30f;
-    				float y = -1f + 2f * ((float) i)/30f;
-    				float z = 5;
+    			final Texture           texture = new Texture(BitmapFactory.decodeResource(getResources(), R.drawable.monster));
+    			final Model             model   = new Billboard(2);
+    			for (int i = 0; i < 12; i++) {
+    				final float x = -5f + 10f * ((float) i)/12f;
+    				float y = -1f;// + 2f * ((float) i)/30f;
+    				float z = 5 + (float)Math.cos(i);
 //    				final float[] mat = new float[16];
 //    				Matrix.setIdentityM(mat, 0);
 //    				Matrix.translateM(mat, 0, x, y, z);
     				Representation rep = new Representation() {
-						float[] mat = new float[16];
+						
 						@Override
 						public Renderable makeRenderable(Entity e) {
+							float[] mat = new float[16];
 							Matrix.setIdentityM(mat, 0);
 							Position p = e.getComponent(Position.class);
 							if (p != null) {
-								Matrix.translateM(mat, 0, p.getX(), p.getY(), p.getZ());
+								Matrix.translateM(mat, 0, p.getX(), p.getY() + .5f, p.getZ());
 							}
 //							Matrix.translateM(mat, 0, x, 0f, (float) Math.sin((float) SystemClock.uptimeMillis() / 1000f)*4 + 5f);
 							return new StandardRenderable(shader, model, mat, texture);
@@ -130,15 +131,39 @@ public class ECSDemoActivity extends Activity {
 						public void move(Entity e, float timeStamp) {
 							Position p = e.getComponent(Position.class);
 							p.shift(0.0f, 0.0f,
-									(float) Math.sin(timeStamp) / 4f);
+									0.01f * (float) Math.sin(timeStamp) / 4f);
 						}    					
     				};
     				Entity ent = new StandardEntity();
     				ent.setComponent(Representation.class, rep);
-    				ent.setComponent(Position.class, new Position(x,-y,z));
+    				ent.setComponent(Position.class, new Position(x,y,z));
     				ent.setComponent(Motion.class, motion);
     				toIntroduce.add(ent);
-    			}    			
+    			}    
+    			
+    			Entity env = new StandardEntity();
+    			env.setComponent(Representation.class, new Representation() {
+    				private Renderable r = new StandardRenderable(
+    						new FlatTextureShader(),
+    						new Backdrop(),
+    						mat(),
+    						new Texture(BitmapFactory.decodeResource(getResources(), R.drawable.cave_background))
+    						);
+					@Override
+					public Renderable makeRenderable(Entity e) {					
+						return r;
+					}    			
+					
+					private float[] mat() {
+						float mat[] = new float[16];
+						Matrix.setIdentityM(mat, 0);						
+						Matrix.translateM(mat, 0, 0,-1,8);
+						Matrix.scaleM(mat, 0, 5,5,8);
+						return mat;
+					}
+    			});
+    			env.setComponent(Position.class, new Position(0,0,100));
+    			toIntroduce.add(env);
     			initialized = true;
     		}
     	}

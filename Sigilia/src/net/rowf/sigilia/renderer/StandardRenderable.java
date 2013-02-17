@@ -14,7 +14,7 @@ public class StandardRenderable implements Renderable {
 	private ParameterizedProgram     program;
 	private Model       model;
 	private Texture     texture;
-	private float[]     transform;
+	private float[]     transform; // TODO: Define Transform class, with apply(float[])
 	
 
 	public StandardRenderable(ParameterizedProgram program, Model model, float[] transform, Texture texture) {
@@ -26,7 +26,7 @@ public class StandardRenderable implements Renderable {
 	
 	@Override
 	public void render(float[] viewMatrix) {
-		float[] matrix = new float[16];
+		float[] matrix = new float[16]; // TODO: Remove these!
 		Matrix.multiplyMM(matrix, 0, viewMatrix, 0, transform, 0);
 		
 		program.begin();

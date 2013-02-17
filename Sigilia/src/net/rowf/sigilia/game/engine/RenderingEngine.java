@@ -13,6 +13,7 @@ import net.rowf.sigilia.geometry.Vector;
 import net.rowf.sigilia.renderer.PerspectiveRenderer.Camera;
 import net.rowf.sigilia.renderer.PerspectiveRenderer.Renderable;
 import net.rowf.sigilia.renderer.PerspectiveRenderer.RenderableProvider;
+import android.util.Log;
 
 public class RenderingEngine implements Engine, RenderableProvider {
 	private static final float MAXIMUM_FPS = 120f;
@@ -31,7 +32,7 @@ public class RenderingEngine implements Engine, RenderableProvider {
 			if (l == null && r != null) return -1;
 			if (l != null && r == null) return 1;
 			
-			return (int) Math.signum(l.getZ() - r.getZ());
+			return (int) -Math.signum(l.getZ() - r.getZ());
 		}
 	};
 	
@@ -46,6 +47,7 @@ public class RenderingEngine implements Engine, RenderableProvider {
 		if (lastTimestamp + (1/MAXIMUM_FPS) > timeStamp) {
 			return;
 		}
+		
 		lastTimestamp = timeStamp;
 
 		// TODO: Consider a double-buffer of these lists
