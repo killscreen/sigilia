@@ -16,6 +16,14 @@ public class SequenceEngine implements Engine {
 		this.engines.addAll(engines);
 	}
 	
+	public void add(Engine engine) {
+		engines.add(engine);
+	}
+	
+	public void remove(Engine engine) {
+		engines.remove(engine);
+	}
+	
 	@Override
 	public void runCycle(List<Entity> entities, float timeStamp) {
 		for (Engine engine : engines) {

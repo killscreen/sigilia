@@ -16,7 +16,7 @@ import net.rowf.sigilia.renderer.PerspectiveRenderer.RenderableProvider;
 import android.util.Log;
 
 public class RenderingEngine implements Engine, RenderableProvider {
-	private static final float MAXIMUM_FPS = 120f;
+	private static final float MAXIMUM_FPS = 120f; //TODO: Let PeriodicEngine handle
 	
 	private float lastTimestamp;
 	private Iterable<Renderable> latest = Collections.emptyList();

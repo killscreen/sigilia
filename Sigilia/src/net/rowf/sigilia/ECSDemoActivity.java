@@ -68,9 +68,16 @@ public class ECSDemoActivity extends Activity {
         setContentView(view);
     }
     
+    
     private class AssetInitializer implements Engine, RenderableInitializer {
     	private boolean initialized = false; 
     	private List<Entity> toIntroduce = new ArrayList<Entity>();
+    	private FlatTextureShader shader;
+    	private Texture           magic;
+    	
+    	public synchronized void addParticle(float x, float y, float z) {
+    		
+    	}
 
     	@Override
 		public void runCycle(List<Entity> entities, float timeStamp) {
@@ -102,7 +109,8 @@ public class ECSDemoActivity extends Activity {
     					), BitmapFactory.decodeResource(getResources(), R.drawable.cave_background));
 
     			
-    			final FlatTextureShader shader  = new FlatTextureShader();
+    			shader  = new FlatTextureShader();
+    			
     			final Texture           texture = new Texture(BitmapFactory.decodeResource(getResources(), R.drawable.monster));
     			final Model             model   = new Billboard(2);
     			for (int i = 0; i < 12; i++) {
