@@ -16,7 +16,7 @@ import net.rowf.sigilia.renderer.PerspectiveRenderer.RenderableProvider;
 import android.util.Log;
 
 public class RenderingEngine implements Engine, RenderableProvider {
-	private static final float MAXIMUM_FPS = 120f; //TODO: Let PeriodicEngine handle
+	private static final float MAXIMUM_FPS = 120f; 
 	
 	private float lastTimestamp;
 	private Iterable<Renderable> latest = Collections.emptyList();
@@ -44,6 +44,7 @@ public class RenderingEngine implements Engine, RenderableProvider {
 	@Override
 	public void runCycle(List<Entity> entities, float timeStamp) {
 		// Don't bother rendering more than the maximum FPS
+		// Note that this is different from PeriodicEngine; frames may be skipped
 		if (lastTimestamp + (1/MAXIMUM_FPS) > timeStamp) {
 			return;
 		}
