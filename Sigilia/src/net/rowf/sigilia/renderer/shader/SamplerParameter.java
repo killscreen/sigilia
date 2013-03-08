@@ -1,6 +1,6 @@
 package net.rowf.sigilia.renderer.shader;
 
-import net.rowf.sigilia.renderer.model.Texture;
+import net.rowf.sigilia.renderer.texture.Texture;
 import android.opengl.GLES20;
 
 public enum SamplerParameter implements ShaderParameter<Texture> {
