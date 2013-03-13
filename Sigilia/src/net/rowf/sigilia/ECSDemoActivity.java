@@ -1,7 +1,10 @@
 package net.rowf.sigilia;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import net.rowf.sigilia.background.Background;
 import net.rowf.sigilia.game.Engine;
@@ -9,13 +12,24 @@ import net.rowf.sigilia.game.Entity;
 import net.rowf.sigilia.game.component.Position;
 import net.rowf.sigilia.game.component.physical.Motion;
 import net.rowf.sigilia.game.component.visual.Representation;
+import net.rowf.sigilia.game.engine.DecorationEngine;
+import net.rowf.sigilia.game.engine.DecorationEngine.Decorator;
+import net.rowf.sigilia.game.engine.InputEngine;
+import net.rowf.sigilia.game.engine.InputEngine.InputElement;
 import net.rowf.sigilia.game.engine.MotionEngine;
+import net.rowf.sigilia.game.engine.PeriodicEngine;
 import net.rowf.sigilia.game.engine.RenderingEngine;
+import net.rowf.sigilia.game.entity.Prototype;
 import net.rowf.sigilia.game.entity.StandardEntity;
+import net.rowf.sigilia.game.entity.weapon.DefaultWeapon;
+import net.rowf.sigilia.input.TouchInputListener;
+import net.rowf.sigilia.input.WeaponInput;
 import net.rowf.sigilia.renderer.PerspectiveRenderer;
 import net.rowf.sigilia.renderer.PerspectiveRenderer.Renderable;
 import net.rowf.sigilia.renderer.PerspectiveRenderer.RenderableInitializer;
 import net.rowf.sigilia.renderer.StandardRenderable;
+import net.rowf.sigilia.renderer.decorator.DeferredRepresentation;
+import net.rowf.sigilia.renderer.decorator.DeferredTexture;
 import net.rowf.sigilia.renderer.model.Backdrop;
 import net.rowf.sigilia.renderer.model.Billboard;
 import net.rowf.sigilia.renderer.model.Model;
@@ -25,10 +39,10 @@ import net.rowf.sigilia.renderer.texture.Texture;
 import android.app.Activity;
 import android.graphics.BitmapFactory;
 import android.opengl.GLSurfaceView;
-import android.opengl.GLSurfaceView.Renderer;
 import android.opengl.Matrix;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.util.FloatMath;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -40,13 +54,34 @@ public class ECSDemoActivity extends Activity {
         final RenderingEngine renderingEngine = new RenderingEngine();
         final AssetInitializer initializer = new AssetInitializer();
         final MotionEngine motion = new MotionEngine();
+        final Engine pruner = new PruneEngine();
         
-        Renderer r = new PerspectiveRenderer(renderingEngine, initializer);
+        final Decorator<Representation> particleRepresentation = 
+        		new DeferredRepresentation( FlatTextureShader.DEFERRED_FORM,
+        				new DeferredTexture(BitmapFactory.decodeResource(getResources(), R.drawable.generic_particle)), 
+        				Billboard.UNIT);
+        
+        
+        Map<String, Decorator<Representation>> decorum = new HashMap<String, Decorator<Representation>>();
+        decorum.put(DefaultWeapon.class.getSimpleName(), particleRepresentation);
+
+        final Engine decorator = new PeriodicEngine(0.2f, 
+        		new DecorationEngine<Representation>(Representation.class, decorum));
+        
+        Prototype weapon = new DefaultWeapon();
+        
+        PerspectiveRenderer r = new PerspectiveRenderer(renderingEngine, initializer);
+        TouchInputListener touchInput = new TouchInputListener(r);
+
+        final Engine input = new PeriodicEngine(0.001f, 
+        		new InputEngine(Arrays.<InputElement>asList(new WeaponInput(weapon, touchInput, 0.1f))));
+
         
         GLSurfaceView view = new GLSurfaceView(this);
         view.setEGLContextClientVersion(2);
         view.setRenderer(r);
         view.setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
+        view.setOnTouchListener(touchInput);
         
         final List<Entity> entities = new ArrayList<Entity>();
         
@@ -59,6 +94,9 @@ public class ECSDemoActivity extends Activity {
 	        		initializer.runCycle(entities, timeStamp);
 	        		renderingEngine.runCycle(entities, timeStamp);
 	        		motion.runCycle(entities, timeStamp);
+	        		decorator.runCycle(entities, timeStamp);
+	        		input.runCycle(entities, timeStamp);
+	        		pruner.runCycle(entities, timeStamp);
         		}
         	}
         }.start();
@@ -68,6 +106,22 @@ public class ECSDemoActivity extends Activity {
         setContentView(view);
     }
     
+    private class PruneEngine implements Engine {
+    	private List<Entity> toRemove = new ArrayList<Entity>();
+    	
+		@Override
+		public void runCycle(List<Entity> entities, float timeStamp) {
+			toRemove.clear();
+			for (Entity e : entities) {
+				Position p = e.getComponent(Position.class);
+				if (p != null && p.getZ() > 12f) {
+					toRemove.add(e);
+				}
+			}
+			entities.removeAll(toRemove);
+		}
+    	
+    }
     
     private class AssetInitializer implements Engine, RenderableInitializer {
     	private boolean initialized = false; 
@@ -135,11 +189,13 @@ public class ECSDemoActivity extends Activity {
 						}    					
     				};
     				Motion motion = new Motion() {
+    					private float t = 0;
 						@Override
-						public void move(Entity e, float timeStamp) {
+						public void move(Entity e, float timeStep) {
+							t += timeStep;
 							Position p = e.getComponent(Position.class);
 							p.shift(0.0f, 0.0f,
-									0.01f * (float) Math.sin(timeStamp) / 4f);
+									timeStep * FloatMath.sin(t));
 						}    					
     				};
     				Entity ent = new StandardEntity();
@@ -170,7 +226,7 @@ public class ECSDemoActivity extends Activity {
 						return mat;
 					}
     			});
-    			env.setComponent(Position.class, new Position(0,0,100));
+    			env.setComponent(Position.class, new Position(0,0,8f));
     			toIntroduce.add(env);
     			initialized = true;
     		}

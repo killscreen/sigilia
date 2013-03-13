@@ -20,7 +20,7 @@ public class InputEngine implements Engine {
 		for (InputRecord r : inputRecords) {
 			if (r.next < 0) r.next = timeStamp;
 			if (r.next <= timeStamp) {
-				r.next += r.element.apply(entities);
+				r.next = timeStamp + r.element.apply(entities);
 			}
 		}
 	}

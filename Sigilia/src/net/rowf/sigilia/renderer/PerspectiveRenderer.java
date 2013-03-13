@@ -50,6 +50,14 @@ public class PerspectiveRenderer implements Renderer {
 		initializer.initialize();
 	}
 	
+	public float getWidth() {
+		return (float) width / (float) height;
+	}
+	
+	public float getHeight() {
+		return 1f;
+	}
+	
 	private void computeViewMatrix() {        
         float   aspect = (float) width / (float) height;
         float[] eye    = camera.getEye();
