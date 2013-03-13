@@ -65,7 +65,7 @@ public class ECSDemoActivity extends Activity {
         Map<String, Decorator<Representation>> decorum = new HashMap<String, Decorator<Representation>>();
         decorum.put(DefaultWeapon.class.getSimpleName(), particleRepresentation);
 
-        final Engine decorator = new PeriodicEngine(0.2f, 
+        final Engine decorator = new PeriodicEngine(0.025f, 
         		new DecorationEngine<Representation>(Representation.class, decorum));
         
         Prototype weapon = new DefaultWeapon();
@@ -74,7 +74,7 @@ public class ECSDemoActivity extends Activity {
         TouchInputListener touchInput = new TouchInputListener(r);
 
         final Engine input = new PeriodicEngine(0.001f, 
-        		new InputEngine(Arrays.<InputElement>asList(new WeaponInput(weapon, touchInput, 0.1f))));
+        		new InputEngine(Arrays.<InputElement>asList(new WeaponInput(weapon, touchInput, 0.05f))));
 
         
         GLSurfaceView view = new GLSurfaceView(this);
