@@ -46,7 +46,7 @@ import android.util.FloatMath;
 import android.view.Window;
 import android.view.WindowManager;
 
-public class ECSDemoActivity extends Activity {
+public class ECSDemoActivity extends FullscreenActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

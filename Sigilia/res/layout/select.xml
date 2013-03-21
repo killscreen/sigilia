@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@android:color/black"
+    android:fillViewport="true"
+    android:scrollbars="horizontal" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent" >
+
+        <ImageView
+            android:id="@+id/scenario_2"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:onClick="chooseScenario"
+            android:paddingBottom="20px"
+            android:paddingLeft="20px"
+            android:paddingRight="20px"
+            android:paddingTop="20px"
+            android:scaleType="center"
+            android:src="@drawable/parchment" />
+
+        <ImageView
+            android:id="@+id/scenario_1"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:paddingBottom="20px"
+            android:paddingLeft="20px"
+            android:paddingRight="20px"
+            android:paddingTop="20px"
+            android:scaleType="center"
+            android:src="@drawable/parchment" />
+
+    </LinearLayout>
+    
+
+</ScrollView>
