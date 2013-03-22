@@ -44,7 +44,7 @@ public abstract class DeltaSequence {
 		return true;
 	}
 		
-	protected static class Delta {
+	static class Delta {
 		public Direction d;
 		public float magnitude;
 	}

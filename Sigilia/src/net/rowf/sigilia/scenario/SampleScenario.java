@@ -25,7 +25,7 @@ public class SampleScenario extends BaseScenario {
 	public void populate(List<Entity> entities) {
 		Prototype enemy = new Goblin();
 		for (float x = -3; x < 3; x += 1f) {
-			entities.add(spawn(enemy, x, -0.5f, 3f));
+			entities.add(spawn(enemy, x, -0.5f, 3f + (float) Math.sin(x)));
 		}
 		
 		Entity backdrop = new StandardEntity();

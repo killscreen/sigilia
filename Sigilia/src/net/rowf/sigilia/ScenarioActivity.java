@@ -37,10 +37,16 @@ import android.util.Log;
 public class ScenarioActivity extends FullscreenActivity {
 	public static final String SCENARIO_KEY = ScenarioActivity.class.getPackage().getName() + ".scenario_class";
 	
+	private ScenarioRunner activeScenario = null;
+	
 	@Override
 	public void onResume() {
 		super.onResume();
-		int z=2;
+
+		if (activeScenario != null) {
+			activeScenario.stop();
+		}
+		
 		String scenarioClass = getIntent().getExtras().getString(SCENARIO_KEY);
 		if (scenarioClass != null) {
 			try {
@@ -50,6 +56,14 @@ public class ScenarioActivity extends FullscreenActivity {
 			}
 		} else {
 			// Log?
+		}
+	}
+	
+	@Override
+	public void onPause() {
+		super.onPause();
+		if (activeScenario != null) {
+			activeScenario.stop();
 		}
 	}
 	
@@ -76,7 +90,8 @@ public class ScenarioActivity extends FullscreenActivity {
 		engines.add(new DecorationEngine<Representation>(Representation.class, decorum));
 		engines.add(new InputEngine(Arrays.<InputElement>asList(new WeaponInput(new DefaultWeapon(), touchInput, 0.05f))));
 
-		new Thread(new ScenarioRunner(s, new SequenceEngine(engines))).start();
+		activeScenario = new ScenarioRunner(s, new SequenceEngine(engines));
+		new Thread(activeScenario).start();
 		
         GLSurfaceView view = new GLSurfaceView(this);
         view.setEGLContextClientVersion(2);
