@@ -26,6 +26,7 @@
             android:id="@+id/scenario_1"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
+            android:onClick="chooseScenario"
             android:paddingBottom="20px"
             android:paddingLeft="20px"
             android:paddingRight="20px"

@@ -17,6 +17,7 @@
         
         <activity android:name="ECSDemoActivity"/>
         <activity android:name="ScenarioSelectActivity"/>
+        <activity android:name="ScenarioActivity"/>
         
 
     </application>
