@@ -51,13 +51,13 @@ public class ECSDemoActivity extends FullscreenActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        final RenderingEngine renderingEngine = new RenderingEngine();
+        final RenderingEngine renderingEngine = new RenderingEngine(null);
         final AssetInitializer initializer = new AssetInitializer();
         final MotionEngine motion = new MotionEngine();
         final Engine pruner = new PruneEngine();
         
         final Decorator<Representation> particleRepresentation = 
-        		new DeferredRepresentation( FlatTextureShader.DEFERRED_FORM,
+        		new DeferredRepresentation( FlatTextureShader.deferredForm(),
         				new DeferredTexture(BitmapFactory.decodeResource(getResources(), R.drawable.generic_particle)), 
         				Billboard.UNIT);
         

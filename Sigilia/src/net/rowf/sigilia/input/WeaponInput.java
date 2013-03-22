@@ -34,7 +34,7 @@ public class WeaponInput implements InputElement {
 		Touch finalTap = taps.get(taps.size() - 1);
 		Entity e = new StandardEntity();
 		prototype.apply(e);
-		e.setComponent(Motion.class, new ConstantMotion(new Vector(finalTap.x, finalTap.y, 1f)));
+		e.setComponent(Motion.class, new ConstantMotion(new Vector(finalTap.x*4, finalTap.y*4, 4f)));
 		e.setComponent(Position.class, new Position(finalTap.x, finalTap.y, 1f));
 		entities.add(e);
 		

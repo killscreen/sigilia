@@ -1,5 +1,15 @@
 package net.rowf.sigilia.renderer.shader;
 
+/**
+ * Internal shader parameter (used to communicate between Vertex and 
+ * Fragment shader, not set externally when rendering)
+ * 
+ * This is necessary because parameterized programs only otherwise provide 
+ * the ability to specify the inner part of shader functions
+ * 
+ * @author woeltjen
+ *
+ */
 public class InternalShaderParameter implements ShaderParameter<Object> {
 	private String decl;
 	private String name;

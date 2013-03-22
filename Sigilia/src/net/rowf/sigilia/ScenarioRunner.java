@@ -11,42 +11,35 @@ import net.rowf.sigilia.scenario.Scenario;
 import android.os.SystemClock;
 import android.util.Log;
 
-public class ScenarioRunner implements Runnable, RenderableInitializer {
+public class ScenarioRunner implements Runnable {
 	private Scenario scenario;
-	private List<Engine> engines;
+	private Engine engine;
+	private boolean running;
 	
-	private Semaphore signal = new Semaphore(0);
 	private List<Entity> entities = new ArrayList<Entity>();
 	
-	public ScenarioRunner(Scenario scenario, List<Engine> engines) {
+	public ScenarioRunner(Scenario scenario, Engine engine) {
 		super();
 		this.scenario = scenario;
-		this.engines = engines;
-	}
-
-	@Override
-	public void initialize() {
-		// This needs to happen after GL has started - it 
-		scenario.populate(entities);
-		notify();
+		this.engine = engine;
 	}
 
 	@Override
 	public void run() {
-		try {
-			// Wait for initialization - this may occur on separate thread
-			wait();
-			
-			while (true) {
-				float timeStamp = ((float) SystemClock.uptimeMillis()) / 1000f;
-				for (Engine e : engines) {
-					e.runCycle(entities, timeStamp);
-				}
-			}
-			
-		} catch (InterruptedException e) {
-			Log.e(getClass().toString(), e.getMessage());
+		entities.clear();
+		scenario.populate(entities);
+		running = true;
+		while (running) {
+			engine.runCycle(entities, ((float)SystemClock.uptimeMillis()) / 1000f);
 		}
+	}
+	
+	/**
+	 * Stop running the current scenario
+	 */
+	public void stop() {
+		// Note - this may be called from another thread
+		running = false;
 	}
 
 }

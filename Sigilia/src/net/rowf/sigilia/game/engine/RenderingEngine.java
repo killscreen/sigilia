@@ -20,6 +20,7 @@ public class RenderingEngine implements Engine, RenderableProvider {
 	
 	private float lastTimestamp;
 	private Iterable<Renderable> latest = Collections.emptyList();
+	private RenderableReceiver receiver;	
 	
 	private static final Comparator<Entity> Z_POSITION_COMPARATOR = new Comparator<Entity>() {
 		@Override
@@ -35,6 +36,10 @@ public class RenderingEngine implements Engine, RenderableProvider {
 			return (int) -Math.signum(l.getZ() - r.getZ());
 		}
 	};
+	
+	public RenderingEngine (RenderableReceiver receiver) {
+		this.receiver = receiver;
+	}
 	
 	@Override
 	public Iterable<Renderable> getOrderedRenderables(Camera camera) {
@@ -64,5 +69,12 @@ public class RenderingEngine implements Engine, RenderableProvider {
 		}
 		
 		latest = newRender;
+		if (receiver != null) {
+			receiver.updateRender(newRender);
+		}
+	}
+	
+	public static interface RenderableReceiver {
+		public void updateRender(List<Renderable> renderables);
 	}
 }

@@ -26,6 +26,7 @@ public class FlatTextureShader extends ParameterizedProgram {
 		super( VERTEX_SHADER, FRAGMENT_SHADER, SHADER_PARAMETERS);
 	}
 	
-	public static final DeferredProgram DEFERRED_FORM =
-			new DeferredProgram(VERTEX_SHADER, FRAGMENT_SHADER, SHADER_PARAMETERS);
+	public static DeferredProgram deferredForm() {
+			return new DeferredProgram(VERTEX_SHADER, FRAGMENT_SHADER, SHADER_PARAMETERS);
+	}
 }
