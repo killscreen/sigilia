@@ -1,5 +1,7 @@
 package net.rowf.sigilia.input.gesture;
 
+import net.rowf.sigilia.input.gesture.DeltaSequence.Delta;
+
 public class DirectionSet {
 	private Direction[] deltas;
 	

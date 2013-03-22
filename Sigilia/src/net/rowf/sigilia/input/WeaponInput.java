@@ -11,11 +11,16 @@ import net.rowf.sigilia.game.entity.Prototype;
 import net.rowf.sigilia.game.entity.StandardEntity;
 import net.rowf.sigilia.geometry.Vector;
 import net.rowf.sigilia.input.TouchInput.Touch;
+import net.rowf.sigilia.input.gesture.DynamicDeltaSequence;
+import net.rowf.sigilia.input.gesture.StaticDeltaSequence;
 
 public class WeaponInput implements InputElement {
 	private Prototype prototype;
 	private TouchInput tapInput;
 	private float delay;
+	
+	private DynamicDeltaSequence activeSequence = 
+			new DynamicDeltaSequence(32, StaticDeltaSequence.DEFAULT);
 	
 	public WeaponInput(Prototype prototype, TouchInput tapInput, float delay) {
 		super();
@@ -29,9 +34,15 @@ public class WeaponInput implements InputElement {
 		List<Touch> taps = tapInput.getPendingEvents();
 		if (taps.isEmpty()) return 0;
 
-		//TODO: Where to intercept shape events?
-		
 		Touch finalTap = taps.get(taps.size() - 1);
+		
+		if (finalTap == TouchInput.RELEASE) {
+			activeSequence.reset();
+			return 0;
+		} else {
+			
+		}
+		
 		Entity e = new StandardEntity();
 		prototype.apply(e);
 		e.setComponent(Motion.class, new ConstantMotion(new Vector(finalTap.x*4, finalTap.y*4, 4f)));

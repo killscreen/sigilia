@@ -16,4 +16,6 @@ public interface TouchInput {
 			this.timeStamp = timeStamp;
 		}		
 	}
+	
+	public static final Touch RELEASE = new Touch(0,0,0);
 }
