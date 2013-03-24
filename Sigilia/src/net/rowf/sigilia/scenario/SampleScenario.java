@@ -14,8 +14,8 @@ import net.rowf.sigilia.game.entity.StandardEntity;
 import net.rowf.sigilia.game.entity.enemy.Goblin;
 import net.rowf.sigilia.renderer.decorator.DeferredRepresentation;
 import net.rowf.sigilia.renderer.decorator.DeferredTexture;
-import net.rowf.sigilia.renderer.model.Backdrop;
 import net.rowf.sigilia.renderer.model.Billboard;
+import net.rowf.sigilia.renderer.model.CurvedBackdrop;
 import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 
@@ -42,7 +42,7 @@ public class SampleScenario extends BaseScenario {
 		
 		decorum.put("BACKDROP", new DeferredRepresentation(DEFERRED_FLAT_SHADER, 
 				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.cave_background)),
-				new Backdrop()));
+				new CurvedBackdrop(12, 8, 8, 3)));//new Backdrop()));
 		//super.decorate
 	}
 

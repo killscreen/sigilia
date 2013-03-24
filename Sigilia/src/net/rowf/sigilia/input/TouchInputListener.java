@@ -36,16 +36,20 @@ public class TouchInputListener implements OnTouchListener, TouchInput {
 
 	@Override
 	public boolean onTouch(View view, MotionEvent motionEvent) {
-		float downTime  = ((float) motionEvent.getDownTime()) / 1000f;
-		float width     = (float) view.getWidth();
-		float height    = (float) view.getHeight();
-		float outWidth  = perspectiveRenderer.getWidth();
-		float outHeight = perspectiveRenderer.getHeight(); 
-		for (int i = 0; i < motionEvent.getPointerCount(); i++) {
-			float x = (motionEvent.getX(i) / width ) * outWidth  - (outWidth /2f);
-			float y = (motionEvent.getY(i) / height) * outHeight - (outHeight/2f);
-			//touchQueue.add(new Touch(-x, -y, downTime));
-			latest = new Touch(-x, -y, downTime);
+		if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+			latest = TouchInput.RELEASE;
+		} else {
+			float downTime  = ((float) motionEvent.getDownTime()) / 1000f;
+			float width     = (float) view.getWidth();
+			float height    = (float) view.getHeight();
+			float outWidth  = perspectiveRenderer.getWidth();
+			float outHeight = perspectiveRenderer.getHeight(); 
+			for (int i = 0; i < motionEvent.getPointerCount(); i++) {
+				float x = (motionEvent.getX(i) / width ) * outWidth  - (outWidth /2f);
+				float y = (motionEvent.getY(i) / height) * outHeight - (outHeight/2f);
+				//touchQueue.add(new Touch(-x, -y, downTime));
+				latest = new Touch(-x, -y, downTime);
+			}
 		}
 		return true;
 	}

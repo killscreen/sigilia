@@ -2,6 +2,8 @@ package net.rowf.sigilia.input;
 
 import java.util.List;
 
+import android.util.Log;
+
 import net.rowf.sigilia.game.Entity;
 import net.rowf.sigilia.game.component.Position;
 import net.rowf.sigilia.game.component.physical.ConstantMotion;
@@ -37,10 +39,13 @@ public class WeaponInput implements InputElement {
 		Touch finalTap = taps.get(taps.size() - 1);
 		
 		if (finalTap == TouchInput.RELEASE) {
+			float sim = activeSequence.getSimilarity(StaticDeltaSequence.BOLT, 24);
+			Log.i("WeaponInput", "Found a bolt with confidence " + sim);
+			
 			activeSequence.reset();
 			return 0;
 		} else {
-			
+			activeSequence.addPoint(finalTap.x, finalTap.y);
 		}
 		
 		Entity e = new StandardEntity();

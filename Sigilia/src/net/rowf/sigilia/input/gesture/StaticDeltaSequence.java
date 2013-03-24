@@ -11,7 +11,7 @@ public class StaticDeltaSequence extends DynamicDeltaSequence {
 		new Vector (2, 0, 0)
 	};
 	
-	public static final DirectionSet DEFAULT = new DirectionSet(12);
+	public static final DirectionSet DEFAULT = new DirectionSet(24);
 	
 	public static final DeltaSequence BOLT = new StaticDeltaSequence(BOLT_POINTS);
 	

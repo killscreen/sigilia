@@ -3,6 +3,7 @@ package net.rowf.sigilia.input.gesture;
 import net.rowf.sigilia.input.gesture.DirectionSet.Direction;
 
 public abstract class DeltaSequence {
+	public abstract Direction[] getSampledDelta(int count);
 	public abstract Delta getTail(int index);
 	public abstract int count();
 	
@@ -15,6 +16,7 @@ public abstract class DeltaSequence {
 	public boolean endsWith (DeltaSequence q, float margin) {
 		int c = q.count();
 		if (c > count()) return false;
+		if (c < 1 || count() < 1) return false;
 		
 		float minq = Float.MAX_VALUE;
 		float mins = Float.MAX_VALUE; // min self
@@ -43,6 +45,27 @@ public abstract class DeltaSequence {
 		
 		return true;
 	}
+	
+	
+	public float getSimilarity(DeltaSequence d, int samples) {
+		if (count() == 0) {
+			return d.count() == 0 ? 1f : 0f;
+		}
+		
+		float similarity = 0;
+		
+		Direction[] self  =   getSampledDelta(samples);
+		Direction[] other = d.getSampledDelta(samples);
+		for (int i = 0; i < samples; i ++) {
+			float dot = self[i].getX() * other[i].getX() +
+			            self[i].getY() * other[i].getY();
+			float scaled = (dot + 1f) / 2f;
+			similarity += scaled * scaled;
+			
+		}
+		return (float) similarity / (float) samples;
+	}
+
 		
 	static class Delta {
 		public Direction d;
