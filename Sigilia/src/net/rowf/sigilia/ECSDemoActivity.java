@@ -19,9 +19,9 @@ import net.rowf.sigilia.game.engine.InputEngine.InputElement;
 import net.rowf.sigilia.game.engine.MotionEngine;
 import net.rowf.sigilia.game.engine.PeriodicEngine;
 import net.rowf.sigilia.game.engine.RenderingEngine;
-import net.rowf.sigilia.game.entity.Prototype;
 import net.rowf.sigilia.game.entity.StandardEntity;
 import net.rowf.sigilia.game.entity.weapon.DefaultWeapon;
+import net.rowf.sigilia.game.entity.weapon.Weapon;
 import net.rowf.sigilia.input.TouchInputListener;
 import net.rowf.sigilia.input.WeaponInput;
 import net.rowf.sigilia.renderer.PerspectiveRenderer;
@@ -36,7 +36,6 @@ import net.rowf.sigilia.renderer.model.Model;
 import net.rowf.sigilia.renderer.shader.Program;
 import net.rowf.sigilia.renderer.shader.program.FlatTextureShader;
 import net.rowf.sigilia.renderer.texture.Texture;
-import android.app.Activity;
 import android.graphics.BitmapFactory;
 import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
@@ -68,7 +67,7 @@ public class ECSDemoActivity extends FullscreenActivity {
         final Engine decorator = new PeriodicEngine(0.025f, 
         		new DecorationEngine<Representation>(Representation.class, decorum));
         
-        Prototype weapon = new DefaultWeapon();
+        Weapon weapon = new DefaultWeapon();
         
         PerspectiveRenderer r = new PerspectiveRenderer(renderingEngine, initializer);
         TouchInputListener touchInput = new TouchInputListener(r);

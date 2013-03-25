@@ -6,6 +6,7 @@ import java.util.List;
 import net.rowf.sigilia.game.Engine;
 import net.rowf.sigilia.game.Entity;
 import net.rowf.sigilia.game.component.Position;
+import net.rowf.sigilia.game.component.metadata.Liveness;
 
 public class RemovalEngine implements Engine {
 	private List<Criterion> criteria = new ArrayList<Criterion>();
@@ -27,12 +28,12 @@ public class RemovalEngine implements Engine {
 		toRemove.clear();
 	}
 	
-	public Engine addCriterion(Criterion c) {
+	public RemovalEngine addCriterion(Criterion c) {
 		criteria.add(c);
 		return this;
 	}
 	
-	public Engine removeCriterion(Criterion c) {
+	public RemovalEngine removeCriterion(Criterion c) {
 		criteria.remove(c);
 		return this;
 	}
@@ -55,9 +56,23 @@ public class RemovalEngine implements Engine {
 		};
 	}
 	
-	
+	public static final Criterion LIVENESS = new Criterion() {
+		@Override
+		public boolean evaluate(Entity e) {
+			Liveness liveness = e.getComponent(Liveness.class);
+			if (liveness != null) {
+				return !liveness.isAlive();
+			}
+			return false;
+		}
+	};
 	
 	public static interface Criterion {
+		/**
+		 * Determine whether or not an entity should be removed.
+		 * @param e the entity to consider
+		 * @return true if entity should be scheduled for removal
+		 */
 		public boolean evaluate(Entity e);
 	}
 }

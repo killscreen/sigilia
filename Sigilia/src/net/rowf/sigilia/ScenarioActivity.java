@@ -18,6 +18,8 @@ import net.rowf.sigilia.game.engine.RenderingEngine;
 import net.rowf.sigilia.game.engine.RenderingEngine.RenderableReceiver;
 import net.rowf.sigilia.game.engine.SequenceEngine;
 import net.rowf.sigilia.game.entity.weapon.DefaultWeapon;
+import net.rowf.sigilia.game.entity.weapon.LightningWeapon;
+import net.rowf.sigilia.game.entity.weapon.Weapon;
 import net.rowf.sigilia.input.TouchInputListener;
 import net.rowf.sigilia.input.WeaponInput;
 import net.rowf.sigilia.renderer.PerspectiveRenderer;
@@ -31,7 +33,6 @@ import net.rowf.sigilia.renderer.shader.program.FlatTextureShader;
 import net.rowf.sigilia.scenario.Scenario;
 import android.graphics.BitmapFactory;
 import android.opengl.GLSurfaceView;
-import android.os.Bundle;
 import android.util.Log;
 
 public class ScenarioActivity extends FullscreenActivity {
@@ -76,19 +77,25 @@ public class ScenarioActivity extends FullscreenActivity {
         Map<String, Decorator<Representation>> decorum = new HashMap<String, Decorator<Representation>>();
         s.decorate(decorum, getResources());
         
+        // TODO: Move to BaseScenario?
         Decorator<Representation> particleRepresentation = 
         		new DeferredRepresentation( FlatTextureShader.deferredForm(),
         				new DeferredTexture(BitmapFactory.decodeResource(getResources(), R.drawable.generic_particle)), 
         				Billboard.UNIT);
+        Decorator<Representation> boltRep = 
+        		new DeferredRepresentation( FlatTextureShader.deferredForm(),
+        				new DeferredTexture(BitmapFactory.decodeResource(getResources(), R.drawable.lightning_particle)), 
+        				Billboard.UNIT);                
         decorum.put(DefaultWeapon.class.getSimpleName(), particleRepresentation);
+        decorum.put(LightningWeapon.class.getSimpleName(), boltRep);
         
 		List<Engine> engines = new ArrayList<Engine>();
        
 		engines.add(new RenderingEngine(intermediary));
 		engines.add(new MotionEngine());
-		engines.add(new RemovalEngine().addCriterion(RemovalEngine.fartherThan(12f)));
+		engines.add(new RemovalEngine().addCriterion(RemovalEngine.fartherThan(12f)).addCriterion(RemovalEngine.LIVENESS));
 		engines.add(new DecorationEngine<Representation>(Representation.class, decorum));
-		engines.add(new InputEngine(Arrays.<InputElement>asList(new WeaponInput(new DefaultWeapon(), touchInput, 0.05f))));
+		engines.add(new InputEngine(Arrays.<InputElement>asList(new WeaponInput(new DefaultWeapon(), Arrays.<Weapon>asList(new LightningWeapon()), touchInput, 0.05f))));
 
 		activeScenario = new ScenarioRunner(s, new SequenceEngine(engines));
 		new Thread(activeScenario).start();

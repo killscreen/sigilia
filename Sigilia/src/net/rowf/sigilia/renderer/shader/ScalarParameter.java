@@ -2,9 +2,18 @@ package net.rowf.sigilia.renderer.shader;
 
 import android.opengl.GLES20;
 
-public enum MatrixParameter implements ShaderParameter<float[]> {
-	TRANSFORMATION ("uniform mat4", "uTransform", true, false);
+public enum ScalarParameter implements ShaderParameter<Float> {
+	SECONDS ("uSeconds"),
+	
+	/**
+	 * How far along (0-1) we are in an animated transition
+	 */
+	TRANSITION ("uTransition"),
+	
+	SPEED ("uSpeed")
+	
 	;
+
 	/* Note: This is mostly boilerplate for the 
 	 * various sorts of specific parameters. Any 
 	 * way to consolidate this? */
@@ -13,7 +22,15 @@ public enum MatrixParameter implements ShaderParameter<float[]> {
 	private boolean  frag;
 	private boolean  vert;
 	
-	private MatrixParameter(String decl, String name, boolean vert, boolean frag) {
+	private ScalarParameter(String name) {
+		this(name, true, true);
+	}
+	
+	private ScalarParameter(String name, boolean vert, boolean frag) {
+		this("uniform float", name, vert, frag);
+	}
+	
+	private ScalarParameter(String decl, String name, boolean vert, boolean frag) {
 		this.decl = decl;
 		this.name = name;
 		this.frag = frag;
@@ -37,19 +54,19 @@ public enum MatrixParameter implements ShaderParameter<float[]> {
 		return vert;
 	}
 
-	/* These elements are unique to MatrixParameter */
-	
+
 	@Override
-	public void set(float[] matrix, int location) {		
-		GLES20.glUniformMatrix4fv(location, 1, false, matrix, 0);
+	public void set(Float object, int location) {
+		GLES20.glUniform1f(location, object.floatValue());
 	}
 
 	@Override
-	public void unset(int location) {
+	public void unset(int location) {		
 	}
 
 	@Override
 	public int getLocationIn(int program) {
 		return GLES20.glGetUniformLocation(program,name);
 	}
+
 }

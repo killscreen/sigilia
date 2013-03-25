@@ -4,7 +4,19 @@ import net.rowf.sigilia.renderer.texture.Texture;
 import android.opengl.GLES20;
 
 public enum SamplerParameter implements ShaderParameter<Texture> {
-	TEXTURE ("uniform sampler2D", "uTexture", false, true);
+	TEXTURE ("uniform sampler2D", "uTexture", false, true),
+	
+	/**
+	 * The subsequent texture in an animation
+	 */
+	NEXT_TEXTURE ("uniform sampler2D", "uSubsequent", false, true),
+	
+	/**
+	 * Texture used as a special effect
+	 */
+	EFFECT ("uniform sampler2D", "uEffect", false, true);
+	
+	
 	;
 	/* Note: This is mostly boilerplate for the 
 	 * various sorts of specific parameters. Any 

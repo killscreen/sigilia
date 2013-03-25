@@ -7,7 +7,10 @@ import android.opengl.GLES20;
 public enum VectorParameter implements ShaderParameter<FloatBuffer> {
 	VERTEX ("attribute vec4", "vPosition", true, false, 3),
 	NORMAL ("attribute vec4", "vNormal", true, false, 3),
-	TEXTURE_COORD ("attribute vec2", "vTexCoord", true, false, 2)	
+	SUBSEQUENT_VERTEX ("attribute vec4", "vSubsequentPosition", true, false, 3),
+	SUBSEQUENT_NORMAL ("attribute vec4", "vSubsequentNormal", true, false, 3),
+	TEXTURE_COORD ("attribute vec2", "vTexCoord", true, false, 2),
+	SOLID_COLOR ("uniform vec4", "vColor", false, true, 4)
 	
 	;
 	/* Note: This is mostly boilerplate for the 

@@ -14,9 +14,10 @@ public final class R {
         public static final int cave_background=0x7f020000;
         public static final int generic_particle=0x7f020001;
         public static final int ic_launcher=0x7f020002;
-        public static final int monster=0x7f020003;
-        public static final int parchment=0x7f020004;
-        public static final int title=0x7f020005;
+        public static final int lightning_particle=0x7f020003;
+        public static final int monster=0x7f020004;
+        public static final int parchment=0x7f020005;
+        public static final int title=0x7f020006;
     }
     public static final class id {
         public static final int imageView1=0x7f060002;

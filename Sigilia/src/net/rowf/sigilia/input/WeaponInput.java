@@ -1,60 +1,78 @@
 package net.rowf.sigilia.input;
 
+import java.util.Collections;
 import java.util.List;
 
-import android.util.Log;
-
 import net.rowf.sigilia.game.Entity;
-import net.rowf.sigilia.game.component.Position;
-import net.rowf.sigilia.game.component.physical.ConstantMotion;
-import net.rowf.sigilia.game.component.physical.Motion;
 import net.rowf.sigilia.game.engine.InputEngine.InputElement;
 import net.rowf.sigilia.game.entity.Prototype;
 import net.rowf.sigilia.game.entity.StandardEntity;
-import net.rowf.sigilia.geometry.Vector;
+import net.rowf.sigilia.game.entity.weapon.Weapon;
 import net.rowf.sigilia.input.TouchInput.Touch;
 import net.rowf.sigilia.input.gesture.DynamicDeltaSequence;
 import net.rowf.sigilia.input.gesture.StaticDeltaSequence;
+import android.util.Log;
 
 public class WeaponInput implements InputElement {
-	private Prototype prototype;
+	private Weapon defaultWeapon;
+	private Weapon weapon;
+	private List<Weapon> alternates;
 	private TouchInput tapInput;
 	private float delay;
+	private float expiration;
 	
 	private DynamicDeltaSequence activeSequence = 
 			new DynamicDeltaSequence(32, StaticDeltaSequence.DEFAULT);
 	
-	public WeaponInput(Prototype prototype, TouchInput tapInput, float delay) {
+	public WeaponInput(Weapon weapon, TouchInput tapInput, float delay) {
+		this(weapon, Collections.<Weapon>emptyList(), tapInput, delay);
+	}
+	
+	public WeaponInput(Weapon weapon, List<Weapon> alternates, TouchInput tapInput, float delay) {
 		super();
-		this.prototype = prototype;
+		this.defaultWeapon = weapon;
+		this.alternates = alternates;
+		this.weapon = weapon;
 		this.tapInput = tapInput;
 		this.delay = delay;
 	}
 
 	@Override
-	public float apply(List<Entity> entities) {
+	public float apply(List<Entity> entities, float timeStamp) {
 		List<Touch> taps = tapInput.getPendingEvents();
 		if (taps.isEmpty()) return 0;
 
 		Touch finalTap = taps.get(taps.size() - 1);
 		
-		if (finalTap == TouchInput.RELEASE) {
-			float sim = activeSequence.getSimilarity(StaticDeltaSequence.BOLT, 24);
-			Log.i("WeaponInput", "Found a bolt with confidence " + sim);
-			
-			activeSequence.reset();
-			return 0;
+		if (weapon == defaultWeapon) {
+			if (finalTap == TouchInput.RELEASE) {
+				float sim = activeSequence.getSimilarity(StaticDeltaSequence.BOLT, 24);
+				Log.i("WeaponInput", "Found a bolt with confidence " + sim);
+				
+				for (Weapon w : alternates) {
+					if (activeSequence.getSimilarity(w.getSigil(), 24) > 0.9f) {
+						weapon = w;
+						expiration = timeStamp + w.getLifetime();
+						break;
+					}
+				}
+				
+				activeSequence.reset();
+				return 0;
+			} else {
+				activeSequence.addPoint(finalTap.x, finalTap.y);
+			}
 		} else {
-			activeSequence.addPoint(finalTap.x, finalTap.y);
+			if (timeStamp > expiration) {
+				weapon = defaultWeapon;
+			}
 		}
 		
 		Entity e = new StandardEntity();
-		prototype.apply(e);
-		e.setComponent(Motion.class, new ConstantMotion(new Vector(finalTap.x*4, finalTap.y*4, 4f)));
-		e.setComponent(Position.class, new Position(finalTap.x, finalTap.y, 1f));
+		weapon.apply(e, finalTap.x, finalTap.y);
 		entities.add(e);
 		
-		return delay;
+		return weapon.getDelay();
 	}
 
 }

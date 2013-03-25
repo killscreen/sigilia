@@ -6,8 +6,9 @@ import net.rowf.sigilia.game.component.physical.Motion;
 import net.rowf.sigilia.game.entity.NamedPrototype;
 import net.rowf.sigilia.geometry.Vector;
 import net.rowf.sigilia.input.gesture.DeltaSequence;
+import net.rowf.sigilia.input.gesture.StaticDeltaSequence;
 
-public class DefaultWeapon extends Weapon {
+public class LightningWeapon extends Weapon {
 	private static final Motion MOTION = new ConstantMotion(new Vector(0,0,15f));
 	
 	@Override
@@ -17,11 +18,11 @@ public class DefaultWeapon extends Weapon {
 
 	@Override
 	protected float velocity() {
-		return 2f;
+		return 4f;
 	}
 
 	@Override
 	public DeltaSequence getSigil() {
-		return null;
+		return StaticDeltaSequence.BOLT;
 	}
 }

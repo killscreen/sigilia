@@ -28,7 +28,7 @@ public class StaticDeltaSequence extends DynamicDeltaSequence {
 			if (last != null) {
 				float x = p.getX() - last.getX();
 				float y = p.getY() - last.getY();
-				addDelta(x, y);
+				super.addDelta(x, y);
 			}
 			last = p;
 		}

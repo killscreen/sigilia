@@ -20,7 +20,7 @@ public class InputEngine implements Engine {
 		for (InputRecord r : inputRecords) {
 			if (r.next < 0) r.next = timeStamp;
 			if (r.next <= timeStamp) {
-				r.next = timeStamp + r.element.apply(entities);
+				r.next = timeStamp + r.element.apply(entities, timeStamp);
 			}
 		}
 	}
@@ -31,7 +31,7 @@ public class InputEngine implements Engine {
 		 * @param entities
 		 * @return the duration before this input should be checked again
 		 */
-		public float apply(List<Entity> entities);
+		public float apply(List<Entity> entities, float timeStamp);
 	}
 	
 	private static class InputRecord {
