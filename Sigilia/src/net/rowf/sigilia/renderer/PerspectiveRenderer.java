@@ -65,8 +65,12 @@ public class PerspectiveRenderer implements Renderer {
         float[] eye    = camera.getEye();
         float[] up     = camera.getUp();
         float[] look   = camera.getLookAt();
-                
-        Matrix.frustumM(fovMatrix, 0, -aspect/2f, aspect/2f, -.5f, .5f, 1f, 100);
+
+        if (aspect >= 1f) {
+        	Matrix.frustumM(fovMatrix, 0, -aspect/2f, aspect/2f, -.5f, .5f, 1f, 100);
+        } else {
+        	Matrix.frustumM(fovMatrix, 0, -.5f, .5f, -.5f/aspect, .5f/aspect, 1f, 100);
+        }
         Matrix.setLookAtM(eyeMatrix, 0, eye[0], eye[1], eye[2], look[0], look[1], look[2], up[0], up[1], up[2]);        
         Matrix.multiplyMM(viewMatrix, 0, fovMatrix, 0, eyeMatrix, 0);
 	}

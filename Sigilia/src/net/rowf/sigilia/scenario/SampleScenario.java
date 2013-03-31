@@ -37,8 +37,8 @@ public class SampleScenario extends BaseScenario {
 	@Override
 	public void decorate(Map<String, Decorator<Representation>> decorum, Resources res) {
 		decorum.put(Goblin.class.getSimpleName(), new DeferredRepresentation( DEFERRED_FLAT_SHADER,
-        				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.monster)), 
-        				Billboard.UNIT));	
+        				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.goblin)), 
+        				new Billboard(2)));	
 		
 		decorum.put("BACKDROP", new DeferredRepresentation(DEFERRED_FLAT_SHADER, 
 				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.cave_background)),
