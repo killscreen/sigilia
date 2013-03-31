@@ -3,7 +3,9 @@ package net.rowf.sigilia;
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import net.rowf.sigilia.renderer.PerspectiveRenderer;
 import net.rowf.sigilia.renderer.PerspectiveRenderer.Camera;
@@ -18,43 +20,55 @@ import net.rowf.sigilia.renderer.shader.program.FlatTextureShader;
 import net.rowf.sigilia.renderer.texture.Texture;
 import net.rowf.sigilia.util.BufferUtil;
 import android.app.Activity;
-import android.content.Intent;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.graphics.BitmapFactory;
 import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
 import android.os.Bundle;
-import android.util.Log;
+import android.util.FloatMath;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.Spinner;
 
-public class EditorActivity extends Activity implements RenderableProvider, RenderableInitializer, OnTouchListener {
-	public static final String VERTEX_KEY = EditorActivity.class.getPackage().getName() + ".vertex_key";
-	public static final String TRIANGLE_KEY = EditorActivity.class.getPackage().getName() + ".triangle_key";
+public class PoserActivity extends Activity implements RenderableProvider, RenderableInitializer, OnTouchListener, Model {
 	private float[] locatorMatrix = new float[16];
 	private Renderable r;
 	private Model pointModel;
-	private Texture pointTexture;
 	private ParameterizedProgram pointShader;
+	private Texture pointTexture;
 	
 	private Texture triangleTexture;
 	
+	private Map<String, List<Vertex>> keyframes = new HashMap<String, List<Vertex>>();
 	private final List<Vertex> verts = new ArrayList<Vertex>();
+	private final List<Vertex> baseVerts = new ArrayList<Vertex>();
 	private final List<Triangle> triangles = new ArrayList<Triangle>();
+
+	private ShortBuffer triangleOrder;
+	private FloatBuffer texCoords;
+	private FloatBuffer currentMesh;
 	
-	private Vertex selected = null;
-	
+	private Vertex selected;
 	
 	public void onCreate(Bundle b) {
 		super.onCreate(b);
 		GLSurfaceView view = new GLSurfaceView(this);
 
-		if (b != null) {
-			rehydrateVertexes(b.getString(VERTEX_KEY));
-			rehydrateTriangles(b.getString(TRIANGLE_KEY));
+	
+		String vertString = getIntent().getExtras().getString(EditorActivity.VERTEX_KEY);
+		String triString  = getIntent().getExtras().getString(EditorActivity.TRIANGLE_KEY);
+		if (vertString != null && triString != null) {
+			rehydrateVertexes(vertString);
+			rehydrateTriangles(triString);
 		}
+		makeKeyframe("base");
 		
 		view.setEGLContextClientVersion(2);
 		view.setRenderer(new PerspectiveRenderer(this, this));
@@ -65,31 +79,115 @@ public class EditorActivity extends Activity implements RenderableProvider, Rend
 		
 	}
 	
-	@Override
-	public void onSaveInstanceState(Bundle b) {
-		super.onSaveInstanceState(b);
-		b.putString(VERTEX_KEY, dehydrateVertexes());
-		b.putString(TRIANGLE_KEY, dehydrateTriangles());
-	}
-	
-	@Override
-	public void onRestoreInstanceState(Bundle b) {
-		super.onRestoreInstanceState(b);
-		rehydrateVertexes(b.getString(VERTEX_KEY));
-		rehydrateTriangles(b.getString(TRIANGLE_KEY));
-	}
-	
-	public void rehydrateVertexes(String state) {		
-		if (state == null) return;
-		verts.clear();
-		String[] split = state.split(",");
-		for (int i = 0; i+1 < split.length; i += 2) {
-			verts.add(new Vertex(Float.parseFloat(split[i]), Float.parseFloat(split[i+1])));
+	public void updateMesh() {
+		int i = 0;
+		for (Vertex v : verts) {
+			currentMesh.put(i++, v.x);
+			currentMesh.put(i++, v.y);
+			currentMesh.put(i++, 0);
 		}
 	}
 	
+	public void makeKeyframe(String name) {
+		List<Vertex> frame = new ArrayList<Vertex>();
+		for (Vertex v : verts) frame.add(new Vertex(v.x, v.y));
+		keyframes.put(name, frame);			
+	}
+	
+	public void loadKeyframe(String name) {
+		
+		List<Vertex> frame = keyframes.get(name);
+		if (frame != null) {
+			verts.clear();
+			for (Vertex v : frame) verts.add(new Vertex(v.x, v.y));
+		}
+		// Point to the new array
+		int j = 0;
+		for (Triangle t : triangles) {
+			t.a = verts.get(triangleOrder.get(j++));
+			t.b = verts.get(triangleOrder.get(j++));
+			t.c = verts.get(triangleOrder.get(j++));
+		}
+		updateMesh();
+	}
+	
+	private void promptLoadKeyframe() {
+		final Spinner spinner = new Spinner(this);
+		ArrayAdapter<String> options = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, keyframes.keySet().toArray(new String[]{}));
+		spinner.setAdapter(options);
+		
+		AlertDialog.Builder popup = new AlertDialog.Builder(this);
+		
+		popup.setView(spinner);
+		popup.setPositiveButton("OK", new OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				String choice = spinner.getSelectedItem().toString();
+				if (choice != null && choice.length() >= 1) {
+					loadKeyframe(choice);
+				}
+			}			
+		});
+		popup.setNegativeButton("Cancel", new OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// Do nothing
+			}			
+		});
+		
+		popup.show();
+		
+	}
+	
+	private void promptKeyframe() {
+		final EditText textEntry = new EditText(this);
+		
+		AlertDialog.Builder popup = new AlertDialog.Builder(this);
+		
+		popup.setView(textEntry);
+		popup.setPositiveButton("OK", new OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				String text = textEntry.getText().toString();
+				if (text != null && text.length() >= 1) {
+					makeKeyframe(text);
+				}
+			}			
+		});		
+		popup.setNegativeButton("Cancel", new OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// Do nothing
+			}			
+		});
+		
+		popup.show();
+	}
+
+	public void rehydrateVertexes(String state) {		
+		if (state == null) return;
+		verts.clear();
+		baseVerts.clear();
+		String[] split = state.split(",");
+		for (int i = 0; i+1 < split.length; i += 2) {
+			verts.add(new Vertex(Float.parseFloat(split[i]), Float.parseFloat(split[i+1])));
+			baseVerts.add(new Vertex(Float.parseFloat(split[i]), Float.parseFloat(split[i+1])));
+		}
+		float[] tex = new float[split.length];
+		float[] mesh = new float[split.length + split.length/2];
+		int j = 0;
+		for (int i = 0; i < split.length; i++) {
+			float v = Float.parseFloat(split[i]);
+			tex[i] = (v + 0.5f);
+			if (i % 2 == 1) tex[i] = 1 - tex[i]; // Flip y to tex-space
+			mesh[j++] = v;
+			if (i % 2 == 1) mesh[j++] = 0; // Add z value, too
+		}
+		texCoords = BufferUtil.toBuffer(tex);
+		currentMesh = BufferUtil.toBuffer(mesh);
+	}
+	
 	public void rehydrateTriangles(String state) {				
-		Log.i("REHYDRATE", state);
 		if (state == null) return;
 		triangles.clear();
 		String[] split = state.split(",");
@@ -100,6 +198,11 @@ public class EditorActivity extends Activity implements RenderableProvider, Rend
 					verts.get(Integer.parseInt(split[i+2]))
 					));
 		}
+		short[] triOrder = new short[split.length];
+		for (int i = 0; i < split.length; i++) {
+			triOrder[i] = Short.parseShort(split[i]);
+		}
+		triangleOrder = BufferUtil.toBuffer(triOrder);
 	}
 	
 	public String dehydrateTriangles() {
@@ -119,16 +222,44 @@ public class EditorActivity extends Activity implements RenderableProvider, Rend
 		}
 		return out.substring(0, out.length() - 1);
 	}
+	
+	private void relax() {
+		for (Triangle t : triangles) {
+			float rigidity = t.rigidity * 0.1f;
+			int a = verts.indexOf(t.a);
+			int b = verts.indexOf(t.b);
+			int c = verts.indexOf(t.c);
+			relax(t.a, t.b, baseVerts.get(a), baseVerts.get(b), rigidity);
+			relax(t.b, t.c, baseVerts.get(b), baseVerts.get(c), rigidity);
+			relax(t.c, t.a, baseVerts.get(c), baseVerts.get(a), rigidity);
+		}
+	}
+	
+	private void relax(Vertex a, Vertex b, Vertex refA, Vertex refB, float rigidity) {
+		float desiredDist = dist(refA, refB);
+		float actualDist  = dist(a,b);
+		float deltaX = b.x - a.x;
+		float deltaY = b.y - a.y;
+		
+		float change = rigidity * (actualDist - desiredDist) / 2;
+		
+		a.x += deltaX * change;
+		a.y += deltaY * change;
+		b.x -= deltaX * change;
+		b.y -= deltaY * change;
+	}
+	
+	private float dist(Vertex a, Vertex b) {
+		float x = a.x-b.x; float y = a.y-b.y; float z=0; //TODO: Use z!
+		return FloatMath.sqrt( x*x + y*y + z*z );
+	}
 
 	@Override
 	public Iterable<Renderable> getOrderedRenderables(Camera camera) {
 		List<Renderable> renderables = new ArrayList<Renderable>();
 		
-		if (r != null) {
-			renderables.add(r);
-		}
-		
-		for (Triangle t : triangles) renderables.add(t);
+		if (r != null)  renderables.add(r);		
+		//for (Triangle t : triangles) renderables.add(t);
 		for (Vertex v : this.verts) renderables.add(v);
 		
 		return renderables;
@@ -140,7 +271,7 @@ public class EditorActivity extends Activity implements RenderableProvider, Rend
 		Matrix.translateM(locatorMatrix, 0, 0, 0, 1);
 		r = new StandardRenderable( 
 				new FlatTextureShader(),
-				Billboard.UNIT,
+				this,
 				locatorMatrix,
 				new Texture(BitmapFactory.decodeResource(getResources(), R.drawable.goblin_patch))
 				);		
@@ -152,34 +283,9 @@ public class EditorActivity extends Activity implements RenderableProvider, Rend
 
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
+		relax();
 		switch (event.getPointerCount()) {
 		case 3:
-			if (true) {
-				Vertex[] vertArr = new Vertex[3];
-				int found = 0;
-				for (int i = 0 ; i < 3; i++) {
-					vertArr[i] = pointToVertex(v, event.getX(i), event.getY(i));
-					for (Vertex other : verts) {
-						if (vertArr[i].match(other)) vertArr[i] = other;
-					}				
-				}
-				// Ensure all are unique, and none are novel
-				if (!vertArr[0].equals(vertArr[1])
-						&& !vertArr[1].equals(vertArr[2])
-						&& !vertArr[2].equals(vertArr[0])
-						&& verts.contains(vertArr[0])
-						&& verts.contains(vertArr[1])
-						&& verts.contains(vertArr[2])) {
-					Triangle t = new Triangle(vertArr[0], vertArr[1],
-							vertArr[2]);
-					// Ensure redundant triangles aren't added
-					boolean toAdd = true;
-					for (Triangle other : triangles) {
-						if (t.same(other)) toAdd = false;
-					}
-					if (toAdd) triangles.add(t);
-				}
-			}
 			break;
 		case 1:
 			// Move or select a vertex
@@ -189,39 +295,15 @@ public class EditorActivity extends Activity implements RenderableProvider, Rend
 				for (Vertex other : verts) {
 					if (vert.match(other)) vert = other;
 				}
-				if (!verts.contains(vert)) {
-					verts.add(vert);
-				}
 				selected = vert;
 			}
 			if (selected != null) {
 				selected.x = vert.x;
 				selected.y = vert.y;
 			}
-			if (event.getAction() == MotionEvent.ACTION_UP) {
-				// Maybe delete vert & triangle
-				// (area outside of sprite is "trash"
-				if (selected != null && (
-				    selected.x < -0.66f || selected.x > 0.66f ||
-				    selected.y < -0.66f || selected.y > 0.66f)) {
-					verts.remove(selected);
-					List<Triangle> toRemove = new ArrayList<Triangle>();
-					for (Triangle t : triangles) {
-						if (t.contains(selected)) toRemove.add(t);
-					}
-					triangles.removeAll(toRemove);
-					selected = null;
-				}
-				// Finally, clamp locations
-				if (selected != null) {
-					if (selected.x < -0.495f) selected.x = -0.495f;
-					if (selected.x >  0.495f) selected.x =  0.495f;
-					if (selected.y < -0.495f) selected.y = -0.495f;
-					if (selected.y >  0.495f) selected.y =  0.495f;
-
-				}
-			}
 		}
+		updateMesh();
+		
 		return true;
 	}
 	
@@ -273,6 +355,7 @@ public class EditorActivity extends Activity implements RenderableProvider, Rend
 	private static final FloatBuffer triangleTexOrder  = BufferUtil.toBuffer(new float[] { 0.995f,0.995f,  0,0f,  0.995f,0f } );
 	private class Triangle implements Renderable, Model {
 		private Vertex a, b, c;
+		private float rigidity = 1;
 
 		public Triangle(Vertex a, Vertex b, Vertex c) {
 			super();
@@ -323,20 +406,51 @@ public class EditorActivity extends Activity implements RenderableProvider, Rend
 		}
 		
 	}
+
+	@Override
+	public FloatBuffer getVertexes() {
+		return currentMesh;
+	}
+
+
+	@Override
+	public ShortBuffer getDrawingOrder() {
+		return triangleOrder;
+	}
+
+
+	@Override
+	public FloatBuffer getTexCoords() {
+		return texCoords;
+	}
+
+
+	@Override
+	public int getTriangleCount() {
+		return triangles.size();
+	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.editor, menu);
+		getMenuInflater().inflate(R.menu.poser, menu);
 		return true;
 	}
 
 	@Override
 	public boolean onMenuItemSelected(int featureId, MenuItem item) {
-		Intent poser = new Intent(this, PoserActivity.class);
-		poser.putExtra(VERTEX_KEY, dehydrateVertexes());
-		poser.putExtra(TRIANGLE_KEY, dehydrateTriangles());
-		startActivity(poser);
+		switch (item.getItemId()) {
+		case R.id.poser_snap:
+			promptKeyframe();
+			break;
+		case R.id.poser_keyframe:
+			promptLoadKeyframe();
+			break;
+		case R.id.poser_reset:
+			loadKeyframe("base");
+			break;
+		}
 		return true;
 	}
-	
+
 	
 }

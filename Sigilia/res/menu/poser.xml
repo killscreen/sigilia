@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:id="@+id/poser_snap" android:title="Snap Keyframe"></item>
+    <item android:id="@+id/poser_keyframe" android:title="Open Keyframe"></item>
+    <item android:id="@+id/poser_reset" android:title="Reset"></item>
+    
+
+</menu>
