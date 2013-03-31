@@ -28,7 +28,7 @@ public class Goblin extends Enemy {
 
 	private static class GoblinWalk implements Animator {
 		private String[] cycle = {"Facing", "Stepleft", "Facing", "Stepright"};
-		private int frame = 0;
+		private int frame = (int) (Math.random() * cycle.length);
 		
 		@Override
 		public void animate(Entity entity, Animation animation) {

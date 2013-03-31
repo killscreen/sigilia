@@ -32,7 +32,7 @@ public abstract class BaseScenario implements Scenario {
 		return entity;
 	}
 
-	protected KeyframeSequence loadKeyframeSequence (Resources res, int id) {
+	protected KeyframeSequence loadKeyframeSequence (Resources res, int id, float scale) {
 		try {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(res.openRawResource(id)));
 			
@@ -65,7 +65,7 @@ public abstract class BaseScenario implements Scenario {
 				float[]  verts    = new float[vertsStr.length + vertsStr.length/2];
 				int j = 0;
 				for (int i = 0; i < vertsStr.length; i++) {
-					verts[j++] = Float.parseFloat(vertsStr[i]);
+					verts[j++] = Float.parseFloat(vertsStr[i]) * scale;
 					if (i % 2 == 1) {
 						verts[j++] = 0; // Fill in z values
 					}
