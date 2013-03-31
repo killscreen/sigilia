@@ -1,15 +1,18 @@
 package net.rowf.sigilia.game.entity.enemy;
 
-import android.util.FloatMath;
 import net.rowf.sigilia.game.Entity;
 import net.rowf.sigilia.game.component.Position;
 import net.rowf.sigilia.game.component.physical.Motion;
+import net.rowf.sigilia.game.component.visual.Animation;
+import net.rowf.sigilia.game.component.visual.Animator;
+import android.util.FloatMath;
 
 public class Goblin extends Enemy {
 
 	@Override
 	protected void applyAdditional(Entity e) {
 		e.setComponent(Motion.class, new GoblinMotion());
+		e.setComponent(Animator.class, new GoblinWalk());
 	}
 	
 	private static class GoblinMotion implements Motion {
@@ -23,4 +26,15 @@ public class Goblin extends Enemy {
 		}  
 	};
 
+	private static class GoblinWalk implements Animator {
+		private String[] cycle = {"Facing", "Stepleft", "Facing", "Stepright"};
+		private int frame = 0;
+		
+		@Override
+		public void animate(Entity entity, Animation animation) {
+			frame++;
+			frame = frame % cycle.length;
+			animation.setNextFrame(cycle[frame], 0.5f);
+		}
+	};
 }

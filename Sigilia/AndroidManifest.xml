@@ -8,16 +8,27 @@
     <application android:label="@string/app_name"
         android:icon="@drawable/ic_launcher"
         android:theme="@style/AppTheme">
-        <activity android:name="EditorActivity" android:configChanges="orientation">
+
+        <activity android:name="TitleActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+                
+        <activity android:name="EditorActivity" 
+            android:configChanges="orientation" 
+            android:label="@string/editor_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
         
         <activity android:name="ECSDemoActivity" android:screenOrientation="landscape"/>
         <activity android:name="ScenarioSelectActivity"/>
-        <activity android:name="ScenarioActivity"  android:screenOrientation="landscape"/>
+        <activity android:name="ScenarioActivity"  android:configChanges="orientation"/>
         <activity android:name="PoserActivity"/>
 
     </application>

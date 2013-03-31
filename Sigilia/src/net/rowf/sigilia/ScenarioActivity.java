@@ -8,6 +8,7 @@ import java.util.Map;
 
 import net.rowf.sigilia.game.Engine;
 import net.rowf.sigilia.game.component.visual.Representation;
+import net.rowf.sigilia.game.engine.AnimationEngine;
 import net.rowf.sigilia.game.engine.DecorationEngine;
 import net.rowf.sigilia.game.engine.DecorationEngine.Decorator;
 import net.rowf.sigilia.game.engine.InputEngine;
@@ -96,7 +97,8 @@ public class ScenarioActivity extends FullscreenActivity {
 		engines.add(new RemovalEngine().addCriterion(RemovalEngine.fartherThan(12f)).addCriterion(RemovalEngine.LIVENESS));
 		engines.add(new DecorationEngine<Representation>(Representation.class, decorum));
 		engines.add(new InputEngine(Arrays.<InputElement>asList(new WeaponInput(new DefaultWeapon(), Arrays.<Weapon>asList(new LightningWeapon()), touchInput, 0.05f))));
-
+		engines.add(new AnimationEngine());
+		
 		activeScenario = new ScenarioRunner(s, new SequenceEngine(engines));
 		new Thread(activeScenario).start();
 		

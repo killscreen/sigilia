@@ -23,28 +23,32 @@ public final class R {
         public static final int title=0x7f020009;
     }
     public static final class id {
-        public static final int imageView1=0x7f070002;
-        public static final int pose=0x7f070003;
-        public static final int poser_keyframe=0x7f070005;
-        public static final int poser_load=0x7f070008;
-        public static final int poser_reset=0x7f070006;
-        public static final int poser_save=0x7f070007;
-        public static final int poser_snap=0x7f070004;
-        public static final int scenario_1=0x7f070000;
-        public static final int scenario_2=0x7f070001;
+        public static final int imageView1=0x7f080002;
+        public static final int pose=0x7f080003;
+        public static final int poser_keyframe=0x7f080005;
+        public static final int poser_load=0x7f080008;
+        public static final int poser_reset=0x7f080006;
+        public static final int poser_save=0x7f080007;
+        public static final int poser_snap=0x7f080004;
+        public static final int scenario_1=0x7f080000;
+        public static final int scenario_2=0x7f080001;
     }
     public static final class layout {
         public static final int select=0x7f030000;
         public static final int title=0x7f030001;
     }
     public static final class menu {
-        public static final int editor=0x7f060000;
-        public static final int poser=0x7f060001;
+        public static final int editor=0x7f070000;
+        public static final int poser=0x7f070001;
+    }
+    public static final class raw {
+        public static final int goblin_animation=0x7f040000;
     }
     public static final class string {
-        public static final int app_name=0x7f040000;
+        public static final int app_name=0x7f050000;
+        public static final int editor_name=0x7f050001;
     }
     public static final class style {
-        public static final int AppTheme=0x7f050000;
+        public static final int AppTheme=0x7f060000;
     }
 }

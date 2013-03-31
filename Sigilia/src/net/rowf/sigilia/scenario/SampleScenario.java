@@ -12,10 +12,12 @@ import net.rowf.sigilia.game.engine.DecorationEngine.Decorator;
 import net.rowf.sigilia.game.entity.Prototype;
 import net.rowf.sigilia.game.entity.StandardEntity;
 import net.rowf.sigilia.game.entity.enemy.Goblin;
+import net.rowf.sigilia.renderer.decorator.AnimatedRepresentation;
 import net.rowf.sigilia.renderer.decorator.DeferredRepresentation;
 import net.rowf.sigilia.renderer.decorator.DeferredTexture;
 import net.rowf.sigilia.renderer.model.Billboard;
 import net.rowf.sigilia.renderer.model.CurvedBackdrop;
+import net.rowf.sigilia.renderer.model.animation.KeyframeSequence;
 import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 
@@ -35,10 +37,10 @@ public class SampleScenario extends BaseScenario {
 	}
 
 	@Override
-	public void decorate(Map<String, Decorator<Representation>> decorum, Resources res) {
-		decorum.put(Goblin.class.getSimpleName(), new DeferredRepresentation( DEFERRED_FLAT_SHADER,
-        				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.goblin)), 
-        				new Billboard(2)));	
+	public void decorate(Map<String, Decorator<Representation>> decorum, Resources res) {	
+		decorum.put(Goblin.class.getSimpleName(), new AnimatedRepresentation(DEFERRED_ANIM_SHADER, 
+				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.goblin_patch)),
+				loadKeyframeSequence(res, R.raw.goblin_animation)));	
 		
 		decorum.put("BACKDROP", new DeferredRepresentation(DEFERRED_FLAT_SHADER, 
 				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.cave_background)),

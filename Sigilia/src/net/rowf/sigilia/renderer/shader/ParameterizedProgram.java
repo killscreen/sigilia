@@ -54,6 +54,8 @@ public class ParameterizedProgram extends Program {
 		buf.append("void main() {");
 		buf.append(snippet);
 		buf.append("}");
-		return buf.toString();
+		String code = buf.toString();
+		Log.d("shader", code);
+		return code;
 	}
 }

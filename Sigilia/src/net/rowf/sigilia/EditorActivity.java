@@ -129,7 +129,9 @@ public class EditorActivity extends Activity implements RenderableProvider, Rend
 		}
 		
 		for (Triangle t : triangles) renderables.add(t);
-		for (Vertex v : this.verts) renderables.add(v);
+		synchronized(verts) {
+			for (Vertex v : this.verts) renderables.add(v);
+		}
 		
 		return renderables;
 	}
@@ -152,73 +154,75 @@ public class EditorActivity extends Activity implements RenderableProvider, Rend
 
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
-		switch (event.getPointerCount()) {
-		case 3:
-			if (true) {
-				Vertex[] vertArr = new Vertex[3];
-				int found = 0;
-				for (int i = 0 ; i < 3; i++) {
-					vertArr[i] = pointToVertex(v, event.getX(i), event.getY(i));
+		synchronized(verts) {
+			switch (event.getPointerCount()) {
+			case 3:
+				if (true) {
+					Vertex[] vertArr = new Vertex[3];
+					int found = 0;
+					for (int i = 0 ; i < 3; i++) {
+						vertArr[i] = pointToVertex(v, event.getX(i), event.getY(i));
+						for (Vertex other : verts) {
+							if (vertArr[i].match(other)) vertArr[i] = other;
+						}				
+					}
+					// Ensure all are unique, and none are novel
+					if (!vertArr[0].equals(vertArr[1])
+							&& !vertArr[1].equals(vertArr[2])
+							&& !vertArr[2].equals(vertArr[0])
+							&& verts.contains(vertArr[0])
+							&& verts.contains(vertArr[1])
+							&& verts.contains(vertArr[2])) {
+						Triangle t = new Triangle(vertArr[0], vertArr[1],
+								vertArr[2]);
+						// Ensure redundant triangles aren't added
+						boolean toAdd = true;
+						for (Triangle other : triangles) {
+							if (t.same(other)) toAdd = false;
+						}
+						if (toAdd) triangles.add(t);
+					}
+				}
+				break;
+			case 1:
+				// Move or select a vertex
+				Vertex vert = pointToVertex(v, event.getX(), event.getY());
+				if (event.getAction() == MotionEvent.ACTION_DOWN) {
+					// Add or select the vert
 					for (Vertex other : verts) {
-						if (vertArr[i].match(other)) vertArr[i] = other;
-					}				
-				}
-				// Ensure all are unique, and none are novel
-				if (!vertArr[0].equals(vertArr[1])
-						&& !vertArr[1].equals(vertArr[2])
-						&& !vertArr[2].equals(vertArr[0])
-						&& verts.contains(vertArr[0])
-						&& verts.contains(vertArr[1])
-						&& verts.contains(vertArr[2])) {
-					Triangle t = new Triangle(vertArr[0], vertArr[1],
-							vertArr[2]);
-					// Ensure redundant triangles aren't added
-					boolean toAdd = true;
-					for (Triangle other : triangles) {
-						if (t.same(other)) toAdd = false;
+						if (vert.match(other)) vert = other;
 					}
-					if (toAdd) triangles.add(t);
-				}
-			}
-			break;
-		case 1:
-			// Move or select a vertex
-			Vertex vert = pointToVertex(v, event.getX(), event.getY());
-			if (event.getAction() == MotionEvent.ACTION_DOWN) {
-				// Add or select the vert
-				for (Vertex other : verts) {
-					if (vert.match(other)) vert = other;
-				}
-				if (!verts.contains(vert)) {
-					verts.add(vert);
-				}
-				selected = vert;
-			}
-			if (selected != null) {
-				selected.x = vert.x;
-				selected.y = vert.y;
-			}
-			if (event.getAction() == MotionEvent.ACTION_UP) {
-				// Maybe delete vert & triangle
-				// (area outside of sprite is "trash"
-				if (selected != null && (
-				    selected.x < -0.66f || selected.x > 0.66f ||
-				    selected.y < -0.66f || selected.y > 0.66f)) {
-					verts.remove(selected);
-					List<Triangle> toRemove = new ArrayList<Triangle>();
-					for (Triangle t : triangles) {
-						if (t.contains(selected)) toRemove.add(t);
+					if (!verts.contains(vert)) {
+						verts.add(vert);
 					}
-					triangles.removeAll(toRemove);
-					selected = null;
+					selected = vert;
 				}
-				// Finally, clamp locations
 				if (selected != null) {
-					if (selected.x < -0.495f) selected.x = -0.495f;
-					if (selected.x >  0.495f) selected.x =  0.495f;
-					if (selected.y < -0.495f) selected.y = -0.495f;
-					if (selected.y >  0.495f) selected.y =  0.495f;
-
+					selected.x = vert.x;
+					selected.y = vert.y;
+				}
+				if (event.getAction() == MotionEvent.ACTION_UP) {
+					// Maybe delete vert & triangle
+					// (area outside of sprite is "trash"
+					if (selected != null && (
+					    selected.x < -0.66f || selected.x > 0.66f ||
+					    selected.y < -0.66f || selected.y > 0.66f)) {
+						verts.remove(selected);
+						List<Triangle> toRemove = new ArrayList<Triangle>();
+						for (Triangle t : triangles) {
+							if (t.contains(selected)) toRemove.add(t);
+						}
+						triangles.removeAll(toRemove);
+						selected = null;
+					}
+					// Finally, clamp locations
+					if (selected != null) {
+						if (selected.x < -0.495f) selected.x = -0.495f;
+						if (selected.x >  0.495f) selected.x =  0.495f;
+						if (selected.y < -0.495f) selected.y = -0.495f;
+						if (selected.y >  0.495f) selected.y =  0.495f;
+	
+					}
 				}
 			}
 		}
