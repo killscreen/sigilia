@@ -26,7 +26,9 @@ public final class R {
         public static final int imageView1=0x7f070002;
         public static final int pose=0x7f070003;
         public static final int poser_keyframe=0x7f070005;
+        public static final int poser_load=0x7f070008;
         public static final int poser_reset=0x7f070006;
+        public static final int poser_save=0x7f070007;
         public static final int poser_snap=0x7f070004;
         public static final int scenario_1=0x7f070000;
         public static final int scenario_2=0x7f070001;

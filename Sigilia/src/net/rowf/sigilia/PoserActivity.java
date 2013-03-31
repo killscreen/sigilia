@@ -1,11 +1,17 @@
 package net.rowf.sigilia;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import net.rowf.sigilia.renderer.PerspectiveRenderer;
 import net.rowf.sigilia.renderer.PerspectiveRenderer.Camera;
@@ -27,7 +33,9 @@ import android.graphics.BitmapFactory;
 import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.FloatMath;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -164,8 +172,44 @@ public class PoserActivity extends Activity implements RenderableProvider, Rende
 		popup.show();
 	}
 
-	public void rehydrateVertexes(String state) {		
-		if (state == null) return;
+	private void promptSave() {
+		final EditText textEntry = new EditText(this);
+		
+		AlertDialog.Builder popup = new AlertDialog.Builder(this);
+		
+		popup.setView(textEntry);
+		popup.setPositiveButton("OK", new OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				String text = textEntry.getText().toString();
+				if (text != null && text.length() >= 1) {
+					File data = Environment.getExternalStorageDirectory();					
+					File f = new File(data.getAbsolutePath() + "/" + text);
+					save(f);
+				}
+			}			
+		});		
+		popup.setNegativeButton("Cancel", new OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// Do nothing
+			}			
+		});
+		
+		popup.show();
+	}
+	
+	public void rehydrateKeyframe(String state) {
+		String[] kv = state.split("\t");
+		List<Vertex> frameVerts = new ArrayList<Vertex>();
+		String[] split = kv[1].split(",");
+		for (int i = 0; i+1 < split.length; i += 2) {
+			frameVerts.add(new Vertex(Float.parseFloat(split[i]), Float.parseFloat(split[i+1])));
+		}
+		keyframes.put(kv[0], frameVerts);
+	}
+	
+	public void rehydrateVertexes(String state) {				
 		verts.clear();
 		baseVerts.clear();
 		String[] split = state.split(",");
@@ -216,12 +260,66 @@ public class PoserActivity extends Activity implements RenderableProvider, Rende
 	}
 	
 	public String dehydrateVertexes() {
+		return dehydrateVertexes(verts);
+	}
+	
+	public String dehydrateVertexes(List<Vertex> verts) {
 		String out = "";
 		for (Vertex v : verts) {
 			out+= v.x + "," +v.y + ",";
 		}
 		return out.substring(0, out.length() - 1);
 	}
+	
+	public void save(File file) {
+		try {
+			FileWriter writer = new FileWriter(file);
+			writer.write(getFullState());
+			writer.close();
+		} catch (IOException ioe) {
+			Log.e("Poser", "IOException writing file: " + ioe.getMessage());
+		}
+	}
+	
+	public void load(File file) {
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader(file));
+			StringBuilder b = new StringBuilder();
+			String line;
+			while ( (line=reader.readLine()) != null) {
+				b.append(line).append('\n');
+			}
+			reader.close();
+			restoreFullState(b.toString());
+		} catch (IOException ioe) {
+			Log.e("Poser", "IOException reading file: " + ioe.getMessage());
+		}
+		
+	}
+	
+	private void restoreFullState(String state) {
+		String[] split = state.split("\n");
+		rehydrateVertexes(split[0]);
+		rehydrateTriangles(split[1]);
+		for (int i = 2; i < split.length; i++) {
+			if (split[i].contains("\t")) {
+				rehydrateKeyframe(split[i]);
+			}
+		}
+		updateMesh();
+	}
+	
+	private String getFullState() {
+		StringBuilder out = new StringBuilder();
+		out.append(dehydrateVertexes(baseVerts)).append('\n');
+		out.append(dehydrateTriangles()).append('\n');
+		for (Entry<String, List<Vertex>> frame : keyframes.entrySet()) {
+			out.append(frame.getKey()).append('\t');
+			out.append(dehydrateVertexes(frame.getValue())).append('\n');
+		}
+		return out.toString();
+	}
+	
 	
 	private void relax() {
 		for (Triangle t : triangles) {
@@ -326,7 +424,7 @@ public class PoserActivity extends Activity implements RenderableProvider, Rende
 
 	private static final float EPSILON = 0.075f;
 	private class Vertex implements Renderable {
-		public float x, y;
+		public float x, y, z;
 
 		public Vertex(float x, float y) {
 			this.x = x; this.y = y;
@@ -447,6 +545,9 @@ public class PoserActivity extends Activity implements RenderableProvider, Rende
 			break;
 		case R.id.poser_reset:
 			loadKeyframe("base");
+			break;
+		case R.id.poser_save:
+			promptSave();
 			break;
 		}
 		return true;

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item android:id="@+id/poser_snap" android:title="Snap Keyframe"></item>
-    <item android:id="@+id/poser_keyframe" android:title="Open Keyframe"></item>
+    <item android:id="@+id/poser_snap" android:title="Snap"></item>
+    <item android:id="@+id/poser_keyframe" android:title="Pull"></item>
     <item android:id="@+id/poser_reset" android:title="Reset"></item>
-    
+    <item android:id="@+id/poser_save" android:title="Save"></item>
+    <item android:id="@+id/poser_load" android:title="Load"></item>
 
 </menu>
