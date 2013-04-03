@@ -3,7 +3,8 @@ package net.rowf.sigilia.game.entity.weapon;
 import net.rowf.sigilia.game.Entity;
 import net.rowf.sigilia.game.component.physical.ConstantMotion;
 import net.rowf.sigilia.game.component.physical.Motion;
-import net.rowf.sigilia.game.entity.NamedPrototype;
+import net.rowf.sigilia.game.component.visual.Animation;
+import net.rowf.sigilia.game.component.visual.PeriodicAnimation;
 import net.rowf.sigilia.geometry.Vector;
 import net.rowf.sigilia.input.gesture.DeltaSequence;
 import net.rowf.sigilia.input.gesture.StaticDeltaSequence;
@@ -14,11 +15,17 @@ public class LightningWeapon extends Weapon {
 	@Override
 	protected void applyAdditional(Entity e) {
 		//e.setComponent(Motion.class, MOTION);
+		e.setComponent(Animation.class, new PeriodicAnimation(getDelay()/2f));
 	}
 
 	@Override
+	public float getDelay() {
+		return 0.33f;
+	}
+	
+	@Override
 	protected float velocity() {
-		return 4f;
+		return 32f;
 	}
 
 	@Override

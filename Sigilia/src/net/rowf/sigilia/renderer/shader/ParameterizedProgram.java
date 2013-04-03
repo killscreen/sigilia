@@ -46,16 +46,16 @@ public class ParameterizedProgram extends Program {
 	
 	private static String createCode(String snippet, boolean isVertex, ShaderParameter<?>... parameters) {
 		StringBuffer buf = new StringBuffer();
+		buf.append("precision mediump float;\n");
 		for (ShaderParameter<?> param : parameters) {
-			if ( isVertex && param.usedByVertex  ()) buf.append(param.getFullDeclaration());
-			if (!isVertex && param.usedByFragment()) buf.append(param.getFullDeclaration());
+			if ( isVertex && param.usedByVertex  ()) buf.append(param.getFullDeclaration()).append('\n');
+			if (!isVertex && param.usedByFragment()) buf.append(param.getFullDeclaration()).append('\n');
 		}
-		buf.append("precision mediump float;");
 		buf.append("void main() {");
 		buf.append(snippet);
-		buf.append("}");
+		buf.append("}\n");
 		String code = buf.toString();
-		Log.d("shader", code);
+		Log.w("shader", code);
 		return code;
 	}
 }

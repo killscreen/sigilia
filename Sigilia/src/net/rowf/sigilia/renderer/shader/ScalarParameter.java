@@ -27,7 +27,7 @@ public enum ScalarParameter implements ShaderParameter<Float> {
 	}
 	
 	private ScalarParameter(String name, boolean vert, boolean frag) {
-		this("uniform float", name, vert, frag);
+		this("uniform mediump float", name, vert, frag);
 	}
 	
 	private ScalarParameter(String decl, String name, boolean vert, boolean frag) {

@@ -29,8 +29,11 @@ import net.rowf.sigilia.renderer.PerspectiveRenderer.Renderable;
 import net.rowf.sigilia.renderer.PerspectiveRenderer.RenderableProvider;
 import net.rowf.sigilia.renderer.decorator.DeferredRepresentation;
 import net.rowf.sigilia.renderer.decorator.DeferredTexture;
+import net.rowf.sigilia.renderer.decorator.PeriodicRepresentation;
 import net.rowf.sigilia.renderer.model.Billboard;
+import net.rowf.sigilia.renderer.model.TiltedBillboard;
 import net.rowf.sigilia.renderer.shader.program.FlatTextureShader;
+import net.rowf.sigilia.renderer.shader.program.FlickeringShader;
 import net.rowf.sigilia.scenario.Scenario;
 import android.graphics.BitmapFactory;
 import android.opengl.GLSurfaceView;
@@ -84,9 +87,9 @@ public class ScenarioActivity extends FullscreenActivity {
         				new DeferredTexture(BitmapFactory.decodeResource(getResources(), R.drawable.generic_particle)), 
         				Billboard.UNIT);
         Decorator<Representation> boltRep = 
-        		new DeferredRepresentation( FlatTextureShader.deferredForm(),
-        				new DeferredTexture(BitmapFactory.decodeResource(getResources(), R.drawable.lightning_particle)), 
-        				Billboard.UNIT);                
+        		new PeriodicRepresentation( FlickeringShader.deferredForm(),
+        				new DeferredTexture(BitmapFactory.decodeResource(getResources(), R.drawable.bolt_particle)), 
+        				TiltedBillboard.UNIT);                
         decorum.put(DefaultWeapon.class.getSimpleName(), particleRepresentation);
         decorum.put(LightningWeapon.class.getSimpleName(), boltRep);
         

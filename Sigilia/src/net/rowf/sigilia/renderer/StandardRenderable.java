@@ -15,7 +15,6 @@ public class StandardRenderable implements Renderable {
 	private Model       model;
 	private Texture     texture;
 	private float[]     transform; // TODO: Define Transform class, with apply(float[])
-	
 
 	public StandardRenderable(ParameterizedProgram program, Model model, float[] transform, Texture texture) {
 		this.program = program;
