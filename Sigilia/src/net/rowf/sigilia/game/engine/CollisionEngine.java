@@ -6,10 +6,10 @@ import java.util.List;
 
 import net.rowf.sigilia.game.Engine;
 import net.rowf.sigilia.game.Entity;
-import net.rowf.sigilia.game.collision.Impact;
 import net.rowf.sigilia.game.component.Boundary;
 import net.rowf.sigilia.game.component.Position;
 import net.rowf.sigilia.game.component.metadata.Name;
+import net.rowf.sigilia.game.component.physical.Impact;
 import net.rowf.sigilia.geometry.Vector;
 import android.util.Log;
 
@@ -49,14 +49,7 @@ public class CollisionEngine implements Engine {
 				Entity a = entities.get(i);
 				Entity b = entities.get(j);
 				if (overlap(a, b)) {
-					//TODO: Invoke collision behavior
-					Name an = a.getComponent(Name.class);
-					Name bn = b.getComponent(Name.class);
-					Log.d( "Collision",
-							   (an != null ? an.get() : "null") + 
-							   " touched " +
-							   (bn != null ? bn.get() : "null")
-							);
+					// Invoke impact behavior in both directions
 					Impact impact;
 					impact = a.getComponent(Impact.class);
 					if (impact != null) {

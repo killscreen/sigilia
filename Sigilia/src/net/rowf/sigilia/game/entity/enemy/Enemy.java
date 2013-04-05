@@ -1,8 +1,8 @@
 package net.rowf.sigilia.game.entity.enemy;
 
 import net.rowf.sigilia.game.Entity;
-import net.rowf.sigilia.game.collision.Health;
 import net.rowf.sigilia.game.component.metadata.Liveness;
+import net.rowf.sigilia.game.component.physical.Health;
 import net.rowf.sigilia.game.component.physical.Size;
 import net.rowf.sigilia.game.component.visual.Animation;
 import net.rowf.sigilia.game.entity.NamedPrototype;

@@ -19,7 +19,9 @@ public class MotionEngine implements Engine {
 		if (timeStep >= EPSILON) {
 			for (Entity e : entities) {
 				Motion m = e.getComponent(Motion.class);
-				if (m != null) m.move(e, timeStep);
+				if (m != null) {
+					m.move(e, timeStep);
+				}
 			}
 			previous = timeStamp;
 		}

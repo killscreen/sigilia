@@ -1,10 +1,10 @@
 package net.rowf.sigilia.game.entity.weapon;
 
 import net.rowf.sigilia.game.Entity;
-import net.rowf.sigilia.game.collision.Health;
-import net.rowf.sigilia.game.collision.Impact;
 import net.rowf.sigilia.game.component.metadata.Liveness;
 import net.rowf.sigilia.game.component.physical.ConstantMotion;
+import net.rowf.sigilia.game.component.physical.Health;
+import net.rowf.sigilia.game.component.physical.Impact;
 import net.rowf.sigilia.game.component.physical.Motion;
 import net.rowf.sigilia.geometry.Vector;
 import net.rowf.sigilia.input.gesture.DeltaSequence;

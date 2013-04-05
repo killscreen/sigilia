@@ -14,6 +14,7 @@ import net.rowf.sigilia.game.engine.DecorationEngine;
 import net.rowf.sigilia.game.engine.DecorationEngine.Decorator;
 import net.rowf.sigilia.game.engine.InputEngine;
 import net.rowf.sigilia.game.engine.InputEngine.InputElement;
+import net.rowf.sigilia.game.engine.IntelligenceEngine;
 import net.rowf.sigilia.game.engine.MotionEngine;
 import net.rowf.sigilia.game.engine.RemovalEngine;
 import net.rowf.sigilia.game.engine.RenderingEngine;
@@ -103,6 +104,7 @@ public class ScenarioActivity extends FullscreenActivity {
 		engines.add(new InputEngine(Arrays.<InputElement>asList(new WeaponInput(new DefaultWeapon(), Arrays.<Weapon>asList(new LightningWeapon()), touchInput, 0.05f))));
 		engines.add(new AnimationEngine());
 		engines.add(new CollisionEngine());
+		engines.add(new IntelligenceEngine());
 		
 		activeScenario = new ScenarioRunner(s, new SequenceEngine(engines));
 		new Thread(activeScenario).start();
