@@ -6,9 +6,12 @@ import java.util.List;
 
 import net.rowf.sigilia.game.Engine;
 import net.rowf.sigilia.game.Entity;
+import net.rowf.sigilia.game.collision.Impact;
 import net.rowf.sigilia.game.component.Boundary;
 import net.rowf.sigilia.game.component.Position;
+import net.rowf.sigilia.game.component.metadata.Name;
 import net.rowf.sigilia.geometry.Vector;
+import android.util.Log;
 
 public class CollisionEngine implements Engine {
 	private static final Comparator<Entity> Z_MINIMUM_COMPARATOR = new Comparator<Entity>() {
@@ -47,6 +50,22 @@ public class CollisionEngine implements Engine {
 				Entity b = entities.get(j);
 				if (overlap(a, b)) {
 					//TODO: Invoke collision behavior
+					Name an = a.getComponent(Name.class);
+					Name bn = b.getComponent(Name.class);
+					Log.d( "Collision",
+							   (an != null ? an.get() : "null") + 
+							   " touched " +
+							   (bn != null ? bn.get() : "null")
+							);
+					Impact impact;
+					impact = a.getComponent(Impact.class);
+					if (impact != null) {
+						impact.impact(a, b);
+					}
+					impact = b.getComponent(Impact.class);
+					if (impact != null) {
+						impact.impact(b, a);
+					}
 				}
 			}
 		}

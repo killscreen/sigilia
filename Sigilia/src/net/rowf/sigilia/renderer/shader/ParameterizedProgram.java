@@ -55,7 +55,7 @@ public class ParameterizedProgram extends Program {
 		buf.append(snippet);
 		buf.append("}\n");
 		String code = buf.toString();
-		Log.w("shader", code);
+		//Log.w("shader", code);
 		return code;
 	}
 }

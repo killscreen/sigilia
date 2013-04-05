@@ -4,7 +4,10 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 import net.rowf.sigilia.game.Entity;
+import net.rowf.sigilia.game.component.Boundary;
 import net.rowf.sigilia.game.component.Position;
+import net.rowf.sigilia.game.component.physical.BoundingBox;
+import net.rowf.sigilia.game.component.physical.Size;
 import net.rowf.sigilia.game.entity.Prototype;
 import net.rowf.sigilia.game.entity.StandardEntity;
 import net.rowf.sigilia.renderer.decorator.DeferredProgram;
@@ -28,7 +31,14 @@ public abstract class BaseScenario implements Scenario {
 	protected Entity spawn(Prototype p, float x, float y, float z) {
 		Entity entity = new StandardEntity();
 		p.apply(entity);
-		entity.setComponent(Position.class, new Position(x,y,z));
+		Size sz = entity.getComponent(Size.class);
+		if (sz == null) {
+			entity.setComponent(Position.class, new Position(x,y,z));
+		} else {
+			BoundingBox bound = new BoundingBox(x,y,z,sz.get());
+			entity.setComponent(Position.class, bound);
+			entity.setComponent(Boundary.class, bound);
+		}
 		return entity;
 	}
 

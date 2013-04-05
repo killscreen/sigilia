@@ -8,5 +8,5 @@ public interface Boundary extends Component {
 	public Vector getMinimum();
 	public Vector getMaximum();
 	
-	public boolean touches(Entity e);
+	public boolean touches(Entity other);
 }
