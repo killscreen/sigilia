@@ -11,7 +11,7 @@ import net.rowf.sigilia.geometry.Vector;
  *
  */
 public class NewtonianMotion extends Vector implements Motion {
-	public static final float GRAVITY = -5f;
+	public static final float GRAVITY = -1.25f;
 	
 	/**
 	 * 

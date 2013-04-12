@@ -44,7 +44,7 @@ public class SampleScenario extends BaseScenario {
 				loadKeyframeSequence(res, R.raw.goblin_animation, 2f)));	
 		
 		decorum.put(Rock.class.getSimpleName(), new DeferredRepresentation( FlatTextureShader.deferredForm(),
-        				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.generic_particle)), 
+        				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.rock_particle)), 
         				Billboard.UNIT));
 		
 		decorum.put("BACKDROP", new DeferredRepresentation(DEFERRED_FLAT_SHADER, 

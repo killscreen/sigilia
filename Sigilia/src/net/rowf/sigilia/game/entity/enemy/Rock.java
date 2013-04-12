@@ -18,7 +18,7 @@ public class Rock extends Projectile {
 		
 		// 0 = overthrow - grav * time * time
 		
-		return new NewtonianMotion(speed*dx/dist, speed*dy/dist + 1f, speed*dz/dist);
+		return new NewtonianMotion(speed*dx/dist, speed*dy/dist + 0.125f, speed*dz/dist);
 	}
 
 	@Override
