@@ -3,19 +3,24 @@ package net.rowf.sigilia.game.entity;
 import net.rowf.sigilia.game.Entity;
 import net.rowf.sigilia.game.component.metadata.Name;
 
-public abstract class NamedPrototype implements Prototype {
-	private Name name;
+public abstract class NamedPrototype extends Name implements Prototype {
 	
 	public NamedPrototype() {
-		name = new Name(getClass().getSimpleName());
+		super("");
 	}
 	
 	@Override
 	public void apply(Entity e) {
-		e.setComponent(Name.class, name);
+		e.setComponent(Prototype.class, this);
+		e.setComponent(Name.class, this);
 		applyAdditional(e);
 	}
 	
+	@Override
+	public String get() {
+		return getClass().getSimpleName();
+	}
+
 	protected abstract void applyAdditional(Entity e);
 
 }

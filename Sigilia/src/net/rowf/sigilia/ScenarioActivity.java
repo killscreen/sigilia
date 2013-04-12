@@ -10,6 +10,9 @@ import net.rowf.sigilia.game.Engine;
 import net.rowf.sigilia.game.component.visual.Representation;
 import net.rowf.sigilia.game.engine.AnimationEngine;
 import net.rowf.sigilia.game.engine.CollisionEngine;
+import net.rowf.sigilia.game.engine.CompletionEngine;
+import net.rowf.sigilia.game.engine.CompletionEngine.CompletionCallback;
+import net.rowf.sigilia.game.engine.CompletionEngine.DoesNotContain;
 import net.rowf.sigilia.game.engine.DecorationEngine;
 import net.rowf.sigilia.game.engine.DecorationEngine.Decorator;
 import net.rowf.sigilia.game.engine.InputEngine;
@@ -21,6 +24,8 @@ import net.rowf.sigilia.game.engine.RenderingEngine;
 import net.rowf.sigilia.game.engine.RenderingEngine.RenderableReceiver;
 import net.rowf.sigilia.game.engine.SequenceEngine;
 import net.rowf.sigilia.game.engine.SpawnEngine;
+import net.rowf.sigilia.game.entity.Player;
+import net.rowf.sigilia.game.entity.enemy.Enemy;
 import net.rowf.sigilia.game.entity.weapon.DefaultWeapon;
 import net.rowf.sigilia.game.entity.weapon.LightningWeapon;
 import net.rowf.sigilia.game.entity.weapon.Weapon;
@@ -31,21 +36,18 @@ import net.rowf.sigilia.renderer.PerspectiveRenderer;
 import net.rowf.sigilia.renderer.PerspectiveRenderer.Camera;
 import net.rowf.sigilia.renderer.PerspectiveRenderer.Renderable;
 import net.rowf.sigilia.renderer.PerspectiveRenderer.RenderableProvider;
-import net.rowf.sigilia.renderer.decorator.DeferredRepresentation;
-import net.rowf.sigilia.renderer.decorator.DeferredTexture;
-import net.rowf.sigilia.renderer.decorator.PeriodicRepresentation;
-import net.rowf.sigilia.renderer.model.Billboard;
-import net.rowf.sigilia.renderer.model.TiltedBillboard;
-import net.rowf.sigilia.renderer.shader.program.FlatTextureShader;
-import net.rowf.sigilia.renderer.shader.program.FlickeringShader;
 import net.rowf.sigilia.scenario.Scenario;
-import android.graphics.BitmapFactory;
 import android.opengl.GLSurfaceView;
 import android.util.Log;
 
-public class ScenarioActivity extends FullscreenActivity {
+public class ScenarioActivity extends FullscreenActivity implements CompletionCallback<Boolean> {
 	public static final String SCENARIO_KEY = ScenarioActivity.class.getPackage().getName() + ".scenario_class";
 
+	public static final int SCENARIO_SUCCESS = 0;
+	public static final int SCENARIO_FAILURE = 1;
+	
+	public static final int SCENARIO_REQUEST = 0;
+	
 	private ScenarioRunner activeScenario = null;
 	
 	private static final Vector WORLD_MIN = new Vector (-20, -5, -1);
@@ -99,6 +101,7 @@ public class ScenarioActivity extends FullscreenActivity {
 		engines.add(new CollisionEngine());
 		engines.add(new IntelligenceEngine());
 		engines.add(new SpawnEngine());
+		engines.add(new CompletionEngine(this, new DoesNotContain(Player.class, false), new DoesNotContain(Enemy.class, true)));
 		
 		activeScenario = new ScenarioRunner(s, new SequenceEngine(engines));
 		new Thread(activeScenario).start();
@@ -110,6 +113,15 @@ public class ScenarioActivity extends FullscreenActivity {
         view.setOnTouchListener(touchInput);
 
         setContentView(view);
+	}
+
+	@Override
+	public void onScenarioComplete(Boolean success) {
+		if (activeScenario != null) {
+			activeScenario.stop();
+		}
+		setResult(success ? SCENARIO_SUCCESS : SCENARIO_FAILURE);
+		finish();
 	}
 	
 	private static class RenderingIntermediary implements RenderableProvider, RenderableReceiver {
@@ -125,5 +137,7 @@ public class ScenarioActivity extends FullscreenActivity {
 			return render;
 		}
 	}
+
+
 }
 
