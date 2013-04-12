@@ -62,7 +62,7 @@ public abstract class BaseScenario implements Scenario {
         				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.generic_particle)), 
         				Billboard.UNIT);
         Decorator<Representation> playerRepresentation = 
-        		new DeferredRepresentation( HealthBarShader.deferredForm(),
+        		new PeriodicRepresentation( HealthBarShader.deferredForm(),
         				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.generic_particle)), 
         				Billboard.UNIT);
         Decorator<Representation> boltRep = 

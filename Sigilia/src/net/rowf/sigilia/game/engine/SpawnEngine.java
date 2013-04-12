@@ -24,6 +24,7 @@ public class SpawnEngine implements Engine {
 			Spawn spawn = e.getComponent(Spawn.class);
 			if (spawn != null) {
 				spawned.add(spawn.getEntity());
+				e.setComponent(Spawn.class, null);
 			}
 		}
 		entities.addAll(spawned);

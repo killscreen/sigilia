@@ -2,14 +2,11 @@ package net.rowf.sigilia;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Semaphore;
 
 import net.rowf.sigilia.game.Engine;
 import net.rowf.sigilia.game.Entity;
-import net.rowf.sigilia.renderer.PerspectiveRenderer.RenderableInitializer;
 import net.rowf.sigilia.scenario.Scenario;
 import android.os.SystemClock;
-import android.util.Log;
 
 public class ScenarioRunner implements Runnable {
 	private Scenario scenario;

@@ -3,19 +3,36 @@ package net.rowf.sigilia.game.entity;
 import net.rowf.sigilia.game.Entity;
 import net.rowf.sigilia.game.component.Boundary;
 import net.rowf.sigilia.game.component.Position;
+import net.rowf.sigilia.game.component.metadata.PhysicalType;
 import net.rowf.sigilia.game.component.physical.BoundingBox;
 import net.rowf.sigilia.game.component.physical.Health;
-import net.rowf.sigilia.game.component.visual.HealthBarRepresentation;
-import net.rowf.sigilia.game.component.visual.Representation;
+import net.rowf.sigilia.game.component.visual.Animation;
 
 public class Player extends NamedPrototype {
-	private static final BoundingBox BOUND = new BoundingBox(0, 0, 1, 2);
+	private BoundingBox BOUND = new BoundingBox(0, 0, 1, 1.75f);
 	
 	@Override
 	protected void applyAdditional(Entity e) {
-		e.setComponent(Health.class, new Health(100000f));
+		e.setComponent(Health.class, new Health(100));
+		e.setComponent(Animation.class, new HealthAnimation(e.getComponent(Health.class)));
 		e.setComponent(Boundary.class, BOUND);
 		e.setComponent(Position.class, BOUND);
+		e.setComponent(PhysicalType.class, PhysicalType.SOLID);
 	}
 
+	private class HealthAnimation extends Animation {
+		private Health health;
+
+		public HealthAnimation(Health health) {
+			super();
+			this.health = health;
+		}
+
+		@Override
+		public float getProgress() {
+			return health.getRatio();
+		}
+		
+		
+	}
 }

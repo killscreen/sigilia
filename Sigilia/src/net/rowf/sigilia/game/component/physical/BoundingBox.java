@@ -22,6 +22,8 @@ public class BoundingBox extends Position implements Boundary {
 		this.width = width;
 		this.height = height;
 		this.depth = depth;
+		shift(0,0,0);
+		
 	}
 	@Override
 	public Vector getMinimum() {

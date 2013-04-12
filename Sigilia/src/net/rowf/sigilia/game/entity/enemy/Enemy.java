@@ -2,6 +2,7 @@ package net.rowf.sigilia.game.entity.enemy;
 
 import net.rowf.sigilia.game.Entity;
 import net.rowf.sigilia.game.component.metadata.Liveness;
+import net.rowf.sigilia.game.component.metadata.PhysicalType;
 import net.rowf.sigilia.game.component.physical.Health;
 import net.rowf.sigilia.game.component.physical.Size;
 import net.rowf.sigilia.game.component.visual.Animation;
@@ -13,6 +14,7 @@ public abstract class Enemy extends NamedPrototype {
 	@Override
 	public void apply(Entity e) {
 		// TODO Add normal collision stuffs
+		e.setComponent(PhysicalType.class, PhysicalType.SOLID);
 		e.setComponent(Health.class, new Health(3f));
 		e.setComponent(Animation.class, new Animation());
 		e.setComponent(Size.class, DEFAULT_SIZE);

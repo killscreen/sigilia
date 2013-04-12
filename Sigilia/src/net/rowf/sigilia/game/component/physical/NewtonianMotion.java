@@ -3,6 +3,7 @@ package net.rowf.sigilia.game.component.physical;
 import net.rowf.sigilia.game.Entity;
 import net.rowf.sigilia.game.component.Position;
 import net.rowf.sigilia.geometry.Vector;
+import android.util.Log;
 
 /**
  * Implements gravity
@@ -11,7 +12,7 @@ import net.rowf.sigilia.geometry.Vector;
  *
  */
 public class NewtonianMotion extends Vector implements Motion {
-	public static final float GRAVITY = -1.25f;
+	public static final float GRAVITY = -8f;
 	
 	/**
 	 * 
@@ -25,7 +26,10 @@ public class NewtonianMotion extends Vector implements Motion {
 
 	@Override
 	public void move(Entity e, float timeStep) {
-		elements[1] += GRAVITY * timeStep * timeStep; // TODO: Generalize to forces/acceleration?
+		elements[1] += GRAVITY * timeStep; // TODO: Generalize to forces/acceleration?
+		
+		float g = GRAVITY * timeStep;
+		if (g == 0) Log.e(getClass().getName(), "GRAVITY REDUCED TO NOTHING");
 		
 		Position p = e.getComponent(Position.class);
 		if (p != null) {
