@@ -21,5 +21,5 @@ public interface Scenario {
 	 * @param decorum
 	 */
 	public void decorate(Map<String, Decorator<Representation>> decorum, Resources res);
-	
+
 }

@@ -8,6 +8,9 @@ import net.rowf.sigilia.game.component.Position;
  * 
  * http://lonesock.net/article/verlet.html
  * 
+ * NOTE: This implementation is very broken! Should not be used at 
+ * this point.
+ * 
  * @author woeltjen
  *
  */

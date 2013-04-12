@@ -20,9 +20,11 @@ import net.rowf.sigilia.game.engine.RemovalEngine;
 import net.rowf.sigilia.game.engine.RenderingEngine;
 import net.rowf.sigilia.game.engine.RenderingEngine.RenderableReceiver;
 import net.rowf.sigilia.game.engine.SequenceEngine;
+import net.rowf.sigilia.game.engine.SpawnEngine;
 import net.rowf.sigilia.game.entity.weapon.DefaultWeapon;
 import net.rowf.sigilia.game.entity.weapon.LightningWeapon;
 import net.rowf.sigilia.game.entity.weapon.Weapon;
+import net.rowf.sigilia.geometry.Vector;
 import net.rowf.sigilia.input.TouchInputListener;
 import net.rowf.sigilia.input.WeaponInput;
 import net.rowf.sigilia.renderer.PerspectiveRenderer;
@@ -43,8 +45,11 @@ import android.util.Log;
 
 public class ScenarioActivity extends FullscreenActivity {
 	public static final String SCENARIO_KEY = ScenarioActivity.class.getPackage().getName() + ".scenario_class";
-	
+
 	private ScenarioRunner activeScenario = null;
+	
+	private static final Vector WORLD_MIN = new Vector (-20, -5, -1);
+	private static final Vector WORLD_MAX = new Vector (20,  20, 20);
 	
 	@Override
 	public void onResume() {
@@ -99,12 +104,13 @@ public class ScenarioActivity extends FullscreenActivity {
        
 		engines.add(new RenderingEngine(intermediary));
 		engines.add(new MotionEngine());
-		engines.add(new RemovalEngine().addCriterion(RemovalEngine.fartherThan(12f)).addCriterion(RemovalEngine.LIVENESS));
+		engines.add(new RemovalEngine().addCriterion(RemovalEngine.outOfBounds(WORLD_MIN, WORLD_MAX)).addCriterion(RemovalEngine.LIVENESS));
 		engines.add(new DecorationEngine<Representation>(Representation.class, decorum));
 		engines.add(new InputEngine(Arrays.<InputElement>asList(new WeaponInput(new DefaultWeapon(), Arrays.<Weapon>asList(new LightningWeapon()), touchInput, 0.05f))));
 		engines.add(new AnimationEngine());
 		engines.add(new CollisionEngine());
 		engines.add(new IntelligenceEngine());
+		engines.add(new SpawnEngine());
 		
 		activeScenario = new ScenarioRunner(s, new SequenceEngine(engines));
 		new Thread(activeScenario).start();

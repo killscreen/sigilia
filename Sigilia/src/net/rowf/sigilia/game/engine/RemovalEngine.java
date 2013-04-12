@@ -7,6 +7,7 @@ import net.rowf.sigilia.game.Engine;
 import net.rowf.sigilia.game.Entity;
 import net.rowf.sigilia.game.component.Position;
 import net.rowf.sigilia.game.component.metadata.Liveness;
+import net.rowf.sigilia.geometry.Vector;
 
 public class RemovalEngine implements Engine {
 	private List<Criterion> criteria = new ArrayList<Criterion>();
@@ -54,6 +55,32 @@ public class RemovalEngine implements Engine {
 				return (p != null) && (p.getZ() > distance);
 			}			
 		};
+	}
+	
+	/**
+	 * Create a Criterion to determine if an object has left world 
+	 * bounds.
+	 * @param min
+	 * @param max
+	 * @return
+	 */
+	public static Criterion outOfBounds(final Vector min, final Vector max) {
+		return new Criterion() {
+			@Override
+			public boolean evaluate(Entity e) {
+				Position p = e.getComponent(Position.class);
+				if (p != null) {
+					return p.getX() < min.getX() ||
+						   p.getX() > max.getX() ||
+						   p.getY() < min.getY() ||
+						   p.getY() > max.getY() ||
+						   p.getZ() < min.getZ() ||
+						   p.getZ() > max.getZ();
+				} else {
+					return false;
+				}
+			}			
+		};		
 	}
 	
 	public static final Criterion LIVENESS = new Criterion() {

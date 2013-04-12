@@ -5,14 +5,17 @@ import java.util.Random;
 import net.rowf.sigilia.game.Entity;
 import net.rowf.sigilia.game.component.Position;
 import net.rowf.sigilia.game.component.mental.Intellect;
+import net.rowf.sigilia.game.component.metadata.Spawn;
 import net.rowf.sigilia.game.component.physical.Motion;
 import net.rowf.sigilia.game.component.visual.Animation;
 import net.rowf.sigilia.game.component.visual.Animator;
-import android.util.FloatMath;
-import android.util.Log;
+import net.rowf.sigilia.geometry.Vector;
 
 public class Goblin extends Enemy {
-
+	private static final Vector ORIGIN = new Vector(0,0,0);
+	private static final Projectile projectile = new Rock();
+	
+	
 	@Override
 	protected void applyAdditional(Entity e) {
 		GoblinController controller = new GoblinController();
@@ -23,7 +26,8 @@ public class Goblin extends Enemy {
 	
 	private static class GoblinController implements Intellect, Motion {
 		private static Random random = new Random();
-		private float nextThink = 0; 
+		private float nextThink = 0;
+		private float nextToss = 0;
 		private float dx = 0;
 		private float dz = 0;
 		// Note: No y-movement
@@ -34,6 +38,12 @@ public class Goblin extends Enemy {
 				dx = (float) (random.nextFloat() * 2f) - 1f;
 				dz = (float) (random.nextFloat() * 2f) - 1f;
 				nextThink = timeStamp + (float) (random.nextFloat() * 0.5) + 0.5f;
+				if (random.nextFloat() < 0.1f) {
+					Position p = e.getComponent(Position.class);
+					if (p != null) {
+						e.setComponent(Spawn.class, projectile.spawnProjectile(p.getX() + 0.25f, p.getY() + 1f, p.getZ(), ORIGIN));
+					}
+				}
 			}					
 		}
 
@@ -42,37 +52,26 @@ public class Goblin extends Enemy {
 			Position p = e.getComponent(Position.class);
 			if (p != null) {
 				// Bound motion
+				// TODO: This should be the world's problem
 				if (p.getZ() < 2) {
 					dz = 2 - p.getZ();
 				}
 				if (p.getZ() > 10) {
 					dz = 10 - p.getZ();
 				}
-				if (p.getX() < -6) {
+				if (p.getX() < -4) {
 					dx = -6 - p.getX();
 				}
-				if (p.getX() > 6) {
+				if (p.getX() > 4) {
 					dx = 6 - p.getX();
 				}
 				
-				Log.d("GOBLIN", "dx,dz" + dx + " " + dz);
 				// Move the goblin
 				p.shift(dx * timeStep, 0, dz * timeStep);
 			}
 		}
 		
 	}
-	
-	private static class GoblinMotion implements Motion {
-		private float t = 0;
-		@Override
-		public void move(Entity e, float timeStep) {
-			t += timeStep;
-			Position p = e.getComponent(Position.class);
-			p.shift(0.0f, 0.0f,
-					timeStep * FloatMath.sin(t));
-		}  
-	};
 
 	private static class GoblinWalk implements Animator {
 		private String[] cycle = {"Facing", "Stepleft", "Facing", "Stepright"};
