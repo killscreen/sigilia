@@ -33,6 +33,6 @@ public class Rock extends Projectile {
 		e.setComponent(Impact.class, IMPACT);
 	}
 	
-	private static final Impact IMPACT = new ProjectileImpact(1f, Goblin.class); 	
+	private static final Impact IMPACT = new ProjectileImpact(5f, Goblin.class); 	
 
 }

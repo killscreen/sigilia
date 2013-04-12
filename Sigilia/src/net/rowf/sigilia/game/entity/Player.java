@@ -3,6 +3,7 @@ package net.rowf.sigilia.game.entity;
 import net.rowf.sigilia.game.Entity;
 import net.rowf.sigilia.game.component.Boundary;
 import net.rowf.sigilia.game.component.Position;
+import net.rowf.sigilia.game.component.metadata.Liveness;
 import net.rowf.sigilia.game.component.metadata.PhysicalType;
 import net.rowf.sigilia.game.component.physical.BoundingBox;
 import net.rowf.sigilia.game.component.physical.Health;
@@ -18,6 +19,7 @@ public class Player extends NamedPrototype {
 		e.setComponent(Boundary.class, BOUND);
 		e.setComponent(Position.class, BOUND);
 		e.setComponent(PhysicalType.class, PhysicalType.SOLID);
+		e.setComponent(Liveness.class, Liveness.ALIVE);
 	}
 
 	private class HealthAnimation extends Animation {

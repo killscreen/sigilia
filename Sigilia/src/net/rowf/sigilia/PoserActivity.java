@@ -371,7 +371,7 @@ public class PoserActivity extends Activity implements RenderableProvider, Rende
 				new FlatTextureShader(),
 				this,
 				locatorMatrix,
-				new Texture(BitmapFactory.decodeResource(getResources(), R.drawable.goblin_patch))
+				new Texture(BitmapFactory.decodeResource(getResources(), R.drawable.archer))
 				);		
 		pointModel = new Billboard(0.05f);
 		pointShader = new FlatTextureShader();

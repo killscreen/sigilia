@@ -134,7 +134,9 @@ public abstract class BaseScenario implements Scenario {
 			return seq;
 		} catch (Exception e) {
 			Log.e("BaseScenario", "Could not read resource for keyframe sequence: " + e.getMessage());
-			return null;
+			Log.e("BaseScenario", e.getMessage());
+			throw new RuntimeException(e.getMessage());
+			//return null;
 		}
 	}
 }

@@ -1,12 +1,10 @@
 package net.rowf.sigilia;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import net.rowf.sigilia.game.Entity;
+import net.rowf.sigilia.scenario.ArcherScenario;
 import net.rowf.sigilia.scenario.SampleScenario;
-import net.rowf.sigilia.scenario.Scenario;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,6 +22,7 @@ public class ScenarioSelectActivity extends FullscreenActivity {
 		// TODO: Need to set images to grey if things are unavailable
 		
 		scenarioMap.put(R.id.scenario_1, SampleScenario.class.getName());
+		scenarioMap.put(R.id.scenario_2, ArcherScenario.class.getName());
 		
 		setContentView(R.layout.select);
 	}
