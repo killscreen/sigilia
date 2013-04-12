@@ -2,19 +2,35 @@ package net.rowf.sigilia.scenario;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.List;
+import java.util.Map;
 
+import net.rowf.sigilia.R;
 import net.rowf.sigilia.game.Entity;
 import net.rowf.sigilia.game.component.Boundary;
 import net.rowf.sigilia.game.component.Position;
 import net.rowf.sigilia.game.component.physical.BoundingBox;
 import net.rowf.sigilia.game.component.physical.Size;
+import net.rowf.sigilia.game.component.visual.Representation;
+import net.rowf.sigilia.game.engine.DecorationEngine.Decorator;
+import net.rowf.sigilia.game.entity.Player;
 import net.rowf.sigilia.game.entity.Prototype;
 import net.rowf.sigilia.game.entity.StandardEntity;
+import net.rowf.sigilia.game.entity.weapon.DefaultWeapon;
+import net.rowf.sigilia.game.entity.weapon.LightningWeapon;
 import net.rowf.sigilia.renderer.decorator.DeferredProgram;
+import net.rowf.sigilia.renderer.decorator.DeferredRepresentation;
+import net.rowf.sigilia.renderer.decorator.DeferredTexture;
+import net.rowf.sigilia.renderer.decorator.PeriodicRepresentation;
+import net.rowf.sigilia.renderer.model.Billboard;
+import net.rowf.sigilia.renderer.model.TiltedBillboard;
 import net.rowf.sigilia.renderer.model.animation.KeyframeSequence;
 import net.rowf.sigilia.renderer.shader.program.AnimatedFlatTextureShader;
 import net.rowf.sigilia.renderer.shader.program.FlatTextureShader;
+import net.rowf.sigilia.renderer.shader.program.FlickeringShader;
+import net.rowf.sigilia.renderer.shader.program.HealthBarShader;
 import android.content.res.Resources;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
 public abstract class BaseScenario implements Scenario {
@@ -28,6 +44,38 @@ public abstract class BaseScenario implements Scenario {
 	public final DeferredProgram DEFERRED_FLAT_SHADER = FlatTextureShader.deferredForm();
 	public final DeferredProgram DEFERRED_ANIM_SHADER = AnimatedFlatTextureShader.deferredForm();
 	
+	@Override
+	public void populate(List<Entity> entities) {
+		StandardEntity e = new StandardEntity();
+		new Player().apply(e);
+		entities.add(e);
+	}
+	
+	
+
+	@Override
+	public void decorate(Map<String, Decorator<Representation>> decorum,
+			Resources res) {
+        // TODO: Move to BaseScenario?
+        Decorator<Representation> particleRepresentation = 
+        		new DeferredRepresentation( DEFERRED_FLAT_SHADER,
+        				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.generic_particle)), 
+        				Billboard.UNIT);
+        Decorator<Representation> playerRepresentation = 
+        		new DeferredRepresentation( HealthBarShader.deferredForm(),
+        				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.generic_particle)), 
+        				Billboard.UNIT);
+        Decorator<Representation> boltRep = 
+        		new PeriodicRepresentation( FlickeringShader.deferredForm(),
+        				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.bolt_particle)), 
+        				TiltedBillboard.UNIT);                
+        decorum.put(DefaultWeapon.class.getSimpleName(), particleRepresentation);
+        decorum.put(LightningWeapon.class.getSimpleName(), boltRep);
+	    decorum.put(Player.class.getSimpleName(), playerRepresentation);
+	}
+
+
+
 	protected Entity spawn(Prototype p, float x, float y, float z) {
 		Entity entity = new StandardEntity();
 		p.apply(entity);

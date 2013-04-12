@@ -87,19 +87,7 @@ public class ScenarioActivity extends FullscreenActivity {
         // TODO: Some class needs to provide this
         Map<String, Decorator<Representation>> decorum = new HashMap<String, Decorator<Representation>>();
         s.decorate(decorum, getResources());
-        
-        // TODO: Move to BaseScenario?
-        Decorator<Representation> particleRepresentation = 
-        		new DeferredRepresentation( FlatTextureShader.deferredForm(),
-        				new DeferredTexture(BitmapFactory.decodeResource(getResources(), R.drawable.generic_particle)), 
-        				Billboard.UNIT);
-        Decorator<Representation> boltRep = 
-        		new PeriodicRepresentation( FlickeringShader.deferredForm(),
-        				new DeferredTexture(BitmapFactory.decodeResource(getResources(), R.drawable.bolt_particle)), 
-        				TiltedBillboard.UNIT);                
-        decorum.put(DefaultWeapon.class.getSimpleName(), particleRepresentation);
-        decorum.put(LightningWeapon.class.getSimpleName(), boltRep);
-        
+               
 		List<Engine> engines = new ArrayList<Engine>();
        
 		engines.add(new RenderingEngine(intermediary));

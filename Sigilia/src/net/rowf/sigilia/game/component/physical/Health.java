@@ -5,9 +5,11 @@ import net.rowf.sigilia.game.Entity;
 import net.rowf.sigilia.game.component.metadata.Liveness;
 
 public class Health implements Component {
+	private float initialHealth;
 	private float health;
 	
 	public Health(float health) {
+		this.initialHealth = health;
 		this.health = health;
 	}
 	
@@ -17,5 +19,9 @@ public class Health implements Component {
 			Liveness liveness = target.getComponent(Liveness.class);
 			liveness.kill(target);
 		}
+	}
+	
+	public float getRatio() {
+		return Math.max(0, health / initialHealth);
 	}
 }

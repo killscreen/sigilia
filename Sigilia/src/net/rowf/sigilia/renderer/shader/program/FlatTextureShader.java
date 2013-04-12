@@ -10,7 +10,7 @@ import net.rowf.sigilia.renderer.shader.VectorParameter;
 
 public class FlatTextureShader extends ParameterizedProgram {
 	private static final String VERTEX_SHADER = 
-		"  vCoord = vec2(abs("+ VectorParameter.TEXTURE_COORD.getName() + ".x)," +
+		"  vCoord = vec2(/*???*/abs("+ VectorParameter.TEXTURE_COORD.getName() + ".x)," +
 		                "abs("+ VectorParameter.TEXTURE_COORD.getName() + ".y));" +
 	    "  gl_Position = " + MatrixParameter.TRANSFORMATION.getName() + " * " +
 	                         VectorParameter.VERTEX.getName() + ";";

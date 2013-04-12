@@ -5,8 +5,12 @@ import android.util.Log;
 
 public abstract class Shader {
 	public final int shader;
-	public Shader(String sourceCode, int type) {
+	public Shader(String sourceCode, int type) {	
+		if (sourceCode.contains("???")) {
+			Log.e("???", "???" );
+		}
 		shader = GLES20.glCreateShader(type);
+		//Log.e("SHADER", "shader=" + shader);
 		GLES20.glShaderSource(shader, sourceCode);
 		checkError("ShaderSource");
 		GLES20.glCompileShader(shader);
@@ -15,12 +19,13 @@ public abstract class Shader {
 	}
 	
 	boolean logged = false;
-	private void checkError(String location) {
+	private boolean checkError(String location) {
 		if (!logged)
 		for (int err = GLES20.glGetError(); err != GLES20.GL_NO_ERROR; err = GLES20.glGetError()) {
 			Log.e("inf", "Error at " + location + ": " + err);
 			logged = true;
 		}
+		return logged;
 	}
 	
 	public static class VertexShader extends Shader {

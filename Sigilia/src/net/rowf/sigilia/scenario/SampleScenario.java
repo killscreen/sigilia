@@ -9,6 +9,7 @@ import net.rowf.sigilia.game.component.Position;
 import net.rowf.sigilia.game.component.metadata.Name;
 import net.rowf.sigilia.game.component.visual.Representation;
 import net.rowf.sigilia.game.engine.DecorationEngine.Decorator;
+import net.rowf.sigilia.game.entity.Player;
 import net.rowf.sigilia.game.entity.Prototype;
 import net.rowf.sigilia.game.entity.StandardEntity;
 import net.rowf.sigilia.game.entity.enemy.Goblin;
@@ -26,6 +27,8 @@ public class SampleScenario extends BaseScenario {
 
 	@Override
 	public void populate(List<Entity> entities) {
+		super.populate(entities);
+		
 		Prototype enemy = new Goblin();
 		for (float x = -3; x < 3; x += 1f) {
 			entities.add(spawn(enemy, x, -0.5f, 6f + 3 * (float) Math.sin(x)));
@@ -38,12 +41,13 @@ public class SampleScenario extends BaseScenario {
 	}
 
 	@Override
-	public void decorate(Map<String, Decorator<Representation>> decorum, Resources res) {	
+	public void decorate(Map<String, Decorator<Representation>> decorum, Resources res) {
+		super.decorate(decorum, res);
 		decorum.put(Goblin.class.getSimpleName(), new AnimatedRepresentation(DEFERRED_ANIM_SHADER, 
 				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.goblin_patch)),
 				loadKeyframeSequence(res, R.raw.goblin_animation, 2f)));	
 		
-		decorum.put(Rock.class.getSimpleName(), new DeferredRepresentation( FlatTextureShader.deferredForm(),
+		decorum.put(Rock.class.getSimpleName(), new DeferredRepresentation( DEFERRED_FLAT_SHADER,
         				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.rock_particle)), 
         				Billboard.UNIT));
 		
