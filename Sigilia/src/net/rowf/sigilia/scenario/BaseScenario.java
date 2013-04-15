@@ -9,6 +9,7 @@ import net.rowf.sigilia.R;
 import net.rowf.sigilia.game.Entity;
 import net.rowf.sigilia.game.component.Boundary;
 import net.rowf.sigilia.game.component.Position;
+import net.rowf.sigilia.game.component.metadata.Name;
 import net.rowf.sigilia.game.component.physical.BoundingBox;
 import net.rowf.sigilia.game.component.physical.Size;
 import net.rowf.sigilia.game.component.visual.Representation;
@@ -22,6 +23,7 @@ import net.rowf.sigilia.renderer.decorator.DeferredProgram;
 import net.rowf.sigilia.renderer.decorator.DeferredRepresentation;
 import net.rowf.sigilia.renderer.decorator.DeferredTexture;
 import net.rowf.sigilia.renderer.decorator.PeriodicRepresentation;
+import net.rowf.sigilia.renderer.model.Backdrop;
 import net.rowf.sigilia.renderer.model.Billboard;
 import net.rowf.sigilia.renderer.model.TiltedBillboard;
 import net.rowf.sigilia.renderer.model.animation.KeyframeSequence;
@@ -44,10 +46,17 @@ public abstract class BaseScenario implements Scenario {
 	public final DeferredProgram DEFERRED_FLAT_SHADER = FlatTextureShader.deferredForm();
 	public final DeferredProgram DEFERRED_ANIM_SHADER = AnimatedFlatTextureShader.deferredForm();
 	
+	protected static final Name BACKDROP_NAME = new Name("Backdrop");
+	
 	@Override
 	public void populate(List<Entity> entities) {
 		StandardEntity e = new StandardEntity();
 		new Player().apply(e);
+		entities.add(e);
+		
+		e = new StandardEntity();
+		e.setComponent(Position.class, new Position(0,0,Backdrop.SIZE));
+		e.setComponent(Name.class, BACKDROP_NAME);
 		entities.add(e);
 	}
 	

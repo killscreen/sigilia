@@ -6,14 +6,20 @@ import java.nio.ShortBuffer;
 import net.rowf.sigilia.util.BufferUtil;
 
 public class Backdrop implements Model {
+	public static final float SIZE = 15f;
+	
 	private static final ShortBuffer order =
-			BufferUtil.toBuffer(new short[] { 0,1,3, 3,2,0, 2,3,5, 5,4,2, 4,5,7, 7,6,4 });
+			BufferUtil.toBuffer(new short[] { 
+					0,1,3, 3,2,0, 
+					2,3,5, 5,4,2, 
+					4,5,7, 7,6,4 });
 	private static final FloatBuffer vertexes =
 			BufferUtil.toBuffer(new float[] {
-					-16,16,  1,   16,16,1,
-					-16, 0,  1,   16, 0,1,
-					-16,-1,  0,   16,-1,0,
-					-16,-1,-10,   16,-1,-10
+					-SIZE,SIZE,  1,   SIZE,SIZE,1,
+					-SIZE, 0,  1,   SIZE, 0,1,
+					-SIZE,-1,  0,   SIZE,-1,0,
+					-SIZE,-2,-SIZE,   SIZE,-2,-SIZE
+//					-16,-3,-32,   16,-3,-32
 			});
 	private static final FloatBuffer texCoords =
 			BufferUtil.toBuffer(new float[] {

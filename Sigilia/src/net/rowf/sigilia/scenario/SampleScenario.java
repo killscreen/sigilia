@@ -33,11 +33,6 @@ public class SampleScenario extends BaseScenario {
 		for (float x = -3; x < 3; x += 1f) {
 			entities.add(spawn(enemy, x, -0.5f, 6f + 3 * (float) Math.sin(x)));
 		}
-		
-		Entity backdrop = new StandardEntity();
-		backdrop.setComponent(Name.class, new Name("BACKDROP"));
-		backdrop.setComponent(Position.class, new Position(0,0,12));
-		entities.add(backdrop);
 	}
 
 	@Override
@@ -51,7 +46,7 @@ public class SampleScenario extends BaseScenario {
         				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.rock_particle)), 
         				Billboard.UNIT));
 		
-		decorum.put("BACKDROP", new DeferredRepresentation(DEFERRED_FLAT_SHADER, 
+		decorum.put(BACKDROP_NAME.get(), new DeferredRepresentation(DEFERRED_FLAT_SHADER, 
 				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.cave_background)),
 				new Backdrop()));
 		//super.decorate
