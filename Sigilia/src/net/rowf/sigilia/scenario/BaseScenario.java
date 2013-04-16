@@ -18,6 +18,7 @@ import net.rowf.sigilia.game.entity.Player;
 import net.rowf.sigilia.game.entity.Prototype;
 import net.rowf.sigilia.game.entity.StandardEntity;
 import net.rowf.sigilia.game.entity.weapon.DefaultWeapon;
+import net.rowf.sigilia.game.entity.weapon.FireWeapon;
 import net.rowf.sigilia.game.entity.weapon.LightningWeapon;
 import net.rowf.sigilia.renderer.decorator.DeferredProgram;
 import net.rowf.sigilia.renderer.decorator.DeferredRepresentation;
@@ -77,9 +78,14 @@ public abstract class BaseScenario implements Scenario {
         Decorator<Representation> boltRep = 
         		new PeriodicRepresentation( FlickeringShader.deferredForm(),
         				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.bolt_particle)), 
-        				TiltedBillboard.UNIT);                
+        				TiltedBillboard.UNIT);
+        Decorator<Representation> fireRep = 
+        		new PeriodicRepresentation( FlickeringShader.deferredForm(),
+        				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.rock_particle)), 
+        				Billboard.UNIT);
         decorum.put(DefaultWeapon.class.getSimpleName(), particleRepresentation);
         decorum.put(LightningWeapon.class.getSimpleName(), boltRep);
+        decorum.put(FireWeapon.class.getSimpleName(), fireRep);
 	    decorum.put(Player.class.getSimpleName(), playerRepresentation);
 	}
 

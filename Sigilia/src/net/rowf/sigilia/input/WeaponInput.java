@@ -47,10 +47,11 @@ public class WeaponInput implements InputElement {
 		if (weapon == defaultWeapon) {
 			if (finalTap == TouchInput.RELEASE) {
 				float sim = activeSequence.getSimilarity(StaticDeltaSequence.BOLT, 24);
-				Log.i("WeaponInput", "Found a bolt with confidence " + sim);
+				//Log.i("WeaponInput", "Found a  with confidence " + sim);
 				
 				for (Weapon w : alternates) {
 					if (activeSequence.getSimilarity(w.getSigil(), 24) > 0.9f) {
+						Log.i("WeapnInput", "Found a " + w.getClass().getName());
 						weapon = w;
 						expiration = timeStamp + w.getLifetime();
 						break;

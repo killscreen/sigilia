@@ -2,6 +2,7 @@ package net.rowf.sigilia.game.entity.weapon;
 
 import net.rowf.sigilia.game.Entity;
 import net.rowf.sigilia.game.component.metadata.Liveness;
+import net.rowf.sigilia.game.component.metadata.PhysicalType;
 import net.rowf.sigilia.game.component.physical.ConstantMotion;
 import net.rowf.sigilia.game.component.physical.ProjectileImpact;
 import net.rowf.sigilia.game.component.physical.Impact;
@@ -17,11 +18,12 @@ public class DefaultWeapon extends Weapon {
 	protected void applyAdditional(Entity e) {
 		e.setComponent(Liveness.class, Liveness.ALIVE);
 		e.setComponent(Impact.class, IMPACT);
+		e.setComponent(PhysicalType.class, PhysicalType.ENERGY);
 	}
 
 	@Override
 	protected float velocity() {
-		return 2f;
+		return 3f;
 	}
 
 	@Override
