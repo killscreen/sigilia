@@ -1,10 +1,8 @@
 package net.rowf.sigilia.game.component.physical;
 
-import android.util.Log;
 import net.rowf.sigilia.game.Component;
 import net.rowf.sigilia.game.Entity;
 import net.rowf.sigilia.game.component.metadata.Liveness;
-import net.rowf.sigilia.game.component.metadata.Name;
 
 public class Health implements Component {
 	private float initialHealth;
