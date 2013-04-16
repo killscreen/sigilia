@@ -9,7 +9,7 @@ import net.rowf.sigilia.game.component.visual.Animation;
 import net.rowf.sigilia.game.entity.NamedPrototype;
 
 public abstract class Enemy extends NamedPrototype {
-	private static final Size DEFAULT_SIZE = new Size(2);
+	private static final Size DEFAULT_SIZE = new Size(1,2,1);
 	
 	@Override
 	public void apply(Entity e) {

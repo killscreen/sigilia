@@ -17,6 +17,10 @@ public class BoundingBox extends Position implements Boundary {
 		this(x,y,z,sz,sz,sz);
 	}
 	
+	public BoundingBox(float x, float y, float z, Vector sz) {
+		this(x,y,z,sz.getX(), sz.getY(), sz.getZ());
+	}
+	
 	public BoundingBox(float x, float y, float z, float width, float height, float depth) {
 		super(x,y,z);
 		this.width = width;

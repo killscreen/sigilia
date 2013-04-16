@@ -83,7 +83,23 @@ public abstract class BaseScenario implements Scenario {
 	    decorum.put(Player.class.getSimpleName(), playerRepresentation);
 	}
 
-
+	/**
+	 * Spawns an entity at ground level
+	 * @param p
+	 * @param x
+	 * @param z
+	 * @return
+	 */
+	protected Entity spawn(Prototype p, float x, float z) {
+		Entity temp = new StandardEntity();
+		p.apply(temp);
+		float y = -1f;
+		if (temp.getComponent(Size.class) != null) {
+			y += temp.getComponent(Size.class).get().getY() / 2f;
+		}
+		return spawn(p, x, y, z);
+	}
+	
 
 	protected Entity spawn(Prototype p, float x, float y, float z) {
 		Entity entity = new StandardEntity();

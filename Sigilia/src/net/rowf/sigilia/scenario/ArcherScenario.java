@@ -10,6 +10,7 @@ import net.rowf.sigilia.game.engine.DecorationEngine.Decorator;
 import net.rowf.sigilia.game.entity.Prototype;
 import net.rowf.sigilia.game.entity.enemy.Archer;
 import net.rowf.sigilia.game.entity.enemy.Rock;
+import net.rowf.sigilia.game.entity.environment.Tree;
 import net.rowf.sigilia.renderer.decorator.AnimatedRepresentation;
 import net.rowf.sigilia.renderer.decorator.DeferredRepresentation;
 import net.rowf.sigilia.renderer.decorator.DeferredTexture;
@@ -25,8 +26,10 @@ public class ArcherScenario extends BaseScenario {
 		super.populate(entities);
 		
 		Prototype enemy = new Archer();
-		for (float x = -3; x < 3; x += 1f) {
-			entities.add(spawn(enemy, x, -0.5f, 6f + 3 * (float) Math.sin(x)));
+		Prototype tree  = new Tree();
+		for (float x = -3; x < 3.99f; x += 1f) {
+			entities.add(spawn(enemy, x, 9f + 3 * (float) Math.sin(x)));
+			entities.add(spawn(tree,  x,  8f + 3 * (float) Math.sin(x)));
 		}
 		
 	}
@@ -45,6 +48,10 @@ public class ArcherScenario extends BaseScenario {
 		decorum.put(Rock.class.getSimpleName(), new DeferredRepresentation( DEFERRED_FLAT_SHADER,
         				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.rock_particle)), 
         				Billboard.UNIT));
+
+		decorum.put(Tree.class.getSimpleName(), new DeferredRepresentation( DEFERRED_FLAT_SHADER,
+				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.tree)), 
+				new Billboard(6.5f)));
 		
 		decorum.put(BACKDROP_NAME.get(), new DeferredRepresentation(DEFERRED_FLAT_SHADER, 
 				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.forest_background)),
