@@ -25,6 +25,10 @@ public abstract class Weapon extends NamedPrototype {
 		return 0.1f;
 	}
 	
+	public Size getSize() {
+		return DEFAULT_SIZE;
+	}
+	
 	public abstract DeltaSequence getSigil();
 	
 	public void apply(Entity e, float x, float y) {
@@ -37,9 +41,9 @@ public abstract class Weapon extends NamedPrototype {
 		/* Scaling factor for velocity*/
 		float v = velocity() / FloatMath.sqrt( x*x + y*y + z*z );
 		
-		BoundingBox bound = new BoundingBox(x,y,z, DEFAULT_SIZE.get());
+		BoundingBox bound = new BoundingBox(x,y,z, getSize().get());
 		
-		e.setComponent(Size.class, DEFAULT_SIZE);
+		e.setComponent(Size.class, getSize());
 		e.setComponent(Motion.class, new ConstantMotion(new Vector(x*v, y*v, z*v)));
 		e.setComponent(Position.class, bound);
 		e.setComponent(Boundary.class, bound);
