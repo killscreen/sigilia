@@ -5,6 +5,7 @@ import java.util.Map;
 
 import net.rowf.sigilia.scenario.ArcherScenario;
 import net.rowf.sigilia.scenario.SampleScenario;
+import net.rowf.sigilia.scenario.WizardScenario;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,6 +24,7 @@ public class ScenarioSelectActivity extends FullscreenActivity {
 		
 		scenarioMap.put(R.id.scenario_1, SampleScenario.class.getName());
 		scenarioMap.put(R.id.scenario_2, ArcherScenario.class.getName());
+		scenarioMap.put(R.id.scenario_3, WizardScenario.class.getName());
 		
 		setContentView(R.layout.select);
 	}

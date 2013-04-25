@@ -34,6 +34,18 @@
             android:scaleType="center"
             android:src="@drawable/parchment" />
 
+        <ImageView
+            android:id="@+id/scenario_3"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:onClick="chooseScenario"
+            android:paddingBottom="20px"
+            android:paddingLeft="20px"
+            android:paddingRight="20px"
+            android:paddingTop="20px"
+            android:scaleType="center"
+            android:src="@drawable/parchment" />
+        
     </LinearLayout>
     
 

@@ -15,29 +15,33 @@ public final class R {
         public static final int bolt_particle=0x7f020001;
         public static final int cave_background=0x7f020002;
         public static final int cave_rock=0x7f020003;
-        public static final int editor_triangle=0x7f020004;
-        public static final int forest_background=0x7f020005;
-        public static final int generic_particle=0x7f020006;
-        public static final int goblin=0x7f020007;
-        public static final int goblin_patch=0x7f020008;
-        public static final int ic_launcher=0x7f020009;
-        public static final int lightning_particle=0x7f02000a;
-        public static final int monster=0x7f02000b;
-        public static final int parchment=0x7f02000c;
-        public static final int rock_particle=0x7f02000d;
-        public static final int title=0x7f02000e;
-        public static final int tree=0x7f02000f;
+        public static final int cloud_background=0x7f020004;
+        public static final int cloud_cover=0x7f020005;
+        public static final int editor_triangle=0x7f020006;
+        public static final int forest_background=0x7f020007;
+        public static final int generic_particle=0x7f020008;
+        public static final int goblin=0x7f020009;
+        public static final int goblin_patch=0x7f02000a;
+        public static final int ic_launcher=0x7f02000b;
+        public static final int lightning_particle=0x7f02000c;
+        public static final int monster=0x7f02000d;
+        public static final int parchment=0x7f02000e;
+        public static final int rock_particle=0x7f02000f;
+        public static final int title=0x7f020010;
+        public static final int tree=0x7f020011;
+        public static final int wizard_patch=0x7f020012;
     }
     public static final class id {
-        public static final int imageView1=0x7f080002;
-        public static final int pose=0x7f080003;
-        public static final int poser_keyframe=0x7f080005;
-        public static final int poser_load=0x7f080008;
-        public static final int poser_reset=0x7f080006;
-        public static final int poser_save=0x7f080007;
-        public static final int poser_snap=0x7f080004;
+        public static final int imageView1=0x7f080003;
+        public static final int pose=0x7f080004;
+        public static final int poser_keyframe=0x7f080006;
+        public static final int poser_load=0x7f080009;
+        public static final int poser_reset=0x7f080007;
+        public static final int poser_save=0x7f080008;
+        public static final int poser_snap=0x7f080005;
         public static final int scenario_1=0x7f080000;
         public static final int scenario_2=0x7f080001;
+        public static final int scenario_3=0x7f080002;
     }
     public static final class layout {
         public static final int select=0x7f030000;
@@ -50,6 +54,7 @@ public final class R {
     public static final class raw {
         public static final int archer_animation=0x7f040000;
         public static final int goblin_animation=0x7f040001;
+        public static final int wizard_animation=0x7f040002;
     }
     public static final class string {
         public static final int app_name=0x7f050000;

@@ -144,7 +144,7 @@ public class EditorActivity extends Activity implements RenderableProvider, Rend
 				new FlatTextureShader(),
 				Billboard.UNIT,
 				locatorMatrix,
-				new Texture(BitmapFactory.decodeResource(getResources(), R.drawable.archer ))
+				new Texture(BitmapFactory.decodeResource(getResources(), R.drawable.wizard_patch ))
 				);		
 		pointModel = new Billboard(0.05f);
 		pointShader = new FlatTextureShader();
