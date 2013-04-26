@@ -16,20 +16,21 @@ public final class R {
         public static final int cave_background=0x7f020002;
         public static final int cave_rock=0x7f020003;
         public static final int cloud_background=0x7f020004;
-        public static final int cloud_cover=0x7f020005;
-        public static final int editor_triangle=0x7f020006;
-        public static final int forest_background=0x7f020007;
-        public static final int generic_particle=0x7f020008;
-        public static final int goblin=0x7f020009;
-        public static final int goblin_patch=0x7f02000a;
-        public static final int ic_launcher=0x7f02000b;
-        public static final int lightning_particle=0x7f02000c;
-        public static final int monster=0x7f02000d;
-        public static final int parchment=0x7f02000e;
-        public static final int rock_particle=0x7f02000f;
-        public static final int title=0x7f020010;
-        public static final int tree=0x7f020011;
-        public static final int wizard_patch=0x7f020012;
+        public static final int cloud_column=0x7f020005;
+        public static final int cloud_cover=0x7f020006;
+        public static final int editor_triangle=0x7f020007;
+        public static final int forest_background=0x7f020008;
+        public static final int generic_particle=0x7f020009;
+        public static final int goblin=0x7f02000a;
+        public static final int goblin_patch=0x7f02000b;
+        public static final int ic_launcher=0x7f02000c;
+        public static final int lightning_particle=0x7f02000d;
+        public static final int monster=0x7f02000e;
+        public static final int parchment=0x7f02000f;
+        public static final int rock_particle=0x7f020010;
+        public static final int title=0x7f020011;
+        public static final int tree=0x7f020012;
+        public static final int wizard_patch=0x7f020013;
     }
     public static final class id {
         public static final int imageView1=0x7f080003;

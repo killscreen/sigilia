@@ -18,31 +18,32 @@ public class Archer extends Enemy {
 	
 	@Override
 	protected void applyAdditional(Entity e) {
-//		GoblinController controller = new GoblinController();
-//		e.setComponent(Motion.class, controller);
-//		e.setComponent(Intellect.class, controller);
-		e.setComponent(Animator.class, new ArcherAnimation());
+		ArcherController controller = new ArcherController();
+		e.setComponent(Motion.class, controller);
+		e.setComponent(Intellect.class, controller);
+		e.setComponent(Animator.class, controller);
 	}
 	
-	private static class GoblinController implements Intellect, Motion {
-		private static final float THROW_FREQUENCY = 0.15f;
+	private static class ArcherController implements Intellect, Motion, Animator {
+		private static final float THINK_DELAY = 0.1f;
+		private static final float FIRE_FREQUENCY = 0.15f;
 		private static Random random = new Random();
 		private float nextThink = 0;
 		private float nextToss = 0;
-		private float dx = 0;
-		private float dz = 0;
+		private ArcherFrame archerFrame = ArcherFrame.FINISH;
+		
 		// Note: No y-movement
 		
 		@Override
 		public void think(Entity e, float timeStamp) {
 			if (timeStamp > nextThink) {
-				dx = (float) (random.nextFloat() * 2f) - 1f;
-				dz = (float) (random.nextFloat() * 2f) - 1f;
-				nextThink = timeStamp + (float) (random.nextFloat() * 0.5) + 0.5f;
-				if (random.nextFloat() < THROW_FREQUENCY) {
+				nextThink = timeStamp + THINK_DELAY;
+				if (archerFrame == ArcherFrame.FINISH && random.nextFloat() < FIRE_FREQUENCY) {
+					archerFrame = ArcherFrame.START;
+				} else if (archerFrame == ArcherFrame.FIRE) {
 					Position p = e.getComponent(Position.class);
 					if (p != null) {
-						e.setComponent(Spawn.class, projectile.spawnProjectile(p.getX() + 0.25f, p.getY() + 1f, p.getZ() - 1, ORIGIN));
+						e.setComponent(Spawn.class, projectile.spawnProjectile(p.getX() + 1f, p.getY() + 1f, p.getZ() - 1, ORIGIN));
 					}
 				}
 			}					
@@ -52,26 +53,32 @@ public class Archer extends Enemy {
 		public void move(Entity e, float timeStep) {
 			Position p = e.getComponent(Position.class);
 			if (p != null) {
-				// Bound motion
-				// TODO: This should be the world's problem
-				if (p.getZ() < 2) {
-					dz = 2 - p.getZ();
-				}
-				if (p.getZ() > 10) {
-					dz = 10 - p.getZ();
-				}
-				if (p.getX() < -4) {
-					dx = -6 - p.getX();
-				}
-				if (p.getX() > 4) {
-					dx = 6 - p.getX();
-				}
-				
-				// Move the goblin
-				p.shift(dx * timeStep, 0, dz * timeStep);
+			}
+		}
+
+		@Override
+		public void animate(Entity entity, Animation animation) {
+			animation.setNextFrame(archerFrame.name, archerFrame.duration);
+			if (archerFrame != ArcherFrame.FINISH) {
+				archerFrame = ArcherFrame.values()[archerFrame.ordinal() + 1];
 			}
 		}
 		
+		private enum ArcherFrame {
+			START("Squat", 0.25f),
+			DRAW("Draw", 0.15f),
+			FIRE("Fire", 0.15f),
+			RETURN("Squat", 0.25f),
+			FINISH("Crouch", 0.25f)
+			;
+			public final String name;
+			public final float duration;
+			
+			private ArcherFrame(String name, float duration) {
+				this.name = name;
+				this.duration = duration;
+			}
+		}
 	}
 
 	private static class ArcherAnimation implements Animator {

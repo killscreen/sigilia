@@ -66,10 +66,10 @@ public class Wizard extends Enemy {
 				if (shieldUp || random.nextFloat() < THROW_FREQUENCY) {
 					Position p = e.getComponent(Position.class);
 					if (p != null) {
-						float x = p.getX() + (throwToggle ? 1f : -1f) * (shieldUp ? 1.5f : 1);						
+						float x = p.getX() + (throwToggle ? 1f : -1f) * (shieldUp ? 1.25f : 1);						
 						throwToggle = !throwToggle;
 						if (e.getComponent(Spawn.class) == null) { // Don't override ice shield
-							e.setComponent(Spawn.class, projectile.spawnProjectile(x, p.getY() + 0.25f, p.getZ() - 1, ORIGIN));
+							e.setComponent(Spawn.class, projectile.spawnProjectile(x, p.getY() + 0.5f, p.getZ() - 1, ORIGIN));
 						}
 					}
 				}
@@ -137,6 +137,5 @@ public class Wizard extends Enemy {
 				e.setComponent(Spawn.class, new Spawn(iceShield));				
 			}
 		}
-
 	}
 }
