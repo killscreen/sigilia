@@ -29,6 +29,7 @@ import net.rowf.sigilia.renderer.model.Billboard;
 import net.rowf.sigilia.renderer.model.TiltedBillboard;
 import net.rowf.sigilia.renderer.model.animation.KeyframeSequence;
 import net.rowf.sigilia.renderer.shader.program.AnimatedFlatTextureShader;
+import net.rowf.sigilia.renderer.shader.program.ColorizedFlatTextureShader;
 import net.rowf.sigilia.renderer.shader.program.FlatTextureShader;
 import net.rowf.sigilia.renderer.shader.program.FlickeringShader;
 import net.rowf.sigilia.renderer.shader.program.HealthBarShader;
@@ -80,8 +81,8 @@ public abstract class BaseScenario implements Scenario {
         				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.bolt_particle)), 
         				TiltedBillboard.UNIT);
         Decorator<Representation> fireRep = 
-        		new PeriodicRepresentation( FlickeringShader.deferredForm(),
-        				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.rock_particle)), 
+        		new PeriodicRepresentation( ColorizedFlatTextureShader.deferredForm(1,0.75,0),
+        				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.generic_particle)), 
         				Billboard.UNIT);
         decorum.put(DefaultWeapon.class.getSimpleName(), particleRepresentation);
         decorum.put(LightningWeapon.class.getSimpleName(), boltRep);
