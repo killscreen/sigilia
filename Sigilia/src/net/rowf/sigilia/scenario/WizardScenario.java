@@ -38,7 +38,7 @@ public class WizardScenario extends BaseScenario {
 		super.decorate(decorum, res);
 		decorum.put(Wizard.class.getSimpleName(), new AnimatedRepresentation(DEFERRED_ANIM_SHADER, 
 				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.wizard_patch)),
-				loadKeyframeSequence(res, R.raw.wizard_animation, 2f)));	
+				loadKeyframeSequence(res, R.raw.wizard_animation, 2f, true)));	
 
 //		decorum.put(Goblin.class.getSimpleName(), new DeferredRepresentation( DEFERRED_FLAT_SHADER,
 //				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.archer)), 

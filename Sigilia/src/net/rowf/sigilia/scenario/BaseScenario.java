@@ -121,7 +121,8 @@ public abstract class BaseScenario implements Scenario {
 		return entity;
 	}
 
-	protected KeyframeSequence loadKeyframeSequence (Resources res, int id, float scale) {
+	//TODO: Move to Util?
+	protected KeyframeSequence loadKeyframeSequence (Resources res, int id, float scale, boolean adjustBottom) {
 		try {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(res.openRawResource(id)));
 			
@@ -129,12 +130,16 @@ public abstract class BaseScenario implements Scenario {
 			String[] drawingLine = reader.readLine().split(",");
 			float[] texCoords = new float[texLine.length];
 			short[] drawingOrder = new short[drawingLine.length];
+			float   standardBottom = Float.MAX_VALUE;
 			
 			// Load texture coordinates. These need a little bit of 
 			// conversion, as they are in object space, not UV space
 			for (int i = 0; i < texLine.length; i++) {
 				texCoords[i] = Float.parseFloat(texLine[i]) + 0.5f;
-				if (i % 2 == 1) {
+				if (i % 2 == 1) { // Y values get flipped, and may change minimum
+					if (texCoords[i] < standardBottom) {
+						standardBottom = texCoords[i];
+					}
 					texCoords[i] = 0.999f - texCoords[i];
 				}
 			}
@@ -152,11 +157,21 @@ public abstract class BaseScenario implements Scenario {
 				String   name     = split[0];
 				String[] vertsStr = split[1].split(",");
 				float[]  verts    = new float[vertsStr.length + vertsStr.length/2];
+				float    frameBottom = Float.MAX_VALUE;
 				int j = 0;
 				for (int i = 0; i < vertsStr.length; i++) {
-					verts[j++] = Float.parseFloat(vertsStr[i]) * scale;
+					float v = Float.parseFloat(vertsStr[i]);
+					verts[j++] = v * scale;
 					if (i % 2 == 1) {
+						if (v < frameBottom) {
+							frameBottom = v;
+						}
 						verts[j++] = 0; // Fill in z values
+					}
+				}
+				if (adjustBottom) {
+					for (int i = 1; i < verts.length; i += 3) {
+						verts[i] -= (frameBottom - standardBottom + 0.5f) * scale;
 					}
 				}
 				seq.addKeyframe(name, verts);
