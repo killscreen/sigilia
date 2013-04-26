@@ -13,6 +13,7 @@ import net.rowf.sigilia.game.component.visual.Representation;
 import net.rowf.sigilia.game.engine.DecorationEngine.Decorator;
 import net.rowf.sigilia.game.entity.Prototype;
 import net.rowf.sigilia.game.entity.enemy.Fireball;
+import net.rowf.sigilia.game.entity.enemy.IceShield;
 import net.rowf.sigilia.game.entity.enemy.Wizard;
 import net.rowf.sigilia.renderer.decorator.AnimatedRepresentation;
 import net.rowf.sigilia.renderer.decorator.DeferredRepresentation;
@@ -55,7 +56,12 @@ public class WizardScenario extends BaseScenario {
 						ColorizedFlatTextureShader.deferredForm(1, 0.75, 0),
         				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.generic_particle)), 
         				Billboard.UNIT));
-	
+
+		decorum.put(IceShield.class.getSimpleName(), new DeferredRepresentation( 
+				ColorizedFlatTextureShader.deferredForm(0, 1, 0.75),
+				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.generic_particle)), 
+				new Billboard(3)));
+		
 		decorum.put(BACKDROP_NAME.get(), new CompositeRepresentation(
 				new DeferredRepresentation(DEFERRED_FLAT_SHADER, 
 						new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.cloud_background)),

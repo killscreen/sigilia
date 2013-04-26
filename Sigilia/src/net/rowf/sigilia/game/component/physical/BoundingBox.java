@@ -6,6 +6,8 @@ import net.rowf.sigilia.game.component.Position;
 import net.rowf.sigilia.geometry.Vector;
 
 public class BoundingBox extends Position implements Boundary {
+	private static final Vector DEFAULT_SIZE = new Vector(1f,1f,1f);
+	
 	private float width;
 	private float height;
 	private float depth;
@@ -74,6 +76,13 @@ public class BoundingBox extends Position implements Boundary {
 		super.shift(dx, dy, dz);
 		minimum.setCenter(this);
 		maximum.setCenter(this);
+	}
+	
+	public static void setBoundary(Entity e, float x, float y, float z) {
+		Size sz = e.getComponent(Size.class);
+		BoundingBox boundingBox = new BoundingBox(x,y,z, sz != null ? sz.get() : DEFAULT_SIZE);
+		e.setComponent(Position.class, boundingBox);
+		e.setComponent(Boundary.class, boundingBox);
 	}
 
 	private class Bound extends Vector {
