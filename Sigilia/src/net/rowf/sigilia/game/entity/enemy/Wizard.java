@@ -69,10 +69,10 @@ public class Wizard extends Enemy {
 					dz = 10 - p.getZ() - 1f;
 				}
 				if (p.getX() < (-0.75f * p.getZ())) {
-					dx = (-0.75f * p.getZ()) - p.getX() + 1f;
+					dx = Math.max(dx, (-0.75f * p.getZ()) - p.getX() + 1f);
 				}
 				if (p.getX() > ( 0.75f * p.getZ())) {
-					dx = (0.75f * p.getZ()) - p.getX() - 1f;
+					dx = Math.min(dx, (0.75f * p.getZ()) - p.getX() - 1f);
 				}
 				if (p.getY() < (-0.25f * p.getZ())) {
 					dy = (-0.25f * p.getZ()) - p.getY() + 1f;
@@ -90,11 +90,13 @@ public class Wizard extends Enemy {
 			animToggle = !animToggle;
 			String frameSuffix = animToggle ? "1" : "2";
 			String framePrefix = "Cast";
-			if (dx > 1) {
-				framePrefix = "Left";
-			} else if (dx < -1) {
-				framePrefix = "Right";
+			if (Math.abs(dx) > 1) {
+				framePrefix = (dx > 0) ? "Left" : "Right";
+				frameSuffix = Math.abs(dx) > 2 ? "1" : "2";
+			} else {
+				frameSuffix = (dx > 0) ? "1" : "2";
 			}
+			
 			animation.setNextFrame(framePrefix + frameSuffix, 0.25f);
 		}
 
