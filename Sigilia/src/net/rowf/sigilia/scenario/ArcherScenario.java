@@ -2,6 +2,7 @@ package net.rowf.sigilia.scenario;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import net.rowf.sigilia.R;
 import net.rowf.sigilia.game.Entity;
@@ -18,6 +19,7 @@ import net.rowf.sigilia.renderer.model.Backdrop;
 import net.rowf.sigilia.renderer.model.Billboard;
 import android.content.res.Resources;
 import android.graphics.BitmapFactory;
+import android.util.FloatMath;
 
 public class ArcherScenario extends BaseScenario {
 
@@ -25,11 +27,20 @@ public class ArcherScenario extends BaseScenario {
 	public void populate(List<Entity> entities) {
 		super.populate(entities);
 		
+		Random random = new Random();
+		
 		Prototype enemy = new Archer();
 		Prototype tree  = new Tree();
-		for (float x = -3; x < 3.99f; x += 1f) {
-			entities.add(spawn(enemy, x, 9f + 3 * (float) Math.sin(x)));
-			entities.add(spawn(tree,  x,  8f + 3 * (float) Math.sin(x)));
+		for (int i = 0; i < 8; i++) {
+			float r = random.nextFloat() * (float) Math.PI / 6f;
+			if (i % 2 == 0) {
+				r *= -1f;
+			}
+			float x = FloatMath.sin(r);
+			float z = FloatMath.cos(r);
+			float d = 4f + ((float) i) * 1.25f;
+			entities.add(spawn(enemy, x * d, z * d));
+			entities.add(spawn(tree,  x * (d-1f),  z * (d-1f)));			
 		}
 		
 	}
