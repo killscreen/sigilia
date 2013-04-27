@@ -10,13 +10,14 @@ import net.rowf.sigilia.game.component.visual.Representation;
 import net.rowf.sigilia.game.engine.DecorationEngine.Decorator;
 import net.rowf.sigilia.game.entity.Prototype;
 import net.rowf.sigilia.game.entity.enemy.Archer;
-import net.rowf.sigilia.game.entity.enemy.Rock;
+import net.rowf.sigilia.game.entity.enemy.Arrow;
 import net.rowf.sigilia.game.entity.environment.Tree;
 import net.rowf.sigilia.renderer.decorator.AnimatedRepresentation;
 import net.rowf.sigilia.renderer.decorator.DeferredRepresentation;
 import net.rowf.sigilia.renderer.decorator.DeferredTexture;
 import net.rowf.sigilia.renderer.model.Backdrop;
 import net.rowf.sigilia.renderer.model.Billboard;
+import net.rowf.sigilia.renderer.model.Crossboard;
 import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.util.FloatMath;
@@ -56,9 +57,9 @@ public class ArcherScenario extends BaseScenario {
 //				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.archer)), 
 //				new Billboard(2)));
 		
-		decorum.put(Rock.class.getSimpleName(), new DeferredRepresentation( DEFERRED_FLAT_SHADER,
-        				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.rock_particle)), 
-        				Billboard.UNIT));
+		decorum.put(Arrow.class.getSimpleName(), new DeferredRepresentation( DEFERRED_FLAT_SHADER,
+        				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.arrow_particle)), 
+        				Crossboard.UNIT));
 
 		decorum.put(Tree.class.getSimpleName(), new DeferredRepresentation( DEFERRED_FLAT_SHADER,
 				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.tree)), 

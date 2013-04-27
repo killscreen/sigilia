@@ -13,28 +13,24 @@ import net.rowf.sigilia.util.BufferUtil;
  * @author woeltjen
  *
  */
-public class TiltedBillboard implements Model {
-	public static final TiltedBillboard UNIT = new TiltedBillboard(1f, 1f, 1.5f);
+public class Crossboard implements Model {
+	public static final Crossboard UNIT = new Crossboard(1f);
 	
 	private static final ShortBuffer order = 
-			BufferUtil.toBuffer(new short[] { 0, 1, 3, 3, 2, 0 } );
+			BufferUtil.toBuffer(new short[] { 0, 1, 3, 3, 2, 0,   4, 5, 7, 7, 6, 4 } );
 	private static final FloatBuffer texCoords = 
-			BufferUtil.toBuffer(new float[] { 0f, 0f, .49f, 0f, 0f, .49f, .49f, .49f } );
+			BufferUtil.toBuffer(new float[] { 
+					.99f, 0f, .0f, 0f, .99f, .99f, 0f, .99f,  
+					.99f, 0f, .0f, 0f, .99f, .99f, 0f, .99f,
+					} );
 	private FloatBuffer vertexes;
 	
-	public TiltedBillboard(float scale) {
-		this(scale, scale, scale);
-	}
 	
-	public TiltedBillboard(float width, float height, float tilt) {
+	public Crossboard(float width) {
 		float w = width / 2;
-		float h = height / 2;
-		float t = tilt;
 		vertexes = BufferUtil.toBuffer(new float[] { 
-				-w, h,0.1f, 
-				 w, h, 0.1f, 
-				-w,-h,-t, 
-				 w,-h,-t 
+				 -w,0,-w,  w,0,-w,  -w,0,w, w,0,w,
+	 			  0,-w,-w,  0,w,-w,  0,-w,w, 0,w,w
 		}); 				
 	}
 	
@@ -55,7 +51,7 @@ public class TiltedBillboard implements Model {
 
 	@Override
 	public int getTriangleCount() {
-		return 2;
+		return 4;
 	}
 
 }

@@ -9,7 +9,9 @@ import java.util.List;
 
 import net.rowf.sigilia.game.Entity;
 import net.rowf.sigilia.game.component.Position;
+import net.rowf.sigilia.game.component.physical.Orientation;
 import net.rowf.sigilia.game.engine.DecorationEngine.Decorator;
+import net.rowf.sigilia.geometry.Vector;
 import net.rowf.sigilia.renderer.GenericRenderable;
 import net.rowf.sigilia.renderer.GenericRenderable.CompositeRenderingElement;
 import net.rowf.sigilia.renderer.GenericRenderable.RenderingElement;
@@ -76,6 +78,12 @@ public class GenericRepresentation implements Representation, Decorator<Represen
 		Position p = e.getComponent(Position.class);
 		if (p != null) {
 			r.translate(p.getX(), p.getY(), p.getZ());
+		}
+		
+		Orientation o = e.getComponent(Orientation.class);
+		if (o != null) {
+			Vector v = o.getRotation(e);
+			r.rotate(v.getX(), v.getY(), v.getZ());
 		}
 		
 		return r;
