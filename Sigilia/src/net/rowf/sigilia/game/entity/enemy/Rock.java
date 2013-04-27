@@ -3,7 +3,9 @@ package net.rowf.sigilia.game.entity.enemy;
 import net.rowf.sigilia.game.Entity;
 import net.rowf.sigilia.game.component.metadata.Liveness;
 import net.rowf.sigilia.game.component.metadata.PhysicalType;
+import net.rowf.sigilia.game.component.physical.Health;
 import net.rowf.sigilia.game.component.physical.Impact;
+import net.rowf.sigilia.game.component.physical.ModifiedHealth;
 import net.rowf.sigilia.game.component.physical.Motion;
 import net.rowf.sigilia.game.component.physical.NewtonianMotion;
 import net.rowf.sigilia.game.component.physical.ProjectileImpact;
@@ -31,6 +33,7 @@ public class Rock extends Projectile {
 		e.setComponent(Liveness.class, Liveness.ALIVE);
 		e.setComponent(PhysicalType.class, PhysicalType.SOLID);
 		e.setComponent(Impact.class, IMPACT);
+		e.setComponent(Health.class, new ModifiedHealth(5f, 0f, 1f, PhysicalType.ELECTRICITY));
 	}
 	
 	private static final Impact IMPACT = new ProjectileImpact(5f, Goblin.class); 	

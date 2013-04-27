@@ -10,7 +10,7 @@ import net.rowf.sigilia.game.component.physical.Health;
 import net.rowf.sigilia.game.component.visual.Animation;
 
 public class Player extends NamedPrototype {
-	private BoundingBox BOUND = new BoundingBox(0, 0, 1, 1.75f);
+	private BoundingBox BOUND = new BoundingBox(0, 0, 1, 1.05f);
 	
 	@Override
 	protected void applyAdditional(Entity e) {

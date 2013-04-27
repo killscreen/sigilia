@@ -25,7 +25,9 @@ public class Goblin extends Enemy {
 	}
 	
 	private static class GoblinController implements Intellect, Motion {
-		private static final float THROW_FREQUENCY = 0.15f;
+		private static final float THROW_FREQUENCY_STEP = 0.01f;
+		private static final float MAX_THROW_FREQUENCY = 0.15f;
+		private float throwFrequency = 0f;
 		private static Random random = new Random();
 		private float nextThink = 0;
 		private float nextToss = 0;
@@ -39,11 +41,14 @@ public class Goblin extends Enemy {
 				dx = (float) (random.nextFloat() * 2f) - 1f;
 				dz = (float) (random.nextFloat() * 2f) - 1f;
 				nextThink = timeStamp + (float) (random.nextFloat() * 0.5) + 0.5f;
-				if (random.nextFloat() < THROW_FREQUENCY) {
+				if (random.nextFloat() < throwFrequency) {
 					Position p = e.getComponent(Position.class);
 					if (p != null) {
 						e.setComponent(Spawn.class, projectile.spawnProjectile(p.getX() + 0.25f, p.getY() + 1f, p.getZ() - 1, ORIGIN));
 					}
+				}
+				if (throwFrequency < MAX_THROW_FREQUENCY) {
+					throwFrequency += THROW_FREQUENCY_STEP;
 				}
 			}					
 		}
