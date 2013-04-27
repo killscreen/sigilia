@@ -53,6 +53,7 @@ public class WeaponInput implements InputElement {
 					if (activeSequence.getSimilarity(w.getSigil(), 24) > 0.9f) {
 						Log.i("WeapnInput", "Found a " + w.getClass().getName());
 						weapon = w;
+						entities.add(w.visibleSigil.spawn(0, 0, 1.05f));
 						expiration = timeStamp + w.getLifetime();
 						break;
 					}

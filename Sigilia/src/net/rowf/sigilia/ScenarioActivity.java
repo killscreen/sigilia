@@ -68,6 +68,9 @@ public class ScenarioActivity extends FullscreenActivity implements CompletionCa
 				runScenario((Scenario) (Class.forName(scenarioClass).newInstance()));
 			} catch (Exception e) {
 				Log.e(ScenarioActivity.class.getName(), "Failed to load scenario " + scenarioClass);
+				if (e instanceof RuntimeException) {
+					throw (RuntimeException) e;
+				}
 			}
 		} else {
 			// Log?

@@ -2,6 +2,7 @@ package net.rowf.sigilia.scenario;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +13,7 @@ import net.rowf.sigilia.game.component.Position;
 import net.rowf.sigilia.game.component.metadata.Name;
 import net.rowf.sigilia.game.component.physical.BoundingBox;
 import net.rowf.sigilia.game.component.physical.Size;
+import net.rowf.sigilia.game.component.visual.GenericRepresentation;
 import net.rowf.sigilia.game.component.visual.Representation;
 import net.rowf.sigilia.game.engine.DecorationEngine.Decorator;
 import net.rowf.sigilia.game.entity.Player;
@@ -20,6 +22,11 @@ import net.rowf.sigilia.game.entity.StandardEntity;
 import net.rowf.sigilia.game.entity.weapon.DefaultWeapon;
 import net.rowf.sigilia.game.entity.weapon.FireWeapon;
 import net.rowf.sigilia.game.entity.weapon.LightningWeapon;
+import net.rowf.sigilia.game.entity.weapon.Weapon;
+import net.rowf.sigilia.geometry.Vector;
+import net.rowf.sigilia.renderer.GenericRenderable.DeferredElement;
+import net.rowf.sigilia.renderer.GenericRenderable.RenderingElement;
+import net.rowf.sigilia.renderer.GenericRenderable.StaticElement;
 import net.rowf.sigilia.renderer.decorator.DeferredProgram;
 import net.rowf.sigilia.renderer.decorator.DeferredRepresentation;
 import net.rowf.sigilia.renderer.decorator.DeferredTexture;
@@ -28,12 +35,16 @@ import net.rowf.sigilia.renderer.model.Backdrop;
 import net.rowf.sigilia.renderer.model.Billboard;
 import net.rowf.sigilia.renderer.model.TiltedBillboard;
 import net.rowf.sigilia.renderer.model.animation.KeyframeSequence;
+import net.rowf.sigilia.renderer.shader.SamplerParameter;
+import net.rowf.sigilia.renderer.shader.VectorParameter;
 import net.rowf.sigilia.renderer.shader.program.AnimatedFlatTextureShader;
-import net.rowf.sigilia.renderer.shader.program.ColorizedFlatTextureShader;
 import net.rowf.sigilia.renderer.shader.program.FlatTextureShader;
 import net.rowf.sigilia.renderer.shader.program.FlickeringShader;
 import net.rowf.sigilia.renderer.shader.program.HealthBarShader;
+import net.rowf.sigilia.renderer.shader.program.SigilShader;
+import net.rowf.sigilia.renderer.texture.Texture;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 
@@ -59,7 +70,7 @@ public abstract class BaseScenario implements Scenario {
 		e = new StandardEntity();
 		e.setComponent(Position.class, new Position(0,0,Backdrop.SIZE));
 		e.setComponent(Name.class, BACKDROP_NAME);
-		entities.add(e);
+		entities.add(e);		
 	}
 	
 	
@@ -81,12 +92,20 @@ public abstract class BaseScenario implements Scenario {
         				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.bolt_particle)), 
         				TiltedBillboard.UNIT);
         Decorator<Representation> fireRep = 
-        		new PeriodicRepresentation( ColorizedFlatTextureShader.deferredForm(1,0.75,0),
+        		new PeriodicRepresentation( FlickeringShader.deferredForm(),
         				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.generic_particle)), 
         				Billboard.UNIT);
+
+        
         decorum.put(DefaultWeapon.class.getSimpleName(), particleRepresentation);
-        decorum.put(LightningWeapon.class.getSimpleName(), boltRep);
+        decorum.put(LightningWeapon.class.getSimpleName(), boltRep);        
         decorum.put(FireWeapon.class.getSimpleName(), fireRep);
+        
+        decorum.put(LightningWeapon.class.getSimpleName() + Weapon.SIGIL_SUFFIX, 
+        		makeSigilRepresentation(BitmapFactory.decodeResource(res, R.drawable.bolt_sigil), 1,1,0));
+        decorum.put(FireWeapon.class.getSimpleName() + Weapon.SIGIL_SUFFIX, 
+        		makeSigilRepresentation(BitmapFactory.decodeResource(res, R.drawable.bolt_sigil), 1,0,0));
+
 	    decorum.put(Player.class.getSimpleName(), playerRepresentation);
 	}
 
@@ -105,6 +124,22 @@ public abstract class BaseScenario implements Scenario {
 			y += temp.getComponent(Size.class).get().getY() / 2f;
 		}
 		return spawn(p, x, y, z);
+	}
+	
+	private Decorator<Representation> makeSigilRepresentation(Bitmap bitmap, float r, float g, float b) {
+		return new GenericRepresentation( SigilShader.deferredForm(), 
+				Billboard.UNIT, 
+				Arrays.<RenderingElement>asList(
+						new DeferredElement<Texture> (
+								SamplerParameter.TEXTURE,
+		        				new DeferredTexture(bitmap)
+								),
+						new StaticElement<Vector> (
+								VectorParameter.COLOR,
+		        				new Vector(r,g,b)
+								)        						
+						), 
+				GenericRepresentation.TRANSITION_ELEMENT);
 	}
 	
 

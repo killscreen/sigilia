@@ -36,7 +36,7 @@ public class PeriodicAnimation extends Animation {
 	public float getProgress() {
 		return sinusoidal ?
 				((FloatMath.sin((float) Math.PI * 2f * progress / period) + 1f) / 2f) :
-				(progress - FloatMath.floor(progress));
+				((progress/period) - FloatMath.floor(progress/period));
 	}
 
 	@Override

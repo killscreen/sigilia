@@ -2,7 +2,7 @@ package net.rowf.sigilia.renderer;
 
 import net.rowf.sigilia.renderer.PerspectiveRenderer.Renderable;
 import net.rowf.sigilia.renderer.model.Model;
-import net.rowf.sigilia.renderer.shader.VectorParameter;
+import net.rowf.sigilia.renderer.shader.VertexParameter;
 import net.rowf.sigilia.renderer.shader.MatrixParameter;
 import net.rowf.sigilia.renderer.shader.ParameterizedProgram;
 import net.rowf.sigilia.renderer.shader.SamplerParameter;
@@ -32,8 +32,8 @@ public class StandardRenderable implements Renderable {
 
 		program.set(MatrixParameter.TRANSFORMATION, matrix);
 		program.set(SamplerParameter.TEXTURE, texture);
-		program.set(VectorParameter.VERTEX, model.getVertexes());
-		program.set(VectorParameter.TEXTURE_COORD, model.getTexCoords());
+		program.set(VertexParameter.VERTEX, model.getVertexes());
+		program.set(VertexParameter.TEXTURE_COORD, model.getTexCoords());
 
 		// TODO: May as well move this to program?
 		GLES20.glDrawElements(GLES20.GL_TRIANGLES, model.getTriangleCount() * 3, 

@@ -7,16 +7,16 @@ import net.rowf.sigilia.renderer.shader.ParameterizedProgram;
 import net.rowf.sigilia.renderer.shader.SamplerParameter;
 import net.rowf.sigilia.renderer.shader.ScalarParameter;
 import net.rowf.sigilia.renderer.shader.ShaderParameter;
-import net.rowf.sigilia.renderer.shader.VectorParameter;
+import net.rowf.sigilia.renderer.shader.VertexParameter;
 
 public class FlickeringShader extends ParameterizedProgram {
 	private static final String VERTEX_SHADER = 
-			"  vCoord = vec2(abs("+ VectorParameter.TEXTURE_COORD.getName() + ".x)," +
-			                "abs("+ VectorParameter.TEXTURE_COORD.getName() + ".y));" +
-			"  float x = " + VectorParameter.VERTEX.getName() + ".x;\n" +		
-			"  float y = " + VectorParameter.VERTEX.getName() + ".y;\n" +
-	        "  float z = " + VectorParameter.VERTEX.getName() + ".z;\n" +
-	        "  float w = " + VectorParameter.VERTEX.getName() + ".w;\n" +
+			"  vCoord = vec2(abs("+ VertexParameter.TEXTURE_COORD.getName() + ".x)," +
+			                "abs("+ VertexParameter.TEXTURE_COORD.getName() + ".y));" +
+			"  float x = " + VertexParameter.VERTEX.getName() + ".x;\n" +		
+			"  float y = " + VertexParameter.VERTEX.getName() + ".y;\n" +
+	        "  float z = " + VertexParameter.VERTEX.getName() + ".z;\n" +
+	        "  float w = " + VertexParameter.VERTEX.getName() + ".w;\n" +
 	        "  vec4  p = " + MatrixParameter.TRANSFORMATION.getName() + " * " +
                            "vec4(x,y,z,w);" +
 	        "  if (z < 0.0) { p = vec4(x,1,0,w); }\n" +
@@ -31,7 +31,7 @@ public class FlickeringShader extends ParameterizedProgram {
 			    //"  gl_FragColor = vec4(a.x*aS+b.x*bS, a.y*aS+b.y*bS, a.z*aS+b.z*bS, a.w*aS+b.w*bS );\n";
 		
 	private static final ShaderParameter<?>[] SHADER_PARAMETERS =
-			{MatrixParameter.TRANSFORMATION, SamplerParameter.TEXTURE, VectorParameter.VERTEX, VectorParameter.TEXTURE_COORD,
+			{MatrixParameter.TRANSFORMATION, SamplerParameter.TEXTURE, VertexParameter.VERTEX, VertexParameter.TEXTURE_COORD,
 		     ScalarParameter.TRANSITION,
 			 new InternalShaderParameter("varying lowp vec2", "vCoord")};
 	

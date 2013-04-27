@@ -7,7 +7,7 @@ import net.rowf.sigilia.renderer.shader.ParameterizedProgram;
 import net.rowf.sigilia.renderer.shader.SamplerParameter;
 import net.rowf.sigilia.renderer.shader.ScalarParameter;
 import net.rowf.sigilia.renderer.shader.ShaderParameter;
-import net.rowf.sigilia.renderer.shader.VectorParameter;
+import net.rowf.sigilia.renderer.shader.VertexParameter;
 
 public class RotatingSparkleShader extends ParameterizedProgram {
 	private static final InternalShaderParameter UP    = new InternalShaderParameter("varying lowp vec2", "vUp");
@@ -18,8 +18,8 @@ public class RotatingSparkleShader extends ParameterizedProgram {
 	
 	private static final String VERTEX_SHADER = 
 		"  " + VARYING_COORD.getName() + 
-		     " = vec2(abs("+ VectorParameter.TEXTURE_COORD.getName() + ".x)," +
-		             "abs("+ VectorParameter.TEXTURE_COORD.getName() + ".y));" +
+		     " = vec2(abs("+ VertexParameter.TEXTURE_COORD.getName() + ".x)," +
+		             "abs("+ VertexParameter.TEXTURE_COORD.getName() + ".y));" +
 		"  float r = (" + ScalarParameter.SECONDS.getName() + " / " 
 		                + ScalarParameter.SPEED.getName() + ") * 2 * 3.14159265" +
 		"  mat4 rot = mat4(" +
@@ -32,7 +32,7 @@ public class RotatingSparkleShader extends ParameterizedProgram {
 		   RIGHT.getName() + " = (rot * vec4(1, 0, 0, 1)).xy;" + 
 	    "  gl_Position = " + MatrixParameter.TRANSFORMATION.getName() + " * " +
 						     "(rot * " +
-	                         VectorParameter.VERTEX.getName() + ");";
+	                         VertexParameter.VERTEX.getName() + ");";
 	private static final String FRAGMENT_SHADER =
 			"  vec4 fx = " + generateFragmentShaderSummation(SamplerParameter.EFFECT, VARYING_COORD, UP, RIGHT) + ";" +					               
 		    "  gl_FragColor = vec4(0,0,0,0);";
@@ -40,8 +40,8 @@ public class RotatingSparkleShader extends ParameterizedProgram {
 	private static final ShaderParameter<?>[] SHADER_PARAMETERS =
 		{ MatrixParameter.TRANSFORMATION, 
 		  SamplerParameter.TEXTURE, 
-		  VectorParameter.VERTEX, 
-		  VectorParameter.TEXTURE_COORD,
+		  VertexParameter.VERTEX, 
+		  VertexParameter.TEXTURE_COORD,
 		  ScalarParameter.SECONDS,
 		  ScalarParameter.SPEED,
 		 };

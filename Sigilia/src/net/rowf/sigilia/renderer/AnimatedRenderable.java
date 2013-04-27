@@ -7,7 +7,7 @@ import net.rowf.sigilia.renderer.shader.MatrixParameter;
 import net.rowf.sigilia.renderer.shader.ParameterizedProgram;
 import net.rowf.sigilia.renderer.shader.SamplerParameter;
 import net.rowf.sigilia.renderer.shader.ScalarParameter;
-import net.rowf.sigilia.renderer.shader.VectorParameter;
+import net.rowf.sigilia.renderer.shader.VertexParameter;
 import net.rowf.sigilia.renderer.texture.Texture;
 import android.opengl.GLES20;
 import android.opengl.Matrix;
@@ -37,9 +37,9 @@ public class AnimatedRenderable implements Renderable {
 		
 		program.set(MatrixParameter.TRANSFORMATION, matrix);
 		program.set(SamplerParameter.TEXTURE, texture);
-		program.set(VectorParameter.VERTEX, model.getVertexes());
-		program.set(VectorParameter.SUBSEQUENT_VERTEX, model.getNextVertexes());
-		program.set(VectorParameter.TEXTURE_COORD, model.getTexCoords());
+		program.set(VertexParameter.VERTEX, model.getVertexes());
+		program.set(VertexParameter.SUBSEQUENT_VERTEX, model.getNextVertexes());
+		program.set(VertexParameter.TEXTURE_COORD, model.getTexCoords());
 		program.set(ScalarParameter.TRANSITION, animation);
 
 		// TODO: May as well move this to program?

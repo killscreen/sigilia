@@ -19,7 +19,7 @@ public class Billboard implements Model {
 	private static final ShortBuffer order = 
 			BufferUtil.toBuffer(new short[] { 0, 1, 3, 3, 2, 0 } );
 	private static final FloatBuffer texCoords = 
-			BufferUtil.toBuffer(new float[] { 0f, 0f, .99f, 0f, 0f, .99f, .99f, .99f } );
+			BufferUtil.toBuffer(new float[] { .99f, 0f, .0f, 0f, .99f, .99f, 0f, .99f } );
 	private FloatBuffer vertexes;
 	
 	public Billboard(float scale) {

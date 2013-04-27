@@ -7,16 +7,16 @@ import net.rowf.sigilia.renderer.shader.ParameterizedProgram;
 import net.rowf.sigilia.renderer.shader.SamplerParameter;
 import net.rowf.sigilia.renderer.shader.ScalarParameter;
 import net.rowf.sigilia.renderer.shader.ShaderParameter;
-import net.rowf.sigilia.renderer.shader.VectorParameter;
+import net.rowf.sigilia.renderer.shader.VertexParameter;
 import android.util.Log;
 
 public class HealthBarShader extends ParameterizedProgram {
 	private static final String VERTEX_SHADER =
-			"  float x = 0.9 + 0.025 * " + VectorParameter.VERTEX.getName() + ".x;\n" +
-			"  float y = 1.5 * " + VectorParameter.VERTEX.getName() + ".y;\n" +
-			"  float z = " + VectorParameter.VERTEX.getName() + ".z;\n" +
-			"  vCoord = vec2(/*???*/abs("+ VectorParameter.TEXTURE_COORD.getName() + ".x)," +
-			                "abs("+ VectorParameter.TEXTURE_COORD.getName() + ".y));" +
+			"  float x = 0.9 + 0.025 * " + VertexParameter.VERTEX.getName() + ".x;\n" +
+			"  float y = 1.5 * " + VertexParameter.VERTEX.getName() + ".y;\n" +
+			"  float z = " + VertexParameter.VERTEX.getName() + ".z;\n" +
+			"  vCoord = vec2(/*???*/abs("+ VertexParameter.TEXTURE_COORD.getName() + ".x)," +
+			                "abs("+ VertexParameter.TEXTURE_COORD.getName() + ".y));" +
 		    "  gl_Position = vec4(x,y,z,1.0);";
 //	private static final String FRAGMENT_SHADER =
 //			"  vec4 color = vec4(1,0,1,0.5);\n" +
@@ -32,9 +32,12 @@ public class HealthBarShader extends ParameterizedProgram {
 	        "  gl_FragColor = vec4(1.0,0.0,0.0,alpha);" ;//color;\n";
 	
 	private static final ShaderParameter<?>[] SHADER_PARAMETERS =
-		{MatrixParameter.TRANSFORMATION, SamplerParameter.TEXTURE, VectorParameter.VERTEX, VectorParameter.TEXTURE_COORD,
+		{MatrixParameter.TRANSFORMATION, 
+		SamplerParameter.TEXTURE, 
+		VertexParameter.VERTEX, 
+		VertexParameter.TEXTURE_COORD,
 		ScalarParameter.TRANSITION,
-		 new InternalShaderParameter("varying lowp vec2", "vCoord")};
+		new InternalShaderParameter("varying lowp vec2", "vCoord")};
 	
 	public HealthBarShader() {	
 		super( VERTEX_SHADER, FRAGMENT_SHADER, SHADER_PARAMETERS);

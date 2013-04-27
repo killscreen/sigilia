@@ -13,9 +13,13 @@ import net.rowf.sigilia.input.gesture.DeltaSequence;
 import android.util.FloatMath;
 
 public abstract class Weapon extends NamedPrototype {
+	public static final String SIGIL_SUFFIX = "Sigil";
+	
 	private static final Size DEFAULT_SIZE = new Size(0.5f);
 	
 	protected abstract float velocity();
+	
+	public final VisibleSigil visibleSigil = new VisibleSigil(getClass().getSimpleName() + SIGIL_SUFFIX);
 	
 	public float getLifetime() {
 		return 5f; // Default to 5 secs

@@ -6,20 +6,20 @@ import net.rowf.sigilia.renderer.shader.MatrixParameter;
 import net.rowf.sigilia.renderer.shader.ParameterizedProgram;
 import net.rowf.sigilia.renderer.shader.SamplerParameter;
 import net.rowf.sigilia.renderer.shader.ShaderParameter;
-import net.rowf.sigilia.renderer.shader.VectorParameter;
+import net.rowf.sigilia.renderer.shader.VertexParameter;
 
 public class ColorizedFlatTextureShader extends ParameterizedProgram {
 	private static final String VERTEX_SHADER = 
-		"  vCoord = vec2(/*???*/abs("+ VectorParameter.TEXTURE_COORD.getName() + ".x)," +
-		                "abs("+ VectorParameter.TEXTURE_COORD.getName() + ".y));" +
+		"  vCoord = vec2(/*???*/abs("+ VertexParameter.TEXTURE_COORD.getName() + ".x)," +
+		                "abs("+ VertexParameter.TEXTURE_COORD.getName() + ".y));" +
 	    "  gl_Position = " + MatrixParameter.TRANSFORMATION.getName() + " * " +
-	                         VectorParameter.VERTEX.getName() + ";";
+	                         VertexParameter.VERTEX.getName() + ";";
 	private static final String FRAGMENT_SHADER =
 		    "  gl_FragColor = texture2D(" + SamplerParameter.TEXTURE.getName() +
             ", vCoord);";
 	
 	private static final ShaderParameter<?>[] SHADER_PARAMETERS =
-		{MatrixParameter.TRANSFORMATION, SamplerParameter.TEXTURE, VectorParameter.VERTEX, VectorParameter.TEXTURE_COORD, 
+		{MatrixParameter.TRANSFORMATION, SamplerParameter.TEXTURE, VertexParameter.VERTEX, VertexParameter.TEXTURE_COORD, 
 		 new InternalShaderParameter("varying lowp vec2", "vCoord")};
 	
 	private ColorizedFlatTextureShader() {	
