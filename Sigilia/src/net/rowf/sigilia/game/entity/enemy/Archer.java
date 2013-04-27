@@ -26,7 +26,7 @@ public class Archer extends Enemy {
 	
 	private static class ArcherController implements Intellect, Motion, Animator {
 		private static final float THINK_DELAY = 0.1f;
-		private static final float FIRE_FREQUENCY = 0.15f;
+		private static final float FIRE_FREQUENCY = 0.02f;
 		private static Random random = new Random();
 		private float nextThink = 0;
 		private float nextToss = 0;
@@ -45,7 +45,7 @@ public class Archer extends Enemy {
 					shouldFire = false;
 					Position p = e.getComponent(Position.class);
 					if (p != null) {
-						e.setComponent(Spawn.class, projectile.spawnProjectile(p.getX() - 1f, p.getY() + 1f, p.getZ() - 1, ORIGIN));
+						e.setComponent(Spawn.class, projectile.spawnProjectile(p.getX() - 0.8f, p.getY() + 0.8f, p.getZ() - 0.25f, ORIGIN));
 					}
 				}
 			}					
@@ -62,7 +62,7 @@ public class Archer extends Enemy {
 		public void animate(Entity entity, Animation animation) {
 			animation.setNextFrame(archerFrame.name, archerFrame.duration);
 			if (archerFrame != ArcherFrame.FINISH) {
-				if (archerFrame == ArcherFrame.FIRE) {
+				if (archerFrame == ArcherFrame.UNDRAW) {
 					shouldFire = true;
 				}
 				archerFrame = ArcherFrame.values()[archerFrame.ordinal() + 1];
