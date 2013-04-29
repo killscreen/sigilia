@@ -19,8 +19,10 @@ import net.rowf.sigilia.game.engine.DecorationEngine.Decorator;
 import net.rowf.sigilia.game.entity.Player;
 import net.rowf.sigilia.game.entity.Prototype;
 import net.rowf.sigilia.game.entity.StandardEntity;
+import net.rowf.sigilia.game.entity.weapon.BeeWeapon;
 import net.rowf.sigilia.game.entity.weapon.DefaultWeapon;
 import net.rowf.sigilia.game.entity.weapon.FireWeapon;
+import net.rowf.sigilia.game.entity.weapon.IceWeapon;
 import net.rowf.sigilia.game.entity.weapon.LightningWeapon;
 import net.rowf.sigilia.game.entity.weapon.Weapon;
 import net.rowf.sigilia.geometry.Vector;
@@ -104,8 +106,13 @@ public abstract class BaseScenario implements Scenario {
         decorum.put(LightningWeapon.class.getSimpleName() + Weapon.SIGIL_SUFFIX, 
         		makeSigilRepresentation(BitmapFactory.decodeResource(res, R.drawable.bolt_sigil), 1,1,0));
         decorum.put(FireWeapon.class.getSimpleName() + Weapon.SIGIL_SUFFIX, 
-        		makeSigilRepresentation(BitmapFactory.decodeResource(res, R.drawable.bolt_sigil), 1,0,0));
+        		makeSigilRepresentation(BitmapFactory.decodeResource(res, R.drawable.fire_sigil), 1,0,0));
+        decorum.put(IceWeapon.class.getSimpleName() + Weapon.SIGIL_SUFFIX, 
+        		makeSigilRepresentation(BitmapFactory.decodeResource(res, R.drawable.ice_sigil), 0,1,1));
+        decorum.put(BeeWeapon.class.getSimpleName() + Weapon.SIGIL_SUFFIX, 
+        		makeSigilRepresentation(BitmapFactory.decodeResource(res, R.drawable.bee_sigil), 1,0.75f,0));
 
+        
 	    decorum.put(Player.class.getSimpleName(), playerRepresentation);
 	}
 
