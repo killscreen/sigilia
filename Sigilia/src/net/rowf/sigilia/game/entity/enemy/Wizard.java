@@ -14,6 +14,8 @@ import net.rowf.sigilia.game.component.visual.Animation;
 import net.rowf.sigilia.game.component.visual.Animator;
 import net.rowf.sigilia.game.entity.Prototype;
 import net.rowf.sigilia.game.entity.StandardEntity;
+import net.rowf.sigilia.game.entity.weapon.IceWeapon;
+import net.rowf.sigilia.game.entity.weapon.VisibleSigil;
 import net.rowf.sigilia.geometry.Vector;
 import android.util.FloatMath;
 
@@ -21,6 +23,7 @@ public class Wizard extends Enemy {
 	private static final Vector ORIGIN = new Vector(0,0,1);
 	private static final Projectile projectile = new Fireball();
 	private static final Prototype shield = new IceShield();
+	private static final VisibleSigil iceSigil = new IceWeapon().visibleSigil;
 	
 	@Override
 	protected void applyAdditional(Entity e) {
@@ -134,7 +137,11 @@ public class Wizard extends Enemy {
 				Lifetime lifetime = new Lifetime(SHIELD_DURATION);
 				iceShield.setComponent(Liveness.class, lifetime);
 				iceShield.setComponent(Intellect.class, lifetime);				
-				e.setComponent(Spawn.class, new Spawn(iceShield));				
+				e.setComponent(Spawn.class, new Spawn(iceShield));
+				
+				scale = (dist-1.25f) / dist;
+				Entity sigil = iceSigil.spawn(p.getX()*scale, p.getY()*scale, p.getZ()*scale);
+				iceShield.setComponent(Spawn.class, new Spawn(sigil));
 			}
 		}
 	}

@@ -21,4 +21,5 @@ public abstract class Enemy extends NamedPrototype {
 		e.setComponent(Liveness.class, Liveness.ALIVE);
 		super.apply(e);
 	}
+	
 }

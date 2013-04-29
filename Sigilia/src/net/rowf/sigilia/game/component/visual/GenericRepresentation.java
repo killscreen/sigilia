@@ -37,8 +37,10 @@ public class GenericRepresentation implements Representation, Decorator<Represen
 			Model model,
 			Collection<RenderingElement> staticElements,
 			DynamicRenderingElement... dynamicElements) {
-		this(program, model.getDrawingOrder(), model.getTriangleCount(), 
-				staticElements, dynamicElements);
+		this(program, model.getDrawingOrder(), 
+				model.getTriangleCount(), 
+				staticElements, 
+				dynamicElements);
 		this.staticElements.add(new StaticElement<FloatBuffer>(VertexParameter.TEXTURE_COORD, model.getTexCoords()));
 		this.staticElements.add(new StaticElement<FloatBuffer>(VertexParameter.VERTEX, model.getVertexes()));
 	}
