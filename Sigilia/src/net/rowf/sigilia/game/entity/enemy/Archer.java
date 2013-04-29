@@ -45,7 +45,8 @@ public class Archer extends Enemy {
 					shouldFire = false;
 					Position p = e.getComponent(Position.class);
 					if (p != null) {
-						e.setComponent(Spawn.class, projectile.spawnProjectile(p.getX() - 0.8f, p.getY() + 0.8f, p.getZ() - 0.25f, ORIGIN));
+						e.setComponent(Spawn.class, 
+								projectile.spawnProjectile(p.getX() - 0.8f, p.getY() + 0.8f, p.getZ() - 0.25f, new Vector(random.nextFloat() - random.nextFloat(), random.nextFloat() * 0.33f, 1)));
 					}
 				}
 			}					
