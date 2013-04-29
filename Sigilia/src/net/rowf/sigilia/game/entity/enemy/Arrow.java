@@ -9,6 +9,7 @@ import net.rowf.sigilia.game.component.physical.NewtonianMotion;
 import net.rowf.sigilia.game.component.physical.Orientation;
 import net.rowf.sigilia.game.component.physical.ProjectileImpact;
 import net.rowf.sigilia.game.component.physical.Velocity;
+import net.rowf.sigilia.game.entity.environment.Tree;
 import net.rowf.sigilia.geometry.Vector;
 import android.util.FloatMath;
 
@@ -52,6 +53,6 @@ public class Arrow extends Projectile {
 		
 	}
 	
-	private static final Impact IMPACT = new ProjectileImpact(7.5f, Archer.class); 	
+	private static final Impact IMPACT = new ProjectileImpact(7.5f, Archer.class, Tree.class); 	
 
 }
