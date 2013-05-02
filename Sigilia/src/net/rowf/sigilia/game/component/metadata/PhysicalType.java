@@ -14,5 +14,6 @@ public enum PhysicalType implements Component {
 	SOLID,
 	ENERGY,
 	ELECTRICITY,
-	FIRE
+	FIRE,
+	ICE
 }

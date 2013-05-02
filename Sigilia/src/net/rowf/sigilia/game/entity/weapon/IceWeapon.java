@@ -3,8 +3,11 @@ package net.rowf.sigilia.game.entity.weapon;
 import net.rowf.sigilia.game.Entity;
 import net.rowf.sigilia.game.component.metadata.Liveness;
 import net.rowf.sigilia.game.component.metadata.PhysicalType;
+import net.rowf.sigilia.game.component.physical.Health;
 import net.rowf.sigilia.game.component.physical.Impact;
+import net.rowf.sigilia.game.component.physical.ModifiedHealth;
 import net.rowf.sigilia.game.component.physical.ProjectileImpact;
+import net.rowf.sigilia.game.component.physical.Size;
 import net.rowf.sigilia.game.component.visual.Animation;
 import net.rowf.sigilia.game.component.visual.PeriodicAnimation;
 import net.rowf.sigilia.game.entity.Player;
@@ -25,20 +28,21 @@ public class IceWeapon extends Weapon {
 	
 	@Override
 	protected void applyAdditional(Entity e) {
-		e.setComponent(Liveness.class, Liveness.ALIVE);
-		e.setComponent(Animation.class, new PeriodicAnimation(getDelay()/2f));
-		e.setComponent(Impact.class, IMPACT);
 		e.setComponent(PhysicalType.class, PhysicalType.SOLID);
+		e.setComponent(Size.class, new Size(2f, 2f, 2f));
+		e.setComponent(Health.class, new ModifiedHealth(1f, 0f, 1f, PhysicalType.FIRE));
+		e.setComponent(Liveness.class, Liveness.ALIVE);
+
 	}
 
 	@Override
 	public float getDelay() {
-		return 0.5f;
+		return 0.125f;
 	}
 	
 	@Override
 	protected float velocity() {
-		return 0.25f;
+		return 0.5f;
 	}
 
 	@Override

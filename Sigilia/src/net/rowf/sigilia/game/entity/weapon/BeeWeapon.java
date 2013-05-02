@@ -53,7 +53,7 @@ public class BeeWeapon extends Weapon {
 	
 	@Override
 	protected float velocity() {
-		return 0.25f;
+		return 3f;
 	}
 
 	@Override

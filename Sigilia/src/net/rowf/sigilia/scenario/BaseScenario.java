@@ -19,6 +19,7 @@ import net.rowf.sigilia.game.engine.DecorationEngine.Decorator;
 import net.rowf.sigilia.game.entity.Player;
 import net.rowf.sigilia.game.entity.Prototype;
 import net.rowf.sigilia.game.entity.StandardEntity;
+import net.rowf.sigilia.game.entity.enemy.IceShield;
 import net.rowf.sigilia.game.entity.weapon.BeeWeapon;
 import net.rowf.sigilia.game.entity.weapon.DefaultWeapon;
 import net.rowf.sigilia.game.entity.weapon.FireWeapon;
@@ -40,6 +41,7 @@ import net.rowf.sigilia.renderer.model.animation.KeyframeSequence;
 import net.rowf.sigilia.renderer.shader.SamplerParameter;
 import net.rowf.sigilia.renderer.shader.VectorParameter;
 import net.rowf.sigilia.renderer.shader.program.AnimatedFlatTextureShader;
+import net.rowf.sigilia.renderer.shader.program.ColorizedFlatTextureShader;
 import net.rowf.sigilia.renderer.shader.program.FlatTextureShader;
 import net.rowf.sigilia.renderer.shader.program.FlickeringShader;
 import net.rowf.sigilia.renderer.shader.program.HealthBarShader;
@@ -94,10 +96,20 @@ public abstract class BaseScenario implements Scenario {
         				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.bolt_particle)), 
         				TiltedBillboard.UNIT);
         Decorator<Representation> fireRep = 
-        		new PeriodicRepresentation( FlickeringShader.deferredForm(),
+        		new DeferredRepresentation( 
+        				ColorizedFlatTextureShader.deferredForm(1, 0.66f, 0),
         				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.generic_particle)), 
-        				Billboard.UNIT);
-
+        				new Billboard(2));
+		
+        decorum.put(IceWeapon.class.getSimpleName(), new DeferredRepresentation( 
+				ColorizedFlatTextureShader.deferredForm(0, 1, 0.75),
+				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.generic_particle)), 
+				new Billboard(2)));
+        
+        decorum.put(BeeWeapon.class.getSimpleName(), new DeferredRepresentation( 
+				ColorizedFlatTextureShader.deferredForm(1, 1, 0),
+				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.generic_particle)), 
+				new Billboard(2)));
         
         decorum.put(DefaultWeapon.class.getSimpleName(), particleRepresentation);
         decorum.put(LightningWeapon.class.getSimpleName(), boltRep);        
