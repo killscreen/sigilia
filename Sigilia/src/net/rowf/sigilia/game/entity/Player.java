@@ -4,6 +4,7 @@ import net.rowf.sigilia.game.Entity;
 import net.rowf.sigilia.game.component.Boundary;
 import net.rowf.sigilia.game.component.Position;
 import net.rowf.sigilia.game.component.mental.Intellect;
+import net.rowf.sigilia.game.component.metadata.Event;
 import net.rowf.sigilia.game.component.metadata.Lifetime;
 import net.rowf.sigilia.game.component.metadata.Liveness;
 import net.rowf.sigilia.game.component.metadata.Name;
@@ -23,7 +24,13 @@ public class Player extends NamedPrototype {
 	
 	@Override
 	protected void applyAdditional(Entity e) {
-		e.setComponent(Health.class, new Health(100));
+		e.setComponent(Health.class, new Health(100) {
+			@Override
+			public void damage(Entity source, Entity target, float amount) {
+				target.setComponent(Event.class, Event.PLAYER_HIT);
+				super.damage(source, target, amount);
+			}			
+		});
 		e.setComponent(Animation.class, new HealthAnimation(e.getComponent(Health.class)));
 		e.setComponent(Boundary.class, BOUND);
 		e.setComponent(Position.class, BOUND);
@@ -43,6 +50,7 @@ public class Player extends NamedPrototype {
 			e.setComponent(Liveness.class, lifetime);
 			e.setComponent(Intellect.class, lifetime);
 			e.setComponent(Health.class, null);
+			e.setComponent(Event.class, Event.PLAYER_KILLED);
 			
 			StandardEntity death = new StandardEntity();
 			death.setComponent(Name.class, DEATH_ANIMATION);

@@ -13,9 +13,9 @@ import net.rowf.sigilia.game.engine.CollisionEngine;
 import net.rowf.sigilia.game.engine.CompletionEngine;
 import net.rowf.sigilia.game.engine.CompletionEngine.CompletionCallback;
 import net.rowf.sigilia.game.engine.CompletionEngine.DoesNotContain;
-import net.rowf.sigilia.game.engine.DebugSequenceEngine;
 import net.rowf.sigilia.game.engine.DecorationEngine;
 import net.rowf.sigilia.game.engine.DecorationEngine.Decorator;
+import net.rowf.sigilia.game.engine.EventEngine;
 import net.rowf.sigilia.game.engine.InputEngine;
 import net.rowf.sigilia.game.engine.InputEngine.InputElement;
 import net.rowf.sigilia.game.engine.IntelligenceEngine;
@@ -23,6 +23,7 @@ import net.rowf.sigilia.game.engine.MotionEngine;
 import net.rowf.sigilia.game.engine.RemovalEngine;
 import net.rowf.sigilia.game.engine.RenderingEngine;
 import net.rowf.sigilia.game.engine.RenderingEngine.RenderableReceiver;
+import net.rowf.sigilia.game.engine.SequenceEngine;
 import net.rowf.sigilia.game.engine.SpawnEngine;
 import net.rowf.sigilia.game.entity.Player;
 import net.rowf.sigilia.game.entity.enemy.Enemy;
@@ -97,7 +98,7 @@ public class ScenarioActivity extends FullscreenActivity implements CompletionCa
         s.decorate(decorum, getResources());
                
 		List<Engine> engines = new ArrayList<Engine>();
-       
+        
 		engines.add(new RenderingEngine(intermediary));
 		engines.add(new MotionEngine());
 		engines.add(new RemovalEngine().addCriterion(RemovalEngine.outOfBounds(WORLD_MIN, WORLD_MAX)).addCriterion(RemovalEngine.LIVENESS));
@@ -108,8 +109,9 @@ public class ScenarioActivity extends FullscreenActivity implements CompletionCa
 		engines.add(new IntelligenceEngine());
 		engines.add(new SpawnEngine());
 		engines.add(new CompletionEngine(this, new DoesNotContain(Player.class, false), new DoesNotContain(Enemy.class, true)));
+		engines.add(new EventEngine(new EventManager(this)));
 		
-		activeScenario = new ScenarioRunner(s, new DebugSequenceEngine(engines));
+		activeScenario = new ScenarioRunner(s, new SequenceEngine(engines));
 		new Thread(activeScenario).start();
 		
         GLSurfaceView view = new GLSurfaceView(this);
@@ -143,6 +145,7 @@ public class ScenarioActivity extends FullscreenActivity implements CompletionCa
 			return render;
 		}
 	}
+
 
 
 }
