@@ -15,7 +15,7 @@ public class DirectionSet {
 	
 	public Direction get(float x, float y) {
 		float r = (float) Math.atan2(y, x);
-		if (r < 0) r = (float) (2*Math.PI) - r;
+		if (r < 0) r = (float) (2*Math.PI) + r;
 		r *= deltas.length / (2*Math.PI);
 		return deltas[((int) (r+0.5f)) % deltas.length];
 	}

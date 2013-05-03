@@ -74,9 +74,11 @@ public class WeaponInput implements InputElement {
 			Entity e = new StandardEntity();
 			weapon.apply(e, finalTap.x, finalTap.y);
 			entities.add(e);
+			return weapon.getDelay();
+		} else {
+			return 0f; // Don't delay on release!
 		}
 		
-		return weapon.getDelay();
 	}
 
 }

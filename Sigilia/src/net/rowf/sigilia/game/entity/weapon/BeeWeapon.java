@@ -35,7 +35,7 @@ public class BeeWeapon extends Weapon {
 		new Vector (0, -6, 0),		
 		
 	};
-	private static final DeltaSequence BEE = 
+	public static final DeltaSequence BEE = 
 			new StaticDeltaSequence(BEE_POINTS); 
 	
 	@Override

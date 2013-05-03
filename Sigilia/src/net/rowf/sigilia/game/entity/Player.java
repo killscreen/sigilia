@@ -20,11 +20,13 @@ public class Player extends NamedPrototype {
 	private static final float DEATH_TIME = 3f;
 	private static final BoundingBox DEATH_BOUND = new BoundingBox(0, 0, 1.01f, 2f);
 	
+	private static final float HEALTH_INITIAL = 100f;
+	
 	private BoundingBox BOUND = new BoundingBox(0, 0, 1, 1.05f);
 	
 	@Override
 	protected void applyAdditional(Entity e) {
-		e.setComponent(Health.class, new Health(100) {
+		e.setComponent(Health.class, new Health(HEALTH_INITIAL) {
 			@Override
 			public void damage(Entity source, Entity target, float amount) {
 				target.setComponent(Event.class, Event.PLAYER_HIT);

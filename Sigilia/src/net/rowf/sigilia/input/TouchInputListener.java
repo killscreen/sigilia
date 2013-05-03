@@ -14,7 +14,6 @@ import android.view.View.OnTouchListener;
 
 public class TouchInputListener implements OnTouchListener, TouchInput {
 	private PerspectiveRenderer perspectiveRenderer;
-	private Queue<Touch> touchQueue = new ConcurrentLinkedQueue<Touch>();
 	private Touch latest;
 	
 	public TouchInputListener(PerspectiveRenderer perspectiveRenderer) {

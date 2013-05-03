@@ -27,31 +27,37 @@ public final class R {
         public static final int generic_particle=0x7f02000d;
         public static final int goblin=0x7f02000e;
         public static final int goblin_patch=0x7f02000f;
-        public static final int ic_launcher=0x7f020010;
-        public static final int ice_sigil=0x7f020011;
-        public static final int lightning_particle=0x7f020012;
-        public static final int monster=0x7f020013;
-        public static final int parchment=0x7f020014;
-        public static final int rock_particle=0x7f020015;
-        public static final int title=0x7f020016;
-        public static final int tree=0x7f020017;
-        public static final int wizard_patch=0x7f020018;
+        public static final int hint_hand=0x7f020010;
+        public static final int ic_launcher=0x7f020011;
+        public static final int ice_sigil=0x7f020012;
+        public static final int lightning_particle=0x7f020013;
+        public static final int monster=0x7f020014;
+        public static final int parchment=0x7f020015;
+        public static final int parchment_archer=0x7f020016;
+        public static final int parchment_goblin=0x7f020017;
+        public static final int parchment_wizard=0x7f020018;
+        public static final int rock_particle=0x7f020019;
+        public static final int title=0x7f02001a;
+        public static final int tree=0x7f02001b;
+        public static final int wizard_patch=0x7f02001c;
     }
     public static final class id {
-        public static final int imageView1=0x7f080003;
-        public static final int pose=0x7f080004;
-        public static final int poser_keyframe=0x7f080006;
-        public static final int poser_load=0x7f080009;
-        public static final int poser_reset=0x7f080007;
-        public static final int poser_save=0x7f080008;
-        public static final int poser_snap=0x7f080005;
-        public static final int scenario_1=0x7f080000;
-        public static final int scenario_2=0x7f080001;
-        public static final int scenario_3=0x7f080002;
+        public static final int floating_hand=0x7f080000;
+        public static final int imageView1=0x7f080004;
+        public static final int pose=0x7f080005;
+        public static final int poser_keyframe=0x7f080007;
+        public static final int poser_load=0x7f08000a;
+        public static final int poser_reset=0x7f080008;
+        public static final int poser_save=0x7f080009;
+        public static final int poser_snap=0x7f080006;
+        public static final int scenario_1=0x7f080001;
+        public static final int scenario_2=0x7f080002;
+        public static final int scenario_3=0x7f080003;
     }
     public static final class layout {
-        public static final int select=0x7f030000;
-        public static final int title=0x7f030001;
+        public static final int hint=0x7f030000;
+        public static final int select=0x7f030001;
+        public static final int title=0x7f030002;
     }
     public static final class menu {
         public static final int editor=0x7f070000;

@@ -16,6 +16,7 @@ import android.view.View;
 public class ScenarioSelectActivity extends FullscreenActivity {
 	
 	private Map<Integer, String> scenarioMap = new HashMap<Integer, String>();
+	private int activeScenario = 0;
 	
 	@Override
 	public void onCreate (Bundle savedInstanceState) {
@@ -32,6 +33,7 @@ public class ScenarioSelectActivity extends FullscreenActivity {
 	public void chooseScenario(View trigger) {
 		String scenario = scenarioMap.get(trigger.getId());
 		if (scenario != null) {
+			activeScenario = trigger.getId();
 			Intent runScenario = new Intent(this, ScenarioActivity.class);			
 			runScenario.putExtra(ScenarioActivity.SCENARIO_KEY, scenario);
 			startActivityForResult(runScenario, ScenarioActivity.SCENARIO_REQUEST);
@@ -48,6 +50,9 @@ public class ScenarioSelectActivity extends FullscreenActivity {
 			Log.i(getClass().getSimpleName(), "Scenario success");
 			break;
 		case ScenarioActivity.SCENARIO_FAILURE:
+			Intent hint = new Intent(this, HintActivity.class);
+			hint.putExtra(HintActivity.HINT_KEY, activeScenario);
+			startActivity(hint);
 			Log.i(getClass().getSimpleName(), "Scenario failed");
 			break;		
 		}
