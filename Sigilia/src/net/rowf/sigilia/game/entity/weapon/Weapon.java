@@ -48,8 +48,12 @@ public abstract class Weapon extends NamedPrototype {
 		BoundingBox bound = new BoundingBox(x,y,z, getSize().get());
 		
 		e.setComponent(Size.class, getSize());
-		e.setComponent(Motion.class, new ConstantMotion(new Vector(x*v, y*v, z*v)));
+		e.setComponent(Motion.class, getMotion(x*v, y*v, z*v));
 		e.setComponent(Position.class, bound);
 		e.setComponent(Boundary.class, bound);
+	}
+	
+	protected Motion getMotion(float x, float y, float z) {
+		return new ConstantMotion(new Vector(x, y, z));
 	}
 }
