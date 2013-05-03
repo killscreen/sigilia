@@ -1,8 +1,7 @@
 package net.rowf.sigilia.game.component.visual;
 
-import net.rowf.sigilia.game.Component;
 
-public class Animation implements Component {
+public class Animation implements Transition {
 	private String DEFAULT_FRAME_NAME = "base";
 	
 	private String currentFrame = DEFAULT_FRAME_NAME;

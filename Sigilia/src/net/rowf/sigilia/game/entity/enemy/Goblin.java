@@ -60,18 +60,23 @@ public class Goblin extends Enemy {
 				// Bound motion
 				// TODO: This should be the world's problem
 				if (p.getZ() < 2) {
-					dz = 2 - p.getZ();
+					dz = 2 - p.getZ() + 1f;
 				}
 				if (p.getZ() > 10) {
-					dz = 10 - p.getZ();
+					dz = 10 - p.getZ() - 1f;
 				}
-				if (p.getX() < -4) {
-					dx = -6 - p.getX();
+				if (p.getX() < (-0.75f * p.getZ())) {
+					dx = Math.max(dx, (-0.75f * p.getZ()) - p.getX() + 1f);
 				}
-				if (p.getX() > 4) {
-					dx = 6 - p.getX();
+				if (p.getX() > ( 0.75f * p.getZ())) {
+					dx = Math.min(dx, (0.75f * p.getZ()) - p.getX() - 1f);
 				}
-				
+				if (p.getY() < (-0.25f * p.getZ())) {
+					dz = (-0.25f * p.getZ()) - p.getY() + 1f;
+				}
+				if (p.getY() > ( 0.25f * p.getZ())) {
+					dz = ( 0.25f * p.getZ()) - p.getY() - 1f;
+				}				
 				// Move the goblin
 				p.shift(dx * timeStep, 0, dz * timeStep);
 			}

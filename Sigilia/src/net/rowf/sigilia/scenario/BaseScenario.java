@@ -19,7 +19,6 @@ import net.rowf.sigilia.game.engine.DecorationEngine.Decorator;
 import net.rowf.sigilia.game.entity.Player;
 import net.rowf.sigilia.game.entity.Prototype;
 import net.rowf.sigilia.game.entity.StandardEntity;
-import net.rowf.sigilia.game.entity.enemy.IceShield;
 import net.rowf.sigilia.game.entity.weapon.BeeWeapon;
 import net.rowf.sigilia.game.entity.weapon.DefaultWeapon;
 import net.rowf.sigilia.game.entity.weapon.FireWeapon;
@@ -42,6 +41,7 @@ import net.rowf.sigilia.renderer.shader.SamplerParameter;
 import net.rowf.sigilia.renderer.shader.VectorParameter;
 import net.rowf.sigilia.renderer.shader.program.AnimatedFlatTextureShader;
 import net.rowf.sigilia.renderer.shader.program.ColorizedFlatTextureShader;
+import net.rowf.sigilia.renderer.shader.program.FadingColorShader;
 import net.rowf.sigilia.renderer.shader.program.FlatTextureShader;
 import net.rowf.sigilia.renderer.shader.program.FlickeringShader;
 import net.rowf.sigilia.renderer.shader.program.HealthBarShader;
@@ -100,7 +100,17 @@ public abstract class BaseScenario implements Scenario {
         				ColorizedFlatTextureShader.deferredForm(1, 0.66f, 0),
         				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.generic_particle)), 
         				new Billboard(2));
-		
+        Decorator<Representation> deathRepresentation = 
+        		new GenericRepresentation( FadingColorShader.deferredForm(), 
+        				new Billboard(4), 
+        				Arrays.<RenderingElement>asList(new StaticElement<Vector> (
+        								VectorParameter.COLOR,
+        		        				new Vector(0.5f,0f,0f)
+        								)        						
+        						), 
+        				GenericRepresentation.TRANSITION_ELEMENT);
+        
+        
         decorum.put(IceWeapon.class.getSimpleName(), new DeferredRepresentation( 
 				ColorizedFlatTextureShader.deferredForm(0, 1, 0.75),
 				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.generic_particle)), 
@@ -123,9 +133,9 @@ public abstract class BaseScenario implements Scenario {
         		makeSigilRepresentation(BitmapFactory.decodeResource(res, R.drawable.ice_sigil), 0,1,1));
         decorum.put(BeeWeapon.class.getSimpleName() + Weapon.SIGIL_SUFFIX, 
         		makeSigilRepresentation(BitmapFactory.decodeResource(res, R.drawable.bee_sigil), 1,0.75f,0));
-
         
 	    decorum.put(Player.class.getSimpleName(), playerRepresentation);
+	    decorum.put(Player.DEATH_ANIMATION.get(), deathRepresentation);
 	}
 
 	/**
