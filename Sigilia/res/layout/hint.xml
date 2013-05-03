@@ -5,11 +5,22 @@
     android:background="@android:color/black" >
 
     <ImageView
-        android:id="@+id/floating_hand"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:src="@drawable/hint_hand" />
+        android:id="@+id/hint_parchment"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/parchment_goblin" />
 
+    <ImageView
+        android:id="@+id/floating_hand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:paddingBottom="75dp"
+        android:paddingLeft="75dp"
+        android:paddingRight="75dp"
+        android:paddingTop="75dp"
+        android:src="@drawable/hint_hand" />
+    
 </RelativeLayout>

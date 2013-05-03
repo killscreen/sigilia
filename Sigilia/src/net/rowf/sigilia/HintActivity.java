@@ -8,7 +8,6 @@ import net.rowf.sigilia.input.gesture.DirectionSet.Direction;
 import net.rowf.sigilia.input.gesture.StaticDeltaSequence;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -43,6 +42,9 @@ public class HintActivity extends FullscreenActivity implements Runnable {
 			hand.setVisibility(View.INVISIBLE);
 			currentStep = 0;			
 			steps =  hint.sequence.getSampledDelta(STEP_COUNT);
+			
+			ImageView parchment = (ImageView) findViewById(R.id.hint_parchment);
+			parchment.setImageResource(hint.hintDrawable);
 			
 			animate();
 		} else {
@@ -84,21 +86,24 @@ public class HintActivity extends FullscreenActivity implements Runnable {
 	}
 
 	private void populateHintMap() {
-		// TODO: Should define initial X/Y in values
-		hintMap.put(R.id.scenario_1, new Hint(0, 10, StaticDeltaSequence.BOLT));
-		hintMap.put(R.id.scenario_2, new Hint(0, -150, StaticDeltaSequence.FIRE));
+		// TODO: Should define initial X/Y in res/values
+		hintMap.put(R.id.scenario_1, new Hint(R.drawable.parchment_goblin, 75,   20, StaticDeltaSequence.BOLT));
+		hintMap.put(R.id.scenario_2, new Hint(R.drawable.parchment_archer,  0, -150, StaticDeltaSequence.FIRE));
 	}
 	
 	private static class Hint {
+		public int hintDrawable;
 		public int startX;
-		public  int startY;
+		public int startY;
 		public DeltaSequence sequence;
-		public Hint(int startX, int startY, DeltaSequence sequence) {
+		public Hint(int hintDrawable, int startX, int startY,
+				DeltaSequence sequence) {
 			super();
+			this.hintDrawable = hintDrawable;
 			this.startX = startX;
 			this.startY = startY;
 			this.sequence = sequence;
-		}		
+		}
 	}
 	
 }
