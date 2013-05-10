@@ -18,12 +18,17 @@ public class ScenarioSelectActivity extends FullscreenActivity {
 	private Map<Integer, String> scenarioMap = new HashMap<Integer, String>();
 	private int activeScenario = 0;	
 	
+	private static final String HIGHEST_SCENARIO_KEY = "HIGHEST_SCENARIO"; 
+	
 	private int highestScenarioAvailable = 0;
 	
 	@Override
 	public void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		// TODO: Need to set images to grey if things are unavailable
+		
+		if (savedInstanceState != null) {
+			highestScenarioAvailable = savedInstanceState.getInt(HIGHEST_SCENARIO_KEY);
+		}
 		
 		scenarioMap.put(R.id.scenario_1, SampleScenario.class.getName());
 		scenarioMap.put(R.id.scenario_2, ArcherScenario.class.getName());
@@ -54,6 +59,19 @@ public class ScenarioSelectActivity extends FullscreenActivity {
 		return false;
 	}
 
+	private void recordVictory(int scenarioId) {
+		for (int i = 0; i < scenarios.length; i++) {
+			if (scenarios[i] == activeScenario) {
+				highestScenarioAvailable = i + 1;
+			}
+		}
+	}
+
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putInt(HIGHEST_SCENARIO_KEY, highestScenarioAvailable);
+	}
 
 	public void chooseScenario(View trigger) {
 		if (isAvailableToPlayer(trigger.getId())) {
@@ -75,11 +93,7 @@ public class ScenarioSelectActivity extends FullscreenActivity {
 		switch (resultCode) {
 		case ScenarioActivity.SCENARIO_SUCCESS:
 			Log.i(getClass().getSimpleName(), "Scenario success");
-			for (int i = 0; i < scenarios.length; i++) {
-				if (scenarios[i] == activeScenario) {
-					highestScenarioAvailable = i + 1;
-				}
-			}
+			recordVictory(activeScenario);
 			break;
 		case ScenarioActivity.SCENARIO_FAILURE:
 			Intent hint = new Intent(this, HintActivity.class);
