@@ -1,5 +1,6 @@
 package net.rowf.sigilia.game.entity.enemy;
 
+import java.util.List;
 import java.util.Random;
 
 import net.rowf.sigilia.game.Entity;
@@ -36,7 +37,7 @@ public class Archer extends Enemy {
 		// Note: No y-movement
 		
 		@Override
-		public void think(Entity e, float timeStamp) {
+		public void think(Entity e, float timeStamp, List<Entity> world) {
 			if (timeStamp > nextThink) {
 				nextThink = timeStamp + THINK_DELAY;
 				if (archerFrame == ArcherFrame.FINISH && random.nextFloat() < FIRE_FREQUENCY) {

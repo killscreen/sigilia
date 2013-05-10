@@ -26,7 +26,7 @@ import net.rowf.sigilia.game.engine.RenderingEngine.RenderableReceiver;
 import net.rowf.sigilia.game.engine.SequenceEngine;
 import net.rowf.sigilia.game.engine.SpawnEngine;
 import net.rowf.sigilia.game.entity.Player;
-import net.rowf.sigilia.game.entity.enemy.Enemy;
+import net.rowf.sigilia.game.entity.enemy.VictorySentinel;
 import net.rowf.sigilia.game.entity.weapon.BeeWeapon;
 import net.rowf.sigilia.game.entity.weapon.DefaultWeapon;
 import net.rowf.sigilia.game.entity.weapon.FireWeapon;
@@ -108,7 +108,7 @@ public class ScenarioActivity extends FullscreenActivity implements CompletionCa
 		engines.add(new CollisionEngine());
 		engines.add(new IntelligenceEngine());
 		engines.add(new SpawnEngine());
-		engines.add(new CompletionEngine(this, new DoesNotContain(Player.class, false), new DoesNotContain(Enemy.class, true)));
+		engines.add(new CompletionEngine(this, new DoesNotContain(Player.class, false), new DoesNotContain(VictorySentinel.class, true)));
 		engines.add(new EventEngine(new EventManager(this)));
 		
 		activeScenario = new ScenarioRunner(s, new SequenceEngine(engines));

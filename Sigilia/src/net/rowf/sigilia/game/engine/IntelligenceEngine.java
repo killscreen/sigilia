@@ -12,7 +12,7 @@ public class IntelligenceEngine implements Engine {
 		for (Entity entity : entities) {
 			Intellect intellect = entity.getComponent(Intellect.class);
 			if (intellect != null) {
-				intellect.think(entity, timeStamp);
+				intellect.think(entity, timeStamp, entities);
 			}
 		}
 	}

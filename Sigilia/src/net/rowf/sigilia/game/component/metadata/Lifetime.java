@@ -1,5 +1,7 @@
 package net.rowf.sigilia.game.component.metadata;
 
+import java.util.List;
+
 import net.rowf.sigilia.game.Entity;
 import net.rowf.sigilia.game.component.mental.Intellect;
 
@@ -23,7 +25,7 @@ public class Lifetime implements Liveness, Intellect {
 	}
 
 	@Override
-	public void think(Entity e, float timeStamp) {
+	public void think(Entity e, float timeStamp, List<Entity> world) {
 		if (Float.isNaN(timeOfDeath)) {
 			timeOfDeath = timeStamp + lifetime;
 		}

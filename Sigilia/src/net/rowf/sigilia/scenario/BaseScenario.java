@@ -19,6 +19,7 @@ import net.rowf.sigilia.game.engine.DecorationEngine.Decorator;
 import net.rowf.sigilia.game.entity.Player;
 import net.rowf.sigilia.game.entity.Prototype;
 import net.rowf.sigilia.game.entity.StandardEntity;
+import net.rowf.sigilia.game.entity.enemy.VictorySentinel;
 import net.rowf.sigilia.game.entity.weapon.BeeWeapon;
 import net.rowf.sigilia.game.entity.weapon.DefaultWeapon;
 import net.rowf.sigilia.game.entity.weapon.FireWeapon;
@@ -74,7 +75,11 @@ public abstract class BaseScenario implements Scenario {
 		e = new StandardEntity();
 		e.setComponent(Position.class, new Position(0,0,Backdrop.SIZE));
 		e.setComponent(Name.class, BACKDROP_NAME);
-		entities.add(e);		
+		entities.add(e);
+		
+		e = new StandardEntity();
+		new VictorySentinel().apply(e);
+		entities.add(e);
 	}
 	
 	
@@ -109,6 +114,15 @@ public abstract class BaseScenario implements Scenario {
         								)        						
         						), 
         				GenericRepresentation.TRANSITION_ELEMENT);
+        Decorator<Representation> victoryRepresentation = 
+        		new GenericRepresentation( FadingColorShader.deferredForm(), 
+        				new Billboard(4), 
+        				Arrays.<RenderingElement>asList(new StaticElement<Vector> (
+        								VectorParameter.COLOR,
+        		        				new Vector(1f,1f,1f)
+        								)        						
+        						), 
+        				GenericRepresentation.TRANSITION_ELEMENT);
         
         
         decorum.put(IceWeapon.class.getSimpleName(), new DeferredRepresentation( 
@@ -136,6 +150,7 @@ public abstract class BaseScenario implements Scenario {
         
 	    decorum.put(Player.class.getSimpleName(), playerRepresentation);
 	    decorum.put(Player.DEATH_ANIMATION.get(), deathRepresentation);
+	    decorum.put(VictorySentinel.VICTORY_ANIMATION.get(), victoryRepresentation);
 	}
 
 	/**
