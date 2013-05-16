@@ -2,6 +2,7 @@ package net.rowf.sigilia.renderer.shader;
 
 import net.rowf.sigilia.renderer.texture.Texture;
 import android.opengl.GLES20;
+import android.util.Log;
 
 public enum SamplerParameter implements ShaderParameter<Texture> {
 	TEXTURE ("uniform sampler2D", "uTexture", false, true),
@@ -9,7 +10,7 @@ public enum SamplerParameter implements ShaderParameter<Texture> {
 	/**
 	 * The subsequent texture in an animation
 	 */
-	NEXT_TEXTURE ("uniform sampler2D", "uSubsequent", false, true),
+	NEXT_TEXTURE ("uniform sampler2D", "uSubsequentTex", false, true),
 	
 	/**
 	 * Texture used as a special effect
@@ -25,6 +26,7 @@ public enum SamplerParameter implements ShaderParameter<Texture> {
 	private String   decl;
 	private boolean  frag;
 	private boolean  vert;
+	private int      texNum;
 	
 	private SamplerParameter(String decl, String name, boolean vert, boolean frag) {
 		this.decl = decl;
@@ -53,9 +55,9 @@ public enum SamplerParameter implements ShaderParameter<Texture> {
 	@Override
 	public void set(Texture texture, int location) {
 		// TODO: Using ordinal is risky if heavily multi-textured
-	    GLES20.glActiveTexture(GLES20.GL_TEXTURE0 + ordinal());
+		GLES20.glActiveTexture(GLES20.GL_TEXTURE0 + ordinal());
 	    GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, texture.handle);
-		GLES20.glUniform1i(location, ordinal());
+		GLES20.glUniform1i(location, ordinal() );
 	}
 
 	@Override

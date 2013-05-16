@@ -37,6 +37,7 @@ import net.rowf.sigilia.renderer.decorator.PeriodicRepresentation;
 import net.rowf.sigilia.renderer.model.Backdrop;
 import net.rowf.sigilia.renderer.model.Billboard;
 import net.rowf.sigilia.renderer.model.TiltedBillboard;
+import net.rowf.sigilia.renderer.model.Trailboard;
 import net.rowf.sigilia.renderer.model.animation.KeyframeSequence;
 import net.rowf.sigilia.renderer.shader.SamplerParameter;
 import net.rowf.sigilia.renderer.shader.VectorParameter;
@@ -47,6 +48,7 @@ import net.rowf.sigilia.renderer.shader.program.FlatTextureShader;
 import net.rowf.sigilia.renderer.shader.program.FlickeringShader;
 import net.rowf.sigilia.renderer.shader.program.HealthBarShader;
 import net.rowf.sigilia.renderer.shader.program.SigilShader;
+import net.rowf.sigilia.renderer.shader.program.TrailShader;
 import net.rowf.sigilia.renderer.texture.Texture;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -88,10 +90,13 @@ public abstract class BaseScenario implements Scenario {
 	public void decorate(Map<String, Decorator<Representation>> decorum,
 			Resources res) {
         // TODO: Move to BaseScenario?
-        Decorator<Representation> particleRepresentation = 
-        		new DeferredRepresentation( DEFERRED_FLAT_SHADER,
-        				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.generic_particle)), 
-        				Billboard.UNIT);
+        Decorator<Representation> particleRepresentation =
+        		makeTrailRepresentation(
+        				BitmapFactory.decodeResource(res, R.drawable.trail_numbers), 
+        				BitmapFactory.decodeResource(res, R.drawable.trail_letters));
+//        		new DeferredRepresentation( DEFERRED_FLAT_SHADER,
+//        				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.generic_particle)), 
+//        				Billboard.UNIT);
         Decorator<Representation> playerRepresentation = 
         		new PeriodicRepresentation( HealthBarShader.deferredForm(),
         				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.generic_particle)), 
@@ -184,6 +189,29 @@ public abstract class BaseScenario implements Scenario {
 								)        						
 						), 
 				GenericRepresentation.TRANSITION_ELEMENT);
+	}
+	
+	private Decorator<Representation> makeTrailRepresentation(Bitmap a, Bitmap b) {
+		return new GenericRepresentation( TrailShader.deferredForm(),
+				Trailboard.UNIT,
+				Arrays.<RenderingElement>asList(
+						new DeferredElement<Texture> (
+								SamplerParameter.TEXTURE,
+		        				new DeferredTexture(a)
+								),
+//						new DeferredElement<Texture> (
+//								SamplerParameter.NEXT_TEXTURE,
+//				        		new DeferredTexture(b)
+//								),
+						new StaticElement<Vector> (
+								VectorParameter.DIRECTION,
+								new Vector(0,0,-2.0f)
+						)
+						),
+				GenericRepresentation.TRANSITION_ELEMENT
+				);
+		
+	
 	}
 	
 

@@ -4,7 +4,18 @@ import android.opengl.GLES20;
 import net.rowf.sigilia.geometry.Vector;
 
 public enum VectorParameter implements ShaderParameter<Vector> {
-	COLOR("uColor")
+	COLOR("uColor"),
+	DIRECTION("uDirection") {
+		@Override
+		public boolean usedByFragment() {
+			return false;
+		}
+
+		@Override
+		public boolean usedByVertex() {
+			return true;
+		}		
+	}
 ;
 	private String   name;
 

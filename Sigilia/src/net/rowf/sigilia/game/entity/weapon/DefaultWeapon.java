@@ -4,9 +4,11 @@ import net.rowf.sigilia.game.Entity;
 import net.rowf.sigilia.game.component.metadata.Liveness;
 import net.rowf.sigilia.game.component.metadata.PhysicalType;
 import net.rowf.sigilia.game.component.physical.ConstantMotion;
-import net.rowf.sigilia.game.component.physical.ProjectileImpact;
 import net.rowf.sigilia.game.component.physical.Impact;
 import net.rowf.sigilia.game.component.physical.Motion;
+import net.rowf.sigilia.game.component.physical.ProjectileImpact;
+import net.rowf.sigilia.game.component.visual.Animation;
+import net.rowf.sigilia.game.component.visual.PeriodicAnimation;
 import net.rowf.sigilia.game.entity.Player;
 import net.rowf.sigilia.geometry.Vector;
 import net.rowf.sigilia.input.gesture.DeltaSequence;
@@ -19,6 +21,7 @@ public class DefaultWeapon extends Weapon {
 		e.setComponent(Liveness.class, Liveness.ALIVE);
 		e.setComponent(Impact.class, IMPACT);
 		e.setComponent(PhysicalType.class, PhysicalType.ENERGY);
+		e.setComponent(Animation.class, new PeriodicAnimation(3f, false));
 	}
 
 	@Override
