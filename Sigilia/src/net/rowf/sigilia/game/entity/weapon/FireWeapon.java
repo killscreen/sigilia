@@ -19,6 +19,7 @@ public class FireWeapon extends Weapon {
 		e.setComponent(Animation.class, new PeriodicAnimation(getDelay()/2f));
 		e.setComponent(Impact.class, IMPACT);
 		e.setComponent(PhysicalType.class, PhysicalType.FIRE);
+		e.setComponent(Animation.class, new PeriodicAnimation(3f, false));
 	}
 
 	@Override

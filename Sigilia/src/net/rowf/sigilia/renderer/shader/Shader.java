@@ -4,16 +4,21 @@ import android.opengl.GLES20;
 import android.util.Log;
 
 public abstract class Shader {
+	private int[] resultCode = { GLES20.GL_TRUE };
 	public final int shader;
-	public Shader(String sourceCode, int type) {	
-		if (sourceCode.contains("???")) {
-			Log.e("???", "???" );
-		}
+	public Shader(String sourceCode, int type) {		
 		shader = GLES20.glCreateShader(type);
 		//Log.e("SHADER", "shader=" + shader);
 		GLES20.glShaderSource(shader, sourceCode);
 		checkError("ShaderSource");
 		GLES20.glCompileShader(shader);
+		
+		// Check to see if compilation succeeded
+		GLES20.glGetShaderiv(shader, GLES20.GL_COMPILE_STATUS, resultCode, 0);
+		if (resultCode[0] != GLES20.GL_TRUE){ 
+			Log.e(getClass().getSimpleName(), GLES20.glGetShaderInfoLog(shader));
+			Log.e(getClass().getSimpleName(), sourceCode);
+		}
 		checkError("CompileShader");
 		if (!GLES20.glIsShader(shader)) Log.e("Shader", "Not a shader");
 	}

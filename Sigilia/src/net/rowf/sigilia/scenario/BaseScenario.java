@@ -91,12 +91,9 @@ public abstract class BaseScenario implements Scenario {
 			Resources res) {
         // TODO: Move to BaseScenario?
         Decorator<Representation> particleRepresentation =
-        		makeTrailRepresentation(
-        				BitmapFactory.decodeResource(res, R.drawable.trail_numbers), 
-        				BitmapFactory.decodeResource(res, R.drawable.trail_letters));
-//        		new DeferredRepresentation( DEFERRED_FLAT_SHADER,
-//        				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.generic_particle)), 
-//        				Billboard.UNIT);
+        		new DeferredRepresentation( DEFERRED_FLAT_SHADER,
+        				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.generic_particle)), 
+        				Billboard.UNIT);
         Decorator<Representation> playerRepresentation = 
         		new PeriodicRepresentation( HealthBarShader.deferredForm(),
         				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.generic_particle)), 
@@ -106,10 +103,8 @@ public abstract class BaseScenario implements Scenario {
         				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.bolt_particle)), 
         				TiltedBillboard.UNIT);
         Decorator<Representation> fireRep = 
-        		new DeferredRepresentation( 
-        				ColorizedFlatTextureShader.deferredForm(1, 0.66f, 0),
-        				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.generic_particle)), 
-        				new Billboard(2));
+        		makeTrailRepresentation(
+        				BitmapFactory.decodeResource(res, R.drawable.fire_particle));
         Decorator<Representation> deathRepresentation = 
         		new GenericRepresentation( FadingColorShader.deferredForm(), 
         				new Billboard(4), 
@@ -191,7 +186,7 @@ public abstract class BaseScenario implements Scenario {
 				GenericRepresentation.TRANSITION_ELEMENT);
 	}
 	
-	private Decorator<Representation> makeTrailRepresentation(Bitmap a, Bitmap b) {
+	private Decorator<Representation> makeTrailRepresentation(Bitmap a) {
 		return new GenericRepresentation( TrailShader.deferredForm(),
 				Trailboard.UNIT,
 				Arrays.<RenderingElement>asList(
@@ -205,7 +200,7 @@ public abstract class BaseScenario implements Scenario {
 //								),
 						new StaticElement<Vector> (
 								VectorParameter.DIRECTION,
-								new Vector(0,0,-2.0f)
+								new Vector(0,0.66f,-0.25f)
 						)
 						),
 				GenericRepresentation.TRANSITION_ELEMENT
