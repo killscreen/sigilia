@@ -14,6 +14,7 @@ import net.rowf.sigilia.game.component.visual.PeriodicAnimation;
 import net.rowf.sigilia.game.component.visual.Representation;
 import net.rowf.sigilia.game.engine.DecorationEngine.Decorator;
 import net.rowf.sigilia.game.entity.Prototype;
+import net.rowf.sigilia.game.entity.enemy.Archer;
 import net.rowf.sigilia.game.entity.enemy.Fireball;
 import net.rowf.sigilia.game.entity.enemy.IceShield;
 import net.rowf.sigilia.game.entity.enemy.Wizard;
@@ -63,9 +64,10 @@ public class WizardScenario extends BaseScenario {
 	@Override
 	public void decorate(Map<String, Decorator<Representation>> decorum, Resources res) {
 		super.decorate(decorum, res);
-		decorum.put(Wizard.class.getSimpleName(), new AnimatedRepresentation(DEFERRED_ANIM_SHADER, 
-				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.wizard_patch)),
-				loadKeyframeSequence(res, R.raw.wizard_animation, 2f, true)));	
+
+		decorateForEnemy(decorum, Wizard.class, 
+				BitmapFactory.decodeResource(res, R.drawable.wizard_patch), 
+				loadKeyframeSequence(res, R.raw.wizard_animation, 2f, false));
 
 		
 		decorum.put(Fireball.class.getSimpleName(), new GenericRepresentation( TrailShader.deferredForm(),

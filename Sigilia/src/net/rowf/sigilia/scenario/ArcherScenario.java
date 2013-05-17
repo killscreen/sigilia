@@ -11,6 +11,7 @@ import net.rowf.sigilia.game.engine.DecorationEngine.Decorator;
 import net.rowf.sigilia.game.entity.Prototype;
 import net.rowf.sigilia.game.entity.enemy.Archer;
 import net.rowf.sigilia.game.entity.enemy.Arrow;
+import net.rowf.sigilia.game.entity.enemy.Goblin;
 import net.rowf.sigilia.game.entity.environment.Tree;
 import net.rowf.sigilia.renderer.decorator.AnimatedRepresentation;
 import net.rowf.sigilia.renderer.decorator.DeferredRepresentation;
@@ -49,13 +50,9 @@ public class ArcherScenario extends BaseScenario {
 	@Override
 	public void decorate(Map<String, Decorator<Representation>> decorum, Resources res) {
 		super.decorate(decorum, res);
-		decorum.put(Archer.class.getSimpleName(), new AnimatedRepresentation(DEFERRED_ANIM_SHADER, 
-				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.archer)),
-				loadKeyframeSequence(res, R.raw.archer_animation, 2f, true)));	
-
-//		decorum.put(Goblin.class.getSimpleName(), new DeferredRepresentation( DEFERRED_FLAT_SHADER,
-//				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.archer)), 
-//				new Billboard(2)));
+		decorateForEnemy(decorum, Archer.class, 
+				BitmapFactory.decodeResource(res, R.drawable.archer), 
+				loadKeyframeSequence(res, R.raw.archer_animation, 2f, true));
 		
 		decorum.put(Arrow.class.getSimpleName(), new DeferredRepresentation( DEFERRED_FLAT_SHADER,
         				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.arrow_particle)), 
