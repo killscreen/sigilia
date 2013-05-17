@@ -1,24 +1,32 @@
 package net.rowf.sigilia.scenario;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
 import net.rowf.sigilia.R;
 import net.rowf.sigilia.game.Entity;
+import net.rowf.sigilia.game.component.visual.GenericRepresentation;
 import net.rowf.sigilia.game.component.visual.Representation;
 import net.rowf.sigilia.game.engine.DecorationEngine.Decorator;
 import net.rowf.sigilia.game.entity.Prototype;
 import net.rowf.sigilia.game.entity.enemy.Archer;
 import net.rowf.sigilia.game.entity.enemy.Arrow;
-import net.rowf.sigilia.game.entity.enemy.Goblin;
 import net.rowf.sigilia.game.entity.environment.Tree;
-import net.rowf.sigilia.renderer.decorator.AnimatedRepresentation;
+import net.rowf.sigilia.geometry.Vector;
+import net.rowf.sigilia.renderer.GenericRenderable.DeferredElement;
+import net.rowf.sigilia.renderer.GenericRenderable.RenderingElement;
+import net.rowf.sigilia.renderer.GenericRenderable.StaticElement;
 import net.rowf.sigilia.renderer.decorator.DeferredRepresentation;
 import net.rowf.sigilia.renderer.decorator.DeferredTexture;
 import net.rowf.sigilia.renderer.model.Backdrop;
 import net.rowf.sigilia.renderer.model.Billboard;
 import net.rowf.sigilia.renderer.model.Crossboard;
+import net.rowf.sigilia.renderer.shader.SamplerParameter;
+import net.rowf.sigilia.renderer.shader.VectorParameter;
+import net.rowf.sigilia.renderer.shader.program.BurnoutShader;
+import net.rowf.sigilia.renderer.texture.Texture;
 import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.util.FloatMath;
@@ -58,9 +66,26 @@ public class ArcherScenario extends BaseScenario {
         				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.arrow_particle)), 
         				Crossboard.UNIT));
 
-		decorum.put(Tree.class.getSimpleName(), new DeferredRepresentation( DEFERRED_FLAT_SHADER,
-				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.tree)), 
-				new Billboard(6.5f)));
+		DeferredTexture treeTexture = 
+				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.tree));
+		decorum.put(Tree.class.getSimpleName(), new DeferredRepresentation( 
+				DEFERRED_FLAT_SHADER, treeTexture, new Billboard(6.5f)));
+
+		decorum.put(Tree.TREE_DEATH_NAME.get(), 
+				new GenericRepresentation( BurnoutShader.deferredForm(),
+						new Billboard(6.5f),
+						Arrays.<RenderingElement>asList(
+								new StaticElement<Vector> (
+									VectorParameter.COLOR,
+		        					new Vector(1f,0.66f,0.125f)
+								),
+								new DeferredElement<Texture> (
+										SamplerParameter.TEXTURE,
+				        				treeTexture
+								)
+						), 
+				GenericRepresentation.TRANSITION_ELEMENT));
+
 		
 		decorum.put(BACKDROP_NAME.get(), new DeferredRepresentation(DEFERRED_FLAT_SHADER, 
 				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.forest_background)),

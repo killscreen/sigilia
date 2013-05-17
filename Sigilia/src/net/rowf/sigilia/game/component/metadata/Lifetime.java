@@ -11,7 +11,7 @@ public class Lifetime implements Liveness, Intellect {
 	
 	public Lifetime(float lifetime) {
 		super();
-		this.lifetime = lifetime;
+		this.lifetime = lifetime * 0.95f; // Always go a little shorter...
 	}
 
 	@Override
