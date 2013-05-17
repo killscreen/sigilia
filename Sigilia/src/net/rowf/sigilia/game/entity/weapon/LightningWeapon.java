@@ -51,5 +51,5 @@ public class LightningWeapon extends Weapon {
 		return super.getMotion(x, y, z);
 	}
 
-	private static final Impact IMPACT = new ProjectileImpact(10f, Player.class);
+	private static final Impact IMPACT = new ProjectileImpact(8f, Player.class);
 }

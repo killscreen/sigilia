@@ -33,6 +33,6 @@ public class Energyball extends Projectile {
 		e.setComponent(Animation.class, new PeriodicAnimation(1.5f, false));
 	}
 
-	private static final Impact IMPACT = new ProjectileImpact(1f, Wizard.class, IceShield.class);
+	private static final Impact IMPACT = new ProjectileImpact(2.5f, Wizard.class, IceShield.class);
 
 }

@@ -8,8 +8,11 @@ import net.rowf.sigilia.game.component.Position;
 import net.rowf.sigilia.game.component.mental.Intellect;
 import net.rowf.sigilia.game.component.metadata.Lifetime;
 import net.rowf.sigilia.game.component.metadata.Liveness;
+import net.rowf.sigilia.game.component.metadata.PhysicalType;
 import net.rowf.sigilia.game.component.metadata.Spawn;
 import net.rowf.sigilia.game.component.physical.BoundingBox;
+import net.rowf.sigilia.game.component.physical.Health;
+import net.rowf.sigilia.game.component.physical.ModifiedHealth;
 import net.rowf.sigilia.game.component.physical.Motion;
 import net.rowf.sigilia.game.component.visual.Animation;
 import net.rowf.sigilia.game.component.visual.Animator;
@@ -33,12 +36,13 @@ public class Wizard extends Enemy {
 		e.setComponent(Motion.class, controller);
 		e.setComponent(Intellect.class, controller);
 		e.setComponent(Animator.class, controller);
+		e.setComponent(Health.class, new ModifiedHealth(100f, 1f, 0.5f, PhysicalType.ELECTRICITY));
 	}
 	
 	private static class WizardController implements Intellect, Motion, Animator {
-		private static final float THROW_FREQUENCY = 0.25f;
-		private static final float SHIELD_FREQUENCY = 0.5f;
-		private static final float SHIELD_DURATION = 3f;
+		private static final float THROW_FREQUENCY = 0.75f;
+		private static final float SHIELD_FREQUENCY = 0.15f;
+		private static final float SHIELD_DURATION = 7.5f;
 		private static Random random = new Random();
 		private boolean throwToggle = false;
 		private float nextThink = 0;
@@ -46,19 +50,22 @@ public class Wizard extends Enemy {
 		private float dy = 0;
 		private float dz = 0;
 		private float shieldTime = 0;
-		private boolean shieldUp = false;
+		private float shieldFrequency = 0;
+		private float shieldFrequencyStep = 0.01f;
+		private boolean shieldUp = true;
 		// Note: No y-movement
 		
 		@Override
 		public void think(Entity e, float timeStamp, List<Entity> world) {
 			if (timeStamp > nextThink) {
 				if (timeStamp > shieldTime) {
-					if (random.nextFloat() < SHIELD_FREQUENCY) {
-						shieldTime = timeStamp + SHIELD_DURATION;
+					if (!shieldUp) {
 						spawnShield(e);
 					}
+					shieldUp = !shieldUp;
+					shieldTime = timeStamp + SHIELD_DURATION;					
 				}
-				shieldUp = timeStamp < shieldTime;
+				//shieldUp = timeStamp < shieldTime;
 				if (shieldUp) {
 					// Stay still if shield is up
 					dx = dy = dz = 0;
@@ -68,10 +75,12 @@ public class Wizard extends Enemy {
 					dz += random.nextFloat() * 4f - 2f;
 				}
 				nextThink = timeStamp + (float) (random.nextFloat() * 0.5) + 0.5f;
-				if (shieldUp || random.nextFloat() < THROW_FREQUENCY) {
+				if (shieldUp || 
+					(random.nextFloat() < THROW_FREQUENCY && 
+					(shieldTime - timeStamp) < SHIELD_DURATION * 0.8f)) {
 					Position p = e.getComponent(Position.class);
 					if (p != null) {
-						float x = p.getX() + (throwToggle ? 1f : -1f) * (shieldUp ? 1.25f : 1);						
+						float x = p.getX() + (throwToggle ? 0.75f : -0.75f) * (shieldUp ? 1.25f : 1);						
 						throwToggle = !throwToggle;
 						if (e.getComponent(Spawn.class) == null) { // Don't override ice shield
 							e.setComponent(Spawn.class, 

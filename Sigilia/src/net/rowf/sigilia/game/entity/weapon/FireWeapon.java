@@ -37,5 +37,5 @@ public class FireWeapon extends Weapon {
 		return StaticDeltaSequence.FIRE;
 	}
 
-	private static final Impact IMPACT = new ProjectileImpact(10f, Player.class);
+	private static final Impact IMPACT = new ProjectileImpact(7.5f, Player.class);
 }

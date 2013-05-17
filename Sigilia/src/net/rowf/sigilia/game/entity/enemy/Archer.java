@@ -7,6 +7,7 @@ import net.rowf.sigilia.game.Entity;
 import net.rowf.sigilia.game.component.Position;
 import net.rowf.sigilia.game.component.mental.Intellect;
 import net.rowf.sigilia.game.component.metadata.Spawn;
+import net.rowf.sigilia.game.component.physical.Health;
 import net.rowf.sigilia.game.component.physical.Motion;
 import net.rowf.sigilia.game.component.visual.Animation;
 import net.rowf.sigilia.game.component.visual.Animator;
@@ -20,6 +21,7 @@ public class Archer extends Enemy {
 	@Override
 	protected void applyAdditional(Entity e) {
 		ArcherController controller = new ArcherController();
+		e.setComponent(Health.class, new Health(5f));
 		e.setComponent(Motion.class, controller);
 		e.setComponent(Intellect.class, controller);
 		e.setComponent(Animator.class, controller);
