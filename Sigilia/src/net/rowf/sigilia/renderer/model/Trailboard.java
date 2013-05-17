@@ -16,14 +16,7 @@ import net.rowf.sigilia.util.BufferUtil;
 public class Trailboard implements Model {
 	public static final Trailboard UNIT = new Trailboard(1f);
 	
-	private static final ShortBuffer order = 
-			BufferUtil.toBuffer(new short[] { 
-					0,  1, 3, 3, 2, 0, 
-					4,  5, 7, 7, 6, 4,
-					8,  9,11,11,10, 8,
-					12,13,15,15,14,12,
-					16,17,19,19,18,16
-			} );
+	private final ShortBuffer order;
 	private static final FloatBuffer texCoords = 
 			BufferUtil.toBuffer(new float[] {
 					.99f, 0f, .0f, 0f, .99f, .99f, 0f, .99f,
@@ -35,10 +28,14 @@ public class Trailboard implements Model {
 	private FloatBuffer vertexes;
 	
 	public Trailboard(float scale) {
-		this(scale, scale);
+		this(scale, true);
 	}
 	
-	public Trailboard(float width, float height) {
+	public Trailboard(float scale, boolean drawTowardOrigin) {
+		this(scale, scale, drawTowardOrigin);
+	}
+	
+	public Trailboard(float width, float height, boolean drawTowardOrigin) {
 		float w = width / 2;
 		float h = height / 2;
 		vertexes = BufferUtil.toBuffer(new float[] { 
@@ -48,6 +45,19 @@ public class Trailboard implements Model {
 				-w,h,3, w,h,3, -w,-h,3, w,-h,3,
 				-w,h,4, w,h,4, -w,-h,4, w,-h,4
 		}); 				
+		order = drawTowardOrigin ? BufferUtil.toBuffer(new short[] { 
+				0,  1, 3, 3, 2, 0, 
+				4,  5, 7, 7, 6, 4,
+				8,  9,11,11,10, 8,
+				12,13,15,15,14,12,
+				16,17,19,19,18,16
+		} ) : BufferUtil.toBuffer(new short[] { 
+				16,17,19,19,18,16,
+				12,13,15,15,14,12,
+				8,  9,11,11,10, 8,
+				4,  5, 7, 7, 6, 4,
+				0,  1, 3, 3, 2, 0
+		} );
 	}
 	
 	@Override

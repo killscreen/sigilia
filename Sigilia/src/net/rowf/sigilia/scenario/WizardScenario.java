@@ -69,7 +69,7 @@ public class WizardScenario extends BaseScenario {
 
 		
 		decorum.put(Fireball.class.getSimpleName(), new GenericRepresentation( TrailShader.deferredForm(),
-				Trailboard.UNIT,
+				new Trailboard(1, false),
 				Arrays.<RenderingElement>asList(
 						new DeferredElement<Texture> (
 								SamplerParameter.TEXTURE,
@@ -77,7 +77,7 @@ public class WizardScenario extends BaseScenario {
 								),
 						new StaticElement<Vector> (
 								VectorParameter.DIRECTION,
-								new Vector(0,0.66f,0.25f)
+								new Vector(0,0.5f,0.5f)
 						)
 						),
 				GenericRepresentation.TRANSITION_ELEMENT
