@@ -30,7 +30,7 @@ public class IceWeapon extends Weapon {
 	private static final DeltaSequence ICE = 
 			new StaticDeltaSequence(ICE_POINTS);
 	
-	private static final Size SIZE = new Size(3f, 3f, 3f);
+	private static final Size SIZE = new Size(2f, 2f, 0.5f);
 	
 	@Override
 	protected void applyAdditional(Entity e) {
