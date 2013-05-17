@@ -9,6 +9,6 @@ public class Stone extends NamedPrototype {
 	@Override
 	protected void applyAdditional(Entity e) {
 		e.setComponent(PhysicalType.class, PhysicalType.SOLID);
-		e.setComponent(Size.class, new Size(0.25f, 0.25f, 0.25f));
+		e.setComponent(Size.class, new Size(0.25f, 0.125f, 0.25f));
 	}
 }

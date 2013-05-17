@@ -27,7 +27,7 @@ public class SampleScenario extends BaseScenario {
 		
 		Prototype enemy = new Goblin();
 		Prototype stone = new Stone();
-		for (float x = -5; x < 5.5; x += 1f) {
+		for (float x = -5; x < 5.25; x += 0.5f) {
 			entities.add(spawn(enemy, x, 6f + 3 * (float) Math.sin(x)));
 			entities.add(spawn(stone, x, 5f + 3 * (float) Math.sin(x)));
 			entities.add(spawn(stone, 5f + 3 * (float) Math.sin(x), x));

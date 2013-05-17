@@ -35,6 +35,6 @@ public class Rock extends Projectile {
 		e.setComponent(Health.class, new ModifiedHealth(5f, 0f, 1f, PhysicalType.ELECTRICITY));
 	}
 	
-	private static final Impact IMPACT = new ProjectileImpact(2f, Goblin.class); 	
+	private static final Impact IMPACT = new ProjectileImpact(3f, Goblin.class); 	
 
 }

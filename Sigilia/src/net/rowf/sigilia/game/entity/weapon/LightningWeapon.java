@@ -16,7 +16,7 @@ import net.rowf.sigilia.input.gesture.DeltaSequence;
 import net.rowf.sigilia.input.gesture.StaticDeltaSequence;
 
 public class LightningWeapon extends Weapon {
-	private static final Size SIZE = new Size(0.5f, 1.5f, 0.5f);
+	private static final Size SIZE = new Size(0.5f, 0.75f, 0.5f);
 	
 	@Override
 	protected void applyAdditional(Entity e) {
@@ -29,7 +29,7 @@ public class LightningWeapon extends Weapon {
 
 	@Override
 	public float getDelay() {
-		return 0.33f;
+		return 0.4f;
 	}
 	
 	@Override
@@ -48,7 +48,7 @@ public class LightningWeapon extends Weapon {
 	}
 	
 	protected Motion getMotion(float x, float y, float z) {
-		return super.getMotion(x, y - 0.75f, z);
+		return super.getMotion(x, y, z);
 	}
 
 	private static final Impact IMPACT = new ProjectileImpact(10f, Player.class);

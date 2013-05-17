@@ -7,6 +7,7 @@ import net.rowf.sigilia.game.Entity;
 import net.rowf.sigilia.game.component.Position;
 import net.rowf.sigilia.game.component.mental.Intellect;
 import net.rowf.sigilia.game.component.metadata.Spawn;
+import net.rowf.sigilia.game.component.physical.Health;
 import net.rowf.sigilia.game.component.physical.Motion;
 import net.rowf.sigilia.game.component.visual.Animation;
 import net.rowf.sigilia.game.component.visual.Animator;
@@ -23,11 +24,12 @@ public class Goblin extends Enemy {
 		e.setComponent(Motion.class, controller);
 		e.setComponent(Intellect.class, controller);
 		e.setComponent(Animator.class, new GoblinWalk());
+		e.setComponent(Health.class, new Health(6f));
 	}
 	
 	private static class GoblinController implements Intellect, Motion {
 		private static final float THROW_FREQUENCY_STEP = 0.01f;
-		private static final float MAX_THROW_FREQUENCY = 0.15f;
+		private static final float MAX_THROW_FREQUENCY = 0.075f;
 		private float throwFrequency = 0f;
 		private static Random random = new Random();
 		private float nextThink = 0;
