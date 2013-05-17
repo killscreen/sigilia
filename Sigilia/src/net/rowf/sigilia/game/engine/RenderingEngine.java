@@ -64,7 +64,10 @@ public class RenderingEngine implements Engine, RenderableProvider {
 		for (Entity entity : entities) {
 			Representation r = entity.getComponent(Representation.class);
 			if (r != null) {
-				newRender.add(r.makeRenderable(entity));
+				Renderable renderable = r.makeRenderable(entity);
+				if (renderable != null) {
+					newRender.add(renderable);
+				}
 			}
 		}
 		

@@ -19,6 +19,8 @@ import net.rowf.sigilia.game.engine.DecorationEngine.Decorator;
 import net.rowf.sigilia.game.entity.Player;
 import net.rowf.sigilia.game.entity.Prototype;
 import net.rowf.sigilia.game.entity.StandardEntity;
+import net.rowf.sigilia.game.entity.enemy.Archer;
+import net.rowf.sigilia.game.entity.enemy.Enemy;
 import net.rowf.sigilia.game.entity.enemy.Splat;
 import net.rowf.sigilia.game.entity.enemy.VictorySentinel;
 import net.rowf.sigilia.game.entity.weapon.BeeWeapon;
@@ -31,6 +33,7 @@ import net.rowf.sigilia.geometry.Vector;
 import net.rowf.sigilia.renderer.GenericRenderable.DeferredElement;
 import net.rowf.sigilia.renderer.GenericRenderable.RenderingElement;
 import net.rowf.sigilia.renderer.GenericRenderable.StaticElement;
+import net.rowf.sigilia.renderer.decorator.AnimatedRepresentation;
 import net.rowf.sigilia.renderer.decorator.DeferredProgram;
 import net.rowf.sigilia.renderer.decorator.DeferredRepresentation;
 import net.rowf.sigilia.renderer.decorator.DeferredTexture;
@@ -43,6 +46,7 @@ import net.rowf.sigilia.renderer.model.Trailboard;
 import net.rowf.sigilia.renderer.model.animation.KeyframeSequence;
 import net.rowf.sigilia.renderer.shader.SamplerParameter;
 import net.rowf.sigilia.renderer.shader.VectorParameter;
+import net.rowf.sigilia.renderer.shader.program.AnimatedDeathShader;
 import net.rowf.sigilia.renderer.shader.program.AnimatedFlatTextureShader;
 import net.rowf.sigilia.renderer.shader.program.ColorizedFlatTextureShader;
 import net.rowf.sigilia.renderer.shader.program.FadingColorShader;
@@ -68,6 +72,7 @@ public abstract class BaseScenario implements Scenario {
 	 */
 	public final DeferredProgram DEFERRED_FLAT_SHADER = FlatTextureShader.deferredForm();
 	public final DeferredProgram DEFERRED_ANIM_SHADER = AnimatedFlatTextureShader.deferredForm();
+	public final DeferredProgram DEFERRED_DEATH_SHADER = AnimatedDeathShader.deferredForm();
 	
 	protected static final Name BACKDROP_NAME = new Name("Backdrop");
 	
@@ -177,6 +182,18 @@ public abstract class BaseScenario implements Scenario {
 			y += temp.getComponent(Size.class).get().getY() / 2f;
 		}
 		return spawn(p, x, y, z);
+	}
+	
+	protected void decorateForEnemy(Map<String, Decorator<Representation>> decorum, 
+			Class<? extends Enemy> enemyClass, 
+			Bitmap bmp, KeyframeSequence seq) {
+		
+		DeferredTexture tex = new DeferredTexture(bmp);
+		decorum.put(enemyClass.getSimpleName(), 
+				new AnimatedRepresentation(DEFERRED_ANIM_SHADER, tex, seq));	
+		decorum.put(enemyClass.getSimpleName() + Enemy.DEATH_SUFFIX, 
+				new AnimatedRepresentation(DEFERRED_DEATH_SHADER, tex, seq));	
+		
 	}
 	
 	private Decorator<Representation> makeSigilRepresentation(Bitmap bitmap, float r, float g, float b) {

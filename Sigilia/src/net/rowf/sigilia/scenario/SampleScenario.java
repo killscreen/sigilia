@@ -37,10 +37,14 @@ public class SampleScenario extends BaseScenario {
 	@Override
 	public void decorate(Map<String, Decorator<Representation>> decorum, Resources res) {
 		super.decorate(decorum, res);
-		decorum.put(Goblin.class.getSimpleName(), new AnimatedRepresentation(DEFERRED_ANIM_SHADER, 
-				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.goblin_patch)),
-				loadKeyframeSequence(res, R.raw.goblin_animation, 2f, false)));	
+//		decorum.put(Goblin.class.getSimpleName(), new AnimatedRepresentation(DEFERRED_ANIM_SHADER, 
+//				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.goblin_patch)),
+//				loadKeyframeSequence(res, R.raw.goblin_animation, 2f, false)));	
 		
+		decorateForEnemy(decorum, Goblin.class, 
+				BitmapFactory.decodeResource(res, R.drawable.goblin_patch), 
+				loadKeyframeSequence(res, R.raw.goblin_animation, 2f, false));
+
 		decorum.put(Rock.class.getSimpleName(), new DeferredRepresentation( DEFERRED_FLAT_SHADER,
         				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.rock_particle)), 
         				Billboard.UNIT));
