@@ -27,7 +27,7 @@ public class Archer extends Enemy {
 	
 	private static class ArcherController implements Intellect, Motion, Animator {
 		private static final float THINK_DELAY = 0.1f;
-		private static final float FIRE_FREQUENCY = 0.02f;
+		private static final float FIRE_FREQUENCY = 0.015f;
 		private static Random random = new Random();
 		private float nextThink = 0;
 		private float nextToss = 0;

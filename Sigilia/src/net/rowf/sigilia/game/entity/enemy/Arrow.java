@@ -52,6 +52,6 @@ public class Arrow extends Projectile {
 		
 	}
 	
-	private static final Impact IMPACT = new ProjectileImpact(3f, Archer.class, Tree.class); 	
+	private static final Impact IMPACT = new ProjectileImpact(5f, Archer.class, Tree.class); 	
 
 }
