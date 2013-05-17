@@ -21,7 +21,7 @@ public class DefaultWeapon extends Weapon {
 		e.setComponent(Liveness.class, Liveness.ALIVE);
 		e.setComponent(Impact.class, IMPACT);
 		e.setComponent(PhysicalType.class, PhysicalType.ENERGY);
-		e.setComponent(Animation.class, new PeriodicAnimation(1f, false));
+		e.setComponent(Animation.class, new PeriodicAnimation(0.75f, false));
 	}
 
 	@Override
