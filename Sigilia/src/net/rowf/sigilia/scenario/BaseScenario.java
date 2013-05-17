@@ -132,10 +132,13 @@ public abstract class BaseScenario implements Scenario {
         				GenericRepresentation.TRANSITION_ELEMENT);
         
         
-        decorum.put(IceWeapon.class.getSimpleName(), new DeferredRepresentation( 
-				DEFERRED_FLAT_SHADER,
-				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.ice_particle)), 
-				Billboard.UNIT));
+        decorum.put(IceWeapon.class.getSimpleName(), new GenericRepresentation( 
+				DEFERRED_FLAT_SHADER, Billboard.UNIT,
+				Arrays.<RenderingElement>asList(new DeferredElement<Texture> (
+						SamplerParameter.TEXTURE,
+						new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.ice_particle))
+						)        						
+				)));
         
         decorum.put(BeeWeapon.class.getSimpleName(), new DeferredRepresentation( 
 				ColorizedFlatTextureShader.deferredForm(1, 1, 0),

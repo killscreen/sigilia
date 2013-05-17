@@ -1,5 +1,6 @@
 package net.rowf.sigilia.game.component.physical;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,10 +12,20 @@ import net.rowf.sigilia.game.entity.NamedPrototype;
 
 public class ProjectileImpact implements Impact {
 	private float damage;
+	private Set<PhysicalType> destroyingTypes;
 	private Set<String> ignore;
+	
+	public ProjectileImpact(float damage, PhysicalType opposingType, 
+			Class<? extends NamedPrototype>... ignore) {
+		this(damage, getSimpleNames(ignore));
+		this.destroyingTypes = new HashSet<PhysicalType>();
+		destroyingTypes.add(PhysicalType.SOLID);
+		destroyingTypes.add(opposingType);
+	}
 	
 	public ProjectileImpact(float damage, Class<? extends NamedPrototype>... ignore) {
 		this(damage, getSimpleNames(ignore));
+		this.destroyingTypes = Collections.singleton(PhysicalType.SOLID);
 	}
 	
 	public ProjectileImpact(float damage, String... ignore) {
@@ -42,7 +53,7 @@ public class ProjectileImpact implements Impact {
 		
 		// Destroy self if we ran into a solid
 		PhysicalType type = other.getComponent(PhysicalType.class);
-		if (type != null && type == PhysicalType.SOLID) {
+		if (type != null && destroyingTypes.contains(type)) {
 			Liveness ownLiveness = source.getComponent(Liveness.class);
 			if (ownLiveness != null) {
 				ownLiveness.kill(source);

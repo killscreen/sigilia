@@ -53,6 +53,7 @@ public abstract class Projectile extends NamedPrototype implements Component {
 		public void kill(Entity e) {
 			Position p = e.getComponent(Position.class);
 			if (p != null) {
+				// TODO: Move to player?
 				e.setComponent(Spawn.class, SPLAT.spawnAt(p));
 			}
 			e.setComponent(Liveness.class, Liveness.DEAD);

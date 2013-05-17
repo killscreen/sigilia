@@ -58,6 +58,7 @@ public class GenericRenderable implements Renderable {
 	public void rotate(float x, float y, float z) {
 		Matrix.rotateM(transform, 0, x, 1, 0, 0);
 		Matrix.rotateM(transform, 0, y, 0, 1, 0);
+		Matrix.rotateM(transform, 0, z, 0, 0, 1);
 	}
 	
 	public static abstract class RenderingElement {
