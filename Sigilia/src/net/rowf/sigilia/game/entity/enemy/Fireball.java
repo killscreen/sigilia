@@ -1,12 +1,13 @@
 package net.rowf.sigilia.game.entity.enemy;
 
 import net.rowf.sigilia.game.Entity;
-import net.rowf.sigilia.game.component.metadata.Liveness;
 import net.rowf.sigilia.game.component.metadata.PhysicalType;
 import net.rowf.sigilia.game.component.physical.ConstantMotion;
 import net.rowf.sigilia.game.component.physical.Impact;
 import net.rowf.sigilia.game.component.physical.Motion;
 import net.rowf.sigilia.game.component.physical.ProjectileImpact;
+import net.rowf.sigilia.game.component.visual.Animation;
+import net.rowf.sigilia.game.component.visual.PeriodicAnimation;
 import net.rowf.sigilia.geometry.Vector;
 import android.util.FloatMath;
 
@@ -29,6 +30,7 @@ public class Fireball extends Projectile {
 	protected void applyAdditional(Entity e) {
 		e.setComponent(PhysicalType.class, PhysicalType.FIRE);
 		e.setComponent(Impact.class, IMPACT);
+		e.setComponent(Animation.class, new PeriodicAnimation(1.5f, false));
 	}
 
 	private static final Impact IMPACT = new ProjectileImpact(10f, Wizard.class);
