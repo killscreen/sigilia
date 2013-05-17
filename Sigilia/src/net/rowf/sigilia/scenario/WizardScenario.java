@@ -14,7 +14,7 @@ import net.rowf.sigilia.game.component.visual.PeriodicAnimation;
 import net.rowf.sigilia.game.component.visual.Representation;
 import net.rowf.sigilia.game.engine.DecorationEngine.Decorator;
 import net.rowf.sigilia.game.entity.Prototype;
-import net.rowf.sigilia.game.entity.enemy.Archer;
+import net.rowf.sigilia.game.entity.enemy.Energyball;
 import net.rowf.sigilia.game.entity.enemy.Fireball;
 import net.rowf.sigilia.game.entity.enemy.IceShield;
 import net.rowf.sigilia.game.entity.enemy.Wizard;
@@ -23,7 +23,6 @@ import net.rowf.sigilia.geometry.Vector;
 import net.rowf.sigilia.renderer.GenericRenderable.DeferredElement;
 import net.rowf.sigilia.renderer.GenericRenderable.RenderingElement;
 import net.rowf.sigilia.renderer.GenericRenderable.StaticElement;
-import net.rowf.sigilia.renderer.decorator.AnimatedRepresentation;
 import net.rowf.sigilia.renderer.decorator.DeferredRepresentation;
 import net.rowf.sigilia.renderer.decorator.DeferredTexture;
 import net.rowf.sigilia.renderer.decorator.PeriodicRepresentation;
@@ -31,7 +30,6 @@ import net.rowf.sigilia.renderer.model.Billboard;
 import net.rowf.sigilia.renderer.model.Trailboard;
 import net.rowf.sigilia.renderer.shader.SamplerParameter;
 import net.rowf.sigilia.renderer.shader.VectorParameter;
-import net.rowf.sigilia.renderer.shader.program.ColorizedFlatTextureShader;
 import net.rowf.sigilia.renderer.shader.program.ScrollingShader;
 import net.rowf.sigilia.renderer.shader.program.TrailShader;
 import net.rowf.sigilia.renderer.texture.Texture;
@@ -84,7 +82,19 @@ public class WizardScenario extends BaseScenario {
 						),
 				GenericRepresentation.TRANSITION_ELEMENT
 				));
+		decorum.put(Energyball.class.getSimpleName(), new GenericRepresentation( TrailShader.deferredForm(),
+				Billboard.UNIT,
+				Arrays.<RenderingElement>asList(
+						new DeferredElement<Texture> (
+								SamplerParameter.TEXTURE,
+		        				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.default_particle))
+								)
+						),
+				GenericRepresentation.TRANSITION_ELEMENT
+				));
 
+		
+		
 		decorum.put(IceShield.class.getSimpleName(), new DeferredRepresentation( 
 				DEFERRED_FLAT_SHADER,
 				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.ice_particle)), 

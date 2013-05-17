@@ -23,6 +23,7 @@ import android.util.FloatMath;
 public class Wizard extends Enemy {	
 	private static final Vector ORIGIN = new Vector(0,0,1);
 	private static final Projectile projectile = new Fireball();
+	private static final Projectile weakProjectile = new Energyball();
 	private static final Prototype shield = new IceShield();
 	private static final VisibleSigil iceSigil = new IceWeapon().visibleSigil;
 	
@@ -73,7 +74,9 @@ public class Wizard extends Enemy {
 						float x = p.getX() + (throwToggle ? 1f : -1f) * (shieldUp ? 1.25f : 1);						
 						throwToggle = !throwToggle;
 						if (e.getComponent(Spawn.class) == null) { // Don't override ice shield
-							e.setComponent(Spawn.class, projectile.spawnProjectile(x, p.getY() + 0.5f, p.getZ() - 1, ORIGIN));
+							e.setComponent(Spawn.class, 
+									(shieldUp ? weakProjectile : projectile)
+									.spawnProjectile(x, p.getY() + 0.5f, p.getZ() - 1, ORIGIN));
 						}
 					}
 				}
