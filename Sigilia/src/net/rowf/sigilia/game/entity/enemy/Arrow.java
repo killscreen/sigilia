@@ -32,7 +32,6 @@ public class Arrow extends Projectile {
 
 	@Override
 	protected void applyAdditional(Entity e) {
-		e.setComponent(Liveness.class, Liveness.ALIVE);
 		e.setComponent(PhysicalType.class, PhysicalType.SOLID);
 		e.setComponent(Impact.class, IMPACT);	
 		e.setComponent(Orientation.class, new ArrowOrientation());

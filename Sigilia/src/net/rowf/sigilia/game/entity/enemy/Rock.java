@@ -30,7 +30,6 @@ public class Rock extends Projectile {
 
 	@Override
 	protected void applyAdditional(Entity e) {
-		e.setComponent(Liveness.class, Liveness.ALIVE);
 		e.setComponent(PhysicalType.class, PhysicalType.SOLID);
 		e.setComponent(Impact.class, IMPACT);
 		e.setComponent(Health.class, new ModifiedHealth(5f, 0f, 1f, PhysicalType.ELECTRICITY));

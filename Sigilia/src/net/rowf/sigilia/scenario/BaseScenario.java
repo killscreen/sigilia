@@ -19,6 +19,7 @@ import net.rowf.sigilia.game.engine.DecorationEngine.Decorator;
 import net.rowf.sigilia.game.entity.Player;
 import net.rowf.sigilia.game.entity.Prototype;
 import net.rowf.sigilia.game.entity.StandardEntity;
+import net.rowf.sigilia.game.entity.enemy.Splat;
 import net.rowf.sigilia.game.entity.enemy.VictorySentinel;
 import net.rowf.sigilia.game.entity.weapon.BeeWeapon;
 import net.rowf.sigilia.game.entity.weapon.DefaultWeapon;
@@ -44,6 +45,7 @@ import net.rowf.sigilia.renderer.shader.VectorParameter;
 import net.rowf.sigilia.renderer.shader.program.AnimatedFlatTextureShader;
 import net.rowf.sigilia.renderer.shader.program.ColorizedFlatTextureShader;
 import net.rowf.sigilia.renderer.shader.program.FadingColorShader;
+import net.rowf.sigilia.renderer.shader.program.SplatTextureShader;
 import net.rowf.sigilia.renderer.shader.program.FlatTextureShader;
 import net.rowf.sigilia.renderer.shader.program.FlickeringShader;
 import net.rowf.sigilia.renderer.shader.program.HealthBarShader;
@@ -147,6 +149,13 @@ public abstract class BaseScenario implements Scenario {
         		makeSigilRepresentation(BitmapFactory.decodeResource(res, R.drawable.ice_sigil), 0,1,1));
         decorum.put(BeeWeapon.class.getSimpleName() + Weapon.SIGIL_SUFFIX, 
         		makeSigilRepresentation(BitmapFactory.decodeResource(res, R.drawable.bee_sigil), 1,0.75f,0));
+
+        decorum.put(Splat.class.getSimpleName(), new GenericRepresentation(SplatTextureShader.deferredForm(), 
+        		Billboard.UNIT, Arrays.<RenderingElement>asList(new DeferredElement<Texture> (
+						SamplerParameter.TEXTURE,
+        				new DeferredTexture(BitmapFactory.decodeResource(res, R.drawable.splat))
+						)), GenericRepresentation.TRANSITION_ELEMENT ));
+
         
 	    decorum.put(Player.class.getSimpleName(), playerRepresentation);
 	    decorum.put(Player.DEATH_ANIMATION.get(), deathRepresentation);

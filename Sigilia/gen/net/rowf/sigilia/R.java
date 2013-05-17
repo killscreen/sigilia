@@ -38,11 +38,12 @@ public final class R {
         public static final int parchment_goblin=0x7f020018;
         public static final int parchment_wizard=0x7f020019;
         public static final int rock_particle=0x7f02001a;
-        public static final int title=0x7f02001b;
-        public static final int trail_letters=0x7f02001c;
-        public static final int trail_numbers=0x7f02001d;
-        public static final int tree=0x7f02001e;
-        public static final int wizard_patch=0x7f02001f;
+        public static final int splat=0x7f02001b;
+        public static final int title=0x7f02001c;
+        public static final int trail_letters=0x7f02001d;
+        public static final int trail_numbers=0x7f02001e;
+        public static final int tree=0x7f02001f;
+        public static final int wizard_patch=0x7f020020;
     }
     public static final class id {
         public static final int floating_hand=0x7f080001;

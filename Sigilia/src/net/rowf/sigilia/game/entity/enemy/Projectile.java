@@ -4,6 +4,7 @@ import net.rowf.sigilia.game.Component;
 import net.rowf.sigilia.game.Entity;
 import net.rowf.sigilia.game.component.Boundary;
 import net.rowf.sigilia.game.component.Position;
+import net.rowf.sigilia.game.component.metadata.Liveness;
 import net.rowf.sigilia.game.component.metadata.Spawn;
 import net.rowf.sigilia.game.component.physical.BoundingBox;
 import net.rowf.sigilia.game.component.physical.Motion;
@@ -13,7 +14,11 @@ import net.rowf.sigilia.game.entity.StandardEntity;
 import net.rowf.sigilia.geometry.Vector;
 
 public abstract class Projectile extends NamedPrototype implements Component {
+	private static final Splat SPLAT = new Splat();
+	
 	public void spawnProjectile(Entity e, float x, float y, float z, Vector target) {
+		e.setComponent(Liveness.class, PROJECTILE_LIVENESS);
+		
 		apply(e);
 		
 		// TODO: Need to find a good common place for this
@@ -37,5 +42,21 @@ public abstract class Projectile extends NamedPrototype implements Component {
 	
 	protected abstract Motion getMotion(float x, float y, float z, Vector target);
 	
-	
+	private static final Liveness PROJECTILE_LIVENESS = new Liveness() {
+
+		@Override
+		public boolean isAlive() {
+			return true;
+		}
+
+		@Override
+		public void kill(Entity e) {
+			Position p = e.getComponent(Position.class);
+			if (p != null) {
+				e.setComponent(Spawn.class, SPLAT.spawnAt(p));
+			}
+			e.setComponent(Liveness.class, Liveness.DEAD);
+		}
+		
+	};
 }

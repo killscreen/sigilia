@@ -27,7 +27,6 @@ public class Fireball extends Projectile {
 
 	@Override
 	protected void applyAdditional(Entity e) {
-		e.setComponent(Liveness.class, Liveness.ALIVE);
 		e.setComponent(PhysicalType.class, PhysicalType.FIRE);
 		e.setComponent(Impact.class, IMPACT);
 	}
