@@ -10,6 +10,11 @@ import net.rowf.sigilia.renderer.shader.ShaderParameter;
 import net.rowf.sigilia.renderer.shader.VectorParameter;
 import net.rowf.sigilia.renderer.shader.VertexParameter;
 
+/**
+ * Shader used when animating the drawing of a sigil on screen
+ * @author woeltjen
+ *
+ */
 public class SigilShader extends ParameterizedProgram {
 	private static final String VERTEX_SHADER = 
 			"  vCoord = vec2(abs("+ VertexParameter.TEXTURE_COORD.getName() + ".x)," +

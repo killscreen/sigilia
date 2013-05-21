@@ -12,6 +12,13 @@ import net.rowf.sigilia.game.component.visual.PeriodicAnimation;
 import net.rowf.sigilia.game.entity.NamedPrototype;
 import net.rowf.sigilia.game.entity.StandardEntity;
 
+/**
+ * Splats are shown whenever an enemy projectile impacts something 
+ * (typically, the player)
+ * 
+ * @author woeltjen
+ *
+ */
 public class Splat extends NamedPrototype {
 	private static final float SPLAT_TIME = 0.33f;
 	

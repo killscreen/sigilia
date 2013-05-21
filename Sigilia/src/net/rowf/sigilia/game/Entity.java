@@ -1,5 +1,14 @@
 package net.rowf.sigilia.game;
 
+/**
+ * An entity is any meaningful "thing" within the context of a running 
+ * game session. In practice, an entity is simply a big bucket of 
+ * Components (identified by type) which contain data and behavior 
+ * accessed and invoked by Engines and other Components.  
+ * 
+ * @author woeltjen
+ *
+ */
 public interface Entity {
 	/**
 	 * Get a component of this entity. Components are specified by 

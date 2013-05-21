@@ -13,6 +13,12 @@ import net.rowf.sigilia.game.component.physical.Velocity;
 import net.rowf.sigilia.game.entity.environment.Tree;
 import android.util.FloatMath;
 
+/**
+ * Describes an arrow (weapon used by Archers, enemies in the 
+ * second scenario)
+ * @author woeltjen
+ *
+ */
 public class Arrow extends Projectile {
 	private static final float SPEED = 5f;
 	@Override

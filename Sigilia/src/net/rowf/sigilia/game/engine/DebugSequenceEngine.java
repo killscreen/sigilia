@@ -11,6 +11,15 @@ import net.rowf.sigilia.game.Entity;
 import android.os.SystemClock;
 import android.util.Log;
 
+/**
+ * Used for debugging purposes; acts as a SequenceEngine, but measures 
+ * and reports the time spent performing each element of the sequence. 
+ * Used to assess performance bottlenecks associated with specific 
+ * engines.
+ *  
+ * @author woeltjen
+ *
+ */
 public class DebugSequenceEngine implements Engine {
 	private Map<Engine, Long> engineTimes = new HashMap<Engine, Long>();
 	private List<Engine> engines = new ArrayList<Engine>();

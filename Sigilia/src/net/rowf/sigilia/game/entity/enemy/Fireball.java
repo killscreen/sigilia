@@ -11,6 +11,13 @@ import net.rowf.sigilia.game.component.visual.Animation;
 import net.rowf.sigilia.game.component.visual.PeriodicAnimation;
 import android.util.FloatMath;
 
+/**
+ * Describes a ball of fire, similar to the player's fire weapon. 
+ * Used by the Wizard in the third scenario. 
+ * 
+ * @author woeltjen
+ *
+ */
 public class Fireball extends Projectile {
 	private static final float SPEED = 7.5f;
 

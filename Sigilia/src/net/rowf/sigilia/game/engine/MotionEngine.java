@@ -6,6 +6,13 @@ import net.rowf.sigilia.game.Engine;
 import net.rowf.sigilia.game.Entity;
 import net.rowf.sigilia.game.component.physical.Motion;
 
+/**
+ * Causes entities in a running game to move, by invoking 
+ * the behavior of their Motion components
+ * 
+ * @author woeltjen
+ *
+ */
 public class MotionEngine implements Engine {
 	private static final float EPSILON  = 0.001f;
 	private float previous = Float.NEGATIVE_INFINITY; 

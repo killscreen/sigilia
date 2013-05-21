@@ -12,6 +12,12 @@ import net.rowf.sigilia.renderer.texture.Texture;
 import android.opengl.GLES20;
 import android.opengl.Matrix;
 
+/**
+ * Handles the rendering of a transitional frame in a typical key 
+ * frame sequence.
+ * @author woeltjen
+ *
+ */
 public class AnimatedRenderable implements Renderable {
 	private ParameterizedProgram     program;
 	private AnimatedModel       model;

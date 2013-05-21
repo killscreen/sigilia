@@ -7,6 +7,14 @@ import java.util.Set;
 import net.rowf.sigilia.game.Entity;
 import net.rowf.sigilia.game.component.metadata.PhysicalType;
 
+/**
+ * Describes the health of an enemy, including its response to damage; 
+ * in this case, damage may by modified based on the PhysicalType of 
+ * the entity doing the damage.
+ * 
+ * @author woeltjen
+ *
+ */
 public class ModifiedHealth extends Health {
 	private Set<PhysicalType> types = new HashSet<PhysicalType>();
 	private float inFactor;

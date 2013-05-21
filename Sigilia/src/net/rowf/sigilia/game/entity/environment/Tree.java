@@ -16,6 +16,13 @@ import net.rowf.sigilia.game.component.visual.PeriodicAnimation;
 import net.rowf.sigilia.game.entity.NamedPrototype;
 import net.rowf.sigilia.game.entity.StandardEntity;
 
+/**
+ * Describes a tree, as seen in the second scenario. Trees can 
+ * be destroyed by fire (typically to expose archers hiding behind them.)
+ * 
+ * @author woeltjen
+ *
+ */
 public class Tree extends NamedPrototype {
 	public  static final Name  TREE_DEATH_NAME = new Name(Tree.class.getSimpleName() + "DEATH");
 	private static final float DEATH_TIME = 1.5f;

@@ -2,6 +2,12 @@ package net.rowf.sigilia.game;
 
 import java.util.List;
 
+/**
+ * An engine is responsible for running some aspect of game logic, 
+ * typically by iterating across the current set of entities.
+ * @author woeltjen
+ *
+ */
 public interface Engine {
 	/**
 	 * Run one game cycle for this engine.

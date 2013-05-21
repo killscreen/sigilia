@@ -36,6 +36,13 @@ import net.rowf.sigilia.renderer.texture.Texture;
 import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 
+/**
+ * A scenario in which another wizard flies about a cloudy sky amongst 
+ * levitating columns, attacking the player with magic. 
+ * 
+ * @author woeltjen
+ *
+ */
 public class WizardScenario extends BaseScenario {
 
 	@Override

@@ -5,9 +5,10 @@ import java.nio.ShortBuffer;
 
 
 /**
- * For simplicity, it is assumed that all billboard are parallel to the 
- * XY-plane, and facing in the negative-Z direction (effectively, camera 
- * is assumed to face positive-Z) 
+ * A crossboard describes two intersecting quads (in a "cross" or "t" shape),
+ * one on the XZ plane, the other on the YZ plane
+ * 
+ * Used as a model for arrows.
  * 
  * @author woeltjen
  *

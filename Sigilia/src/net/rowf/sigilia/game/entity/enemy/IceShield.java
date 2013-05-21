@@ -8,6 +8,13 @@ import net.rowf.sigilia.game.component.physical.ModifiedHealth;
 import net.rowf.sigilia.game.component.physical.Size;
 import net.rowf.sigilia.game.entity.NamedPrototype;
 
+/**
+ * Describes a shield of ice, similar to the player's ice weapon (but stationary) 
+ * Used by the Wizard in the third scenario; can be destroyed with fire.
+ * 
+ * @author woeltjen
+ *
+ */
 public class IceShield extends NamedPrototype {
 	@Override
 	protected void applyAdditional(Entity e) {

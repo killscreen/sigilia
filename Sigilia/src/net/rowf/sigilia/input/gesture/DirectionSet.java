@@ -1,7 +1,13 @@
 package net.rowf.sigilia.input.gesture;
 
-import net.rowf.sigilia.input.gesture.DeltaSequence.Delta;
-
+/**
+ * Describes a finite set of directions. Swipe movements are clamped 
+ * to this finite set in order to simplify comparison with known 
+ * delta sequences. 
+ * 
+ * @author woeltjen
+ *
+ */
 public class DirectionSet {
 	private Direction[] deltas;
 	

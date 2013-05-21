@@ -23,6 +23,12 @@ import net.rowf.sigilia.game.entity.weapon.IceWeapon;
 import net.rowf.sigilia.game.entity.weapon.VisibleSigil;
 import android.util.FloatMath;
 
+/**
+ * Describes the enemy wizard encountered in the third scenario.
+ * 
+ * @author woeltjen
+ *
+ */
 public class Wizard extends Enemy {	
 	private static final Vector ORIGIN = new Vector(0,0,1);
 	private static final Projectile projectile = new Fireball();

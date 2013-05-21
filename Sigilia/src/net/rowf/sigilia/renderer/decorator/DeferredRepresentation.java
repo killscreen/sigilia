@@ -9,6 +9,17 @@ import net.rowf.sigilia.renderer.model.Model;
 import net.rowf.sigilia.renderer.shader.ParameterizedProgram;
 import net.rowf.sigilia.renderer.texture.Texture;
 
+/**
+ * Produces DeferredRenderable objects, which 
+ * allow for elements like shader programs and textures to be defined 
+ * ahead of time, but initialized (in the OpenGL context) only when first 
+ * used. 
+ * 
+ * TODO: This can probably be replaced by GenericRepresentation
+ * 
+ * @author woeltjen
+ *
+ */
 public class DeferredRepresentation extends PositionedRepresentation implements Decorator<Representation> {
 	private Deferred<ParameterizedProgram>     program;
 	private Deferred<Texture>     texture;

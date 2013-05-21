@@ -3,6 +3,13 @@ package net.rowf.sigilia.input.gesture;
 import net.rowf.sigilia.input.gesture.DirectionSet.Direction;
 import android.util.FloatMath;
 
+/**
+ * A DeltaSequence that is updated over time (for instance, to 
+ * accumulate points as a player is swiping a sigil)
+ * 
+ * @author woeltjen
+ *
+ */
 public class DynamicDeltaSequence extends DeltaSequence {
 	private int count;
 	private DirectionSet directionSet;

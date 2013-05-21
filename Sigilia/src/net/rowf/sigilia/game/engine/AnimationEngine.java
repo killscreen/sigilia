@@ -7,6 +7,11 @@ import net.rowf.sigilia.game.Entity;
 import net.rowf.sigilia.game.component.visual.Animation;
 import net.rowf.sigilia.game.component.visual.Animator;
 
+/**
+ * Triggers the "animation" behavior of entities.
+ * 
+ * @author woeltjen
+ */
 public class AnimationEngine implements Engine {
 
 	@Override

@@ -8,6 +8,14 @@ import android.opengl.GLSurfaceView.Renderer;
 import android.opengl.Matrix;
 
 
+/**
+ * Manages the actual rendering of a scene using OpenGL ES. In practice, 
+ * this means setting up a viewport and, each frame, consuming a list of 
+ * Renderable objects and drawing them in order. 
+ * 
+ * @author woeltjen
+ *
+ */
 public class PerspectiveRenderer implements Renderer {
 	private RenderableProvider provider;
 	private RenderableInitializer initializer;

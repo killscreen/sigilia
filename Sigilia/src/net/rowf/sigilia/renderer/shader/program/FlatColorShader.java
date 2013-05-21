@@ -8,6 +8,11 @@ import net.rowf.sigilia.renderer.shader.SamplerParameter;
 import net.rowf.sigilia.renderer.shader.ShaderParameter;
 import net.rowf.sigilia.renderer.shader.VertexParameter;
 
+/**
+ * Simple shader that draws a model as a flat color (used for test purposes)
+ * @author woeltjen
+ *
+ */
 public class FlatColorShader extends ParameterizedProgram {
 	private static final String VERTEX_SHADER = 
 		"  vCoord = vec2(abs("+ VertexParameter.TEXTURE_COORD.getName() + ".x)," +

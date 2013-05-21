@@ -40,10 +40,10 @@ import net.rowf.sigilia.renderer.decorator.DeferredTexture;
 import net.rowf.sigilia.renderer.decorator.PeriodicRepresentation;
 import net.rowf.sigilia.renderer.model.Backdrop;
 import net.rowf.sigilia.renderer.model.Billboard;
+import net.rowf.sigilia.renderer.model.KeyframeSequence;
 import net.rowf.sigilia.renderer.model.Model;
 import net.rowf.sigilia.renderer.model.TiltedBillboard;
 import net.rowf.sigilia.renderer.model.Trailboard;
-import net.rowf.sigilia.renderer.model.animation.KeyframeSequence;
 import net.rowf.sigilia.renderer.shader.SamplerParameter;
 import net.rowf.sigilia.renderer.shader.VectorParameter;
 import net.rowf.sigilia.renderer.shader.program.AnimatedDeathShader;
@@ -62,6 +62,15 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 
+/**
+ * Abstract super-class for all in-game scenarios; handles common 
+ * entities (such as the player) and common graphical representations 
+ * (such as sigils and weapons), while subclasses provide scenario-specific
+ * details.
+ * 
+ * @author woeltjen
+ *
+ */
 public abstract class BaseScenario implements Scenario {
 	
 	/*

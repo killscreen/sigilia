@@ -5,6 +5,15 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+/**
+ * A DeferredTexture allows textures to be defined ahead of time,
+ * but initialized when used (as definition will typically happen 
+ * before the OpenGL context has been created, but initialization must 
+ * occur after.)  
+ * 
+ * @author woeltjen
+ *
+ */
 public class DeferredTexture extends Deferred<Texture> {
 	private Bitmap bitmap;
 

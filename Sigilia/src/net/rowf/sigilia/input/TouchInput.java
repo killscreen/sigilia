@@ -2,6 +2,14 @@ package net.rowf.sigilia.input;
 
 import java.util.List;
 
+/**
+ * Tracks touches on the screen at x/y locations. Note that this is 
+ * an intermediary interface used to decouple the WeaponInput from 
+ * the TouchInputListener (the latter is Android-specific)
+ * 
+ * @author woeltjen
+ *
+ */
 public interface TouchInput {
 	public List<Touch> getPendingEvents();
 	

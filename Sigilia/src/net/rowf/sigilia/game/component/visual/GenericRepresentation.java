@@ -19,12 +19,20 @@ import net.rowf.sigilia.renderer.GenericRenderable.StaticElement;
 import net.rowf.sigilia.renderer.PerspectiveRenderer.Renderable;
 import net.rowf.sigilia.renderer.decorator.Deferred;
 import net.rowf.sigilia.renderer.model.AnimatedModel;
+import net.rowf.sigilia.renderer.model.KeyframeSequence;
 import net.rowf.sigilia.renderer.model.Model;
-import net.rowf.sigilia.renderer.model.animation.KeyframeSequence;
 import net.rowf.sigilia.renderer.shader.ParameterizedProgram;
 import net.rowf.sigilia.renderer.shader.ScalarParameter;
 import net.rowf.sigilia.renderer.shader.VertexParameter;
 
+/**
+ * A GenericRepresentation allows shaders and models to be flexibly 
+ * coupled with a variety of other attributes, which may be static 
+ * or determined based on the run-time properties of an entity. 
+ * 
+ * @author woeltjen
+ *
+ */
 public class GenericRepresentation implements Representation, Decorator<Representation> {
 	private Collection<RenderingElement> staticElements;
 	private List<DynamicRenderingElement> dynamicElements =

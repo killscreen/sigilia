@@ -2,6 +2,12 @@ package net.rowf.sigilia.game.component.physical;
 
 import net.rowf.sigilia.game.Entity;
 
+/**
+ * Describes an entity's position, as well as an axis-aligned bounding 
+ * box around that position.
+ * @author woeltjen
+ *
+ */
 public class BoundingBox extends Position implements Boundary {
 	private static final Vector DEFAULT_SIZE = new Vector(1f,1f,1f);
 	

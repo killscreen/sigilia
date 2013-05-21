@@ -8,6 +8,12 @@ import android.util.FloatMath;
 import net.rowf.sigilia.input.gesture.DeltaSequence;
 import net.rowf.sigilia.input.gesture.DirectionSet.Direction;
 
+/**
+ * Describes a flat model in the shape of a sigil (not used)
+ * 
+ * @author woeltjen
+ *
+ */
 public class SigilModel implements Model {
 	private final ShortBuffer order;
 	private final FloatBuffer vertexes;	

@@ -14,6 +14,14 @@ import net.rowf.sigilia.game.component.visual.Animation;
 import net.rowf.sigilia.game.entity.NamedPrototype;
 import net.rowf.sigilia.game.entity.StandardEntity;
 
+/**
+ * Serves as the superclass for various Enemy types encountered in  
+ * different scenarios. Responsible for attaching components which are 
+ * common among enemies, such as Liveness and solidity.
+ * 
+ * @author woeltjen
+ *
+ */
 public abstract class Enemy extends NamedPrototype {
 	private static final Size DEFAULT_SIZE = new Size(1,2,1);
 	

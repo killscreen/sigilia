@@ -2,7 +2,17 @@ package net.rowf.sigilia.game.component.visual;
 
 import android.util.FloatMath;
 
-
+/**
+ * Animates an entity in a loop (either sinusoidal or saw-tooth)
+ * 
+ * Note that this does not maintain the named keyframe element of 
+ * most animations; it is typically used when shaders care about 
+ * some cyclical or timed behavior, but do not care about transitioning 
+ * between keyframes.
+ * 
+ * @author woeltjen
+ *
+ */
 public class PeriodicAnimation extends Animation {
 	private final float period;
 	private boolean sinusoidal;

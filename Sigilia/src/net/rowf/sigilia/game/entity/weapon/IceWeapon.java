@@ -19,6 +19,14 @@ import net.rowf.sigilia.game.entity.Player;
 import net.rowf.sigilia.input.gesture.DeltaSequence;
 import net.rowf.sigilia.input.gesture.StaticDeltaSequence;
 
+/**
+ * The player's 'ice' weapon. More useful as a shield than a weapon, 
+ * particularly when blocking the fireballs of the wizard in the 
+ * third scenario.
+ * 
+ * @author woeltjen
+ *
+ */
 public class IceWeapon extends Weapon {
 	private static final Vector[] ICE_POINTS = {
 		new Vector (0, 0, 0),

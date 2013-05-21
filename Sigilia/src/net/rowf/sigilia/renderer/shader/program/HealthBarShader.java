@@ -10,6 +10,12 @@ import net.rowf.sigilia.renderer.shader.ShaderParameter;
 import net.rowf.sigilia.renderer.shader.VertexParameter;
 import android.util.Log;
 
+/**
+ * Shader used to draw the health bar over the screen
+ * 
+ * @author woeltjen
+ *
+ */
 public class HealthBarShader extends ParameterizedProgram {
 	private static final String VERTEX_SHADER =
 			"  float x = 0.9 + 0.025 * " + VertexParameter.VERTEX.getName() + ".x;\n" +

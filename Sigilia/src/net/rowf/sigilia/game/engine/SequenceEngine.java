@@ -6,22 +6,16 @@ import java.util.List;
 import net.rowf.sigilia.game.Engine;
 import net.rowf.sigilia.game.Entity;
 
+/**
+ * Runs multiple engines in a sequence.
+ * 
+ * @author woeltjen
+ */
 public class SequenceEngine implements Engine {
 	private List<Engine> engines = new ArrayList<Engine>();
 
-	public SequenceEngine() {		
-	}
-	
 	public SequenceEngine(List<Engine> engines) {
 		this.engines.addAll(engines);
-	}
-	
-	public void add(Engine engine) {
-		engines.add(engine);
-	}
-	
-	public void remove(Engine engine) {
-		engines.remove(engine);
 	}
 	
 	@Override

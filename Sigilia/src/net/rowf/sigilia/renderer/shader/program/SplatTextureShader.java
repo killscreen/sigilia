@@ -9,6 +9,11 @@ import net.rowf.sigilia.renderer.shader.ScalarParameter;
 import net.rowf.sigilia.renderer.shader.ShaderParameter;
 import net.rowf.sigilia.renderer.shader.VertexParameter;
 
+/**
+ * Texture used to animate "splat" effects (scaling up while fading out)
+ * @author woeltjen
+ *
+ */
 public class SplatTextureShader extends ParameterizedProgram {
 	private static final String VERTEX_SHADER =
 		"  float t = " + ScalarParameter.TRANSITION.getName() + ";\n" +

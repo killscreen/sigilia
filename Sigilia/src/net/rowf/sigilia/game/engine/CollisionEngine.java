@@ -13,6 +13,13 @@ import net.rowf.sigilia.game.component.physical.Position;
 import net.rowf.sigilia.game.component.physical.Vector;
 import android.util.Log;
 
+/**
+ * Checks for collisions among entities, and invokes their response 
+ * to collision when these occur.
+ * 
+ * @author woeltjen
+ *
+ */
 public class CollisionEngine implements Engine {
 	private static final Comparator<Entity> Z_MINIMUM_COMPARATOR = new Comparator<Entity>() {
 		@Override

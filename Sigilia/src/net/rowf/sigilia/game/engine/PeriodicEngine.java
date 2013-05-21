@@ -5,6 +5,13 @@ import java.util.List;
 import net.rowf.sigilia.game.Engine;
 import net.rowf.sigilia.game.Entity;
 
+/**
+ * A PeriodicEngine wraps some other engine, and invokes it only at 
+ * pre-defined intervals. This can be used to prevent relatively 
+ * long-running engines from executing every cycle. 
+ * 
+ * @author woeltjen
+ */
 public class PeriodicEngine implements Engine {
 	private float next = -1;
 	private float period;

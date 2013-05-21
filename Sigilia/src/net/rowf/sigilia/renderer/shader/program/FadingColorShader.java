@@ -10,6 +10,12 @@ import net.rowf.sigilia.renderer.shader.ShaderParameter;
 import net.rowf.sigilia.renderer.shader.VectorParameter;
 import net.rowf.sigilia.renderer.shader.VertexParameter;
 
+/**
+ * Handles full-screen color fades, as used by success and failure animations.
+ * 
+ * @author woeltjen
+ *
+ */
 public class FadingColorShader extends ParameterizedProgram {
 	private static final String VERTEX_SHADER = 
 	    "  gl_Position = " + MatrixParameter.TRANSFORMATION.getName() + " * " +

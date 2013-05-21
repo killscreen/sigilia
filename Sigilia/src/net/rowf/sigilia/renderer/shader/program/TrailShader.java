@@ -10,6 +10,12 @@ import net.rowf.sigilia.renderer.shader.ShaderParameter;
 import net.rowf.sigilia.renderer.shader.VectorParameter;
 import net.rowf.sigilia.renderer.shader.VertexParameter;
 
+/**
+ * Shader used for drawing fireballs; animated non-zero Z positions, 
+ * fades to grey/transparent.
+ * @author woeltjen
+ *
+ */
 public class TrailShader extends ParameterizedProgram {
 	private static final String VERTEX_SHADER = 
 			"  vCoord = vec2(abs("+ VertexParameter.TEXTURE_COORD.getName() + ".x)," +

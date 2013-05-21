@@ -3,6 +3,13 @@ package net.rowf.sigilia.renderer.shader;
 import android.opengl.GLES20;
 import net.rowf.sigilia.game.component.physical.Vector;
 
+/**
+ * Describes parameters that are represented by a three-element 
+ * vector, such as color. 
+ * 
+ * @author woeltjen
+ *
+ */
 public enum VectorParameter implements ShaderParameter<Vector> {
 	COLOR("uColor"),
 	DIRECTION("uDirection") {

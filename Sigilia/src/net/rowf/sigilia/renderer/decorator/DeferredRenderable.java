@@ -6,6 +6,15 @@ import net.rowf.sigilia.renderer.model.Model;
 import net.rowf.sigilia.renderer.shader.ParameterizedProgram;
 import net.rowf.sigilia.renderer.texture.Texture;
 
+/**
+ * A DeferredRenderable uses Deferred elements when drawing. This 
+ * allows for elements like shader programs and textures to be defined 
+ * ahead of time, but initialized (in the OpenGL context) only when first 
+ * used. 
+ * 
+ * @author woeltjen
+ *
+ */
 public class DeferredRenderable extends Deferred<Renderable> implements Renderable {
 	private Deferred<ParameterizedProgram>     program;
 	private Deferred<Texture>     texture;

@@ -15,6 +15,13 @@ import net.rowf.sigilia.game.entity.Player;
 import net.rowf.sigilia.input.gesture.DeltaSequence;
 import net.rowf.sigilia.input.gesture.StaticDeltaSequence;
 
+/**
+ * The player's 'lightning' weapon. Does a lot of damage, but can't 
+ * pass through or destroy solid objects.
+ * 
+ * @author woeltjen
+ *
+ */
 public class LightningWeapon extends Weapon {
 	private static final Size SIZE = new Size(0.5f, 0.75f, 0.5f);
 	

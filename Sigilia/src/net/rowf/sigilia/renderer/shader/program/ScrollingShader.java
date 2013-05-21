@@ -9,6 +9,12 @@ import net.rowf.sigilia.renderer.shader.ScalarParameter;
 import net.rowf.sigilia.renderer.shader.ShaderParameter;
 import net.rowf.sigilia.renderer.shader.VertexParameter;
 
+/**
+ * As FlatTextureShader, but scrolls repeating image in the X direction. 
+ * Used for animated clouds in the third scenario.
+ * @author woeltjen
+ *
+ */
 public class ScrollingShader extends ParameterizedProgram {
 	private static final String VERTEX_SHADER = 
 			"  vCoord = vec2(abs("+ VertexParameter.TEXTURE_COORD.getName() + ".x)," +

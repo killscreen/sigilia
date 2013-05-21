@@ -9,6 +9,11 @@ import net.rowf.sigilia.renderer.shader.ScalarParameter;
 import net.rowf.sigilia.renderer.shader.ShaderParameter;
 import net.rowf.sigilia.renderer.shader.VertexParameter;
 
+/**
+ * Handles interpolated key frame animation, as used by enemies
+ * @author woeltjen
+ *
+ */
 public class AnimatedFlatTextureShader extends ParameterizedProgram {
 	private static final String VERTEX_SHADER = 
 		"  vCoord = vec2(abs("+ VertexParameter.TEXTURE_COORD.getName() + ".x)," +

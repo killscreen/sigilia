@@ -13,6 +13,13 @@ import net.rowf.sigilia.game.component.physical.Vector;
 import net.rowf.sigilia.game.component.visual.Animation;
 import net.rowf.sigilia.game.component.visual.Animator;
 
+/**
+ * Describes an Archer (enemy in the second scenario)
+ * Archers mostly crouch, and occasionally stand to fire arrows.
+ * 
+ * @author woeltjen
+ *
+ */
 public class Archer extends Enemy {
 	private static final Vector ORIGIN = new Vector(0,0,1);
 	private static final Projectile projectile = new Arrow();

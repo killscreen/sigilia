@@ -9,6 +9,12 @@ import net.rowf.sigilia.renderer.shader.ScalarParameter;
 import net.rowf.sigilia.renderer.shader.ShaderParameter;
 import net.rowf.sigilia.renderer.shader.VertexParameter;
 
+/**
+ * Shader used to draw lightning particles; clamps -z to top of screen, 
+ * flips image back and forth.
+ * @author woeltjen
+ *
+ */
 public class FlickeringShader extends ParameterizedProgram {
 	private static final String VERTEX_SHADER = 
 			"  vCoord = vec2(abs("+ VertexParameter.TEXTURE_COORD.getName() + ".x)," +

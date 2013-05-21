@@ -7,10 +7,16 @@ import net.rowf.sigilia.game.component.visual.Representation;
 import net.rowf.sigilia.game.engine.DecorationEngine.Decorator;
 import net.rowf.sigilia.renderer.AnimatedRenderable.DeferredAnimatedRenderable;
 import net.rowf.sigilia.renderer.PerspectiveRenderer.Renderable;
-import net.rowf.sigilia.renderer.model.animation.KeyframeSequence;
+import net.rowf.sigilia.renderer.model.KeyframeSequence;
 import net.rowf.sigilia.renderer.shader.ParameterizedProgram;
 import net.rowf.sigilia.renderer.texture.Texture;
 
+/**
+ * Observes entities and produces intermediary frames (as AnimatedRenderable 
+ * objects)
+ * @author woeltjen
+ *
+ */
 public class AnimatedRepresentation extends PositionedRepresentation implements Decorator<Representation> {
 	private Deferred<ParameterizedProgram>     program;
 	private Deferred<Texture>     texture;

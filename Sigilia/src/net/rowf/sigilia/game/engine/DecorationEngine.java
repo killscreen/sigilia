@@ -10,11 +10,14 @@ import net.rowf.sigilia.game.component.metadata.Name;
 
 /**
  * A DecorationEngine is useful for decorating (adding components of a 
- * specific type) to entities, by entity name. 
+ * specific type) to entities, by entity name. This allows 'core' 
+ * attributes of entities to be defined first (those corresponding to 
+ * gameplay), and accessory attributes (such as representation) to 
+ * be attached later. 
  * 
  * @author woeltjen
  *
- * @param <T>
+ * @param <T> the type of component that this engine is responsible for adding
  */
 public class DecorationEngine<T extends Component> implements Engine {
 	private Map<String, Decorator<T>> decorators;

@@ -5,9 +5,9 @@ import java.nio.ShortBuffer;
 
 
 /**
- * For simplicity, it is assumed that all billboard are parallel to the 
- * XY-plane, and facing in the negative-Z direction (effectively, camera 
- * is assumed to face positive-Z) 
+ * A trailboard is a sequence of 5 billboards, increasing in the Z 
+ * direction. These Z values are recognized by certain shader programs 
+ * to support some animation types (for instance, trails behind fireballs) 
  * 
  * @author woeltjen
  *

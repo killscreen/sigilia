@@ -2,6 +2,13 @@ package net.rowf.sigilia.game.component.physical;
 
 import net.rowf.sigilia.game.Entity;
 
+/**
+ * Describes the orientation of an entity which is intended to change 
+ * based on its motion, as is the case for arrows.
+ * 
+ * @author woeltjen
+ *
+ */
 public class MotionBasedOrientation extends Vector implements Orientation {
 	public static final Vector NONE = new Vector(0,0,0);
 	private boolean observed = false;

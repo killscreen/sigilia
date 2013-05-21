@@ -2,8 +2,13 @@ package net.rowf.sigilia.renderer.shader;
 
 import net.rowf.sigilia.renderer.texture.Texture;
 import android.opengl.GLES20;
-import android.util.Log;
 
+/**
+ * Describes a parameter that will become a sampler; typically, 
+ * this means a texture.
+ * @author woeltjen
+ *
+ */
 public enum SamplerParameter implements ShaderParameter<Texture> {
 	TEXTURE ("uniform sampler2D", "uTexture", false, true),
 	

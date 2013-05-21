@@ -8,6 +8,13 @@ import net.rowf.sigilia.game.component.visual.Representation;
 import net.rowf.sigilia.game.engine.DecorationEngine.Decorator;
 import android.content.res.Resources;
 
+/**
+ * Describes a specific in-game scenario, in terms of its starting conditions 
+ * and the representations used to display objects in the scenario.
+ * 
+ * @author woeltjen
+ *
+ */
 public interface Scenario {
 	/**
 	 * Populate a list with entities for this scenario.

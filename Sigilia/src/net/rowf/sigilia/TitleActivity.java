@@ -6,7 +6,11 @@ import android.os.Handler;
 import android.view.View;
 
 
-
+/**
+ * Displays the title screen for the game.
+ * @author woeltjen
+ *
+ */
 public class TitleActivity extends FullscreenActivity {
 	@Override
 	public void onCreate (Bundle savedInstanceState) {

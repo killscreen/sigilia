@@ -10,6 +10,12 @@ import net.rowf.sigilia.game.component.physical.Size;
 import net.rowf.sigilia.game.entity.NamedPrototype;
 import android.util.FloatMath;
 
+/**
+ * Describes the floating columns seen in the third scenario.
+ * 
+ * @author woeltjen
+ *
+ */
 public class Column extends NamedPrototype {
 	@Override
 	protected void applyAdditional(Entity e) {

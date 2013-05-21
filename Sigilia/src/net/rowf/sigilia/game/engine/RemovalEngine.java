@@ -9,6 +9,14 @@ import net.rowf.sigilia.game.component.metadata.Liveness;
 import net.rowf.sigilia.game.component.physical.Position;
 import net.rowf.sigilia.game.component.physical.Vector;
 
+/**
+ * Removes entities from a running game, if they meet certain 
+ * externally-specified criteria. (For instance, if they are no longer 
+ * alive.)
+ * 
+ * @author woeltjen
+ *
+ */
 public class RemovalEngine implements Engine {
 	private List<Criterion> criteria = new ArrayList<Criterion>();
 	

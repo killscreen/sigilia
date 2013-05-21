@@ -11,8 +11,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-
-
+/**
+ * The "scenario select" screen. Allows the player to select one of 
+ * the available scenarios, which are also exposed or hidden as appropriate 
+ * based on the player's current progress in the game.
+ * 
+ * @author woeltjen
+ *
+ */
 public class ScenarioSelectActivity extends FullscreenActivity {	
 	private int[] scenarios = { R.id.scenario_1, R.id.scenario_2, R.id.scenario_3 };
 	private Map<Integer, String> scenarioMap = new HashMap<Integer, String>();

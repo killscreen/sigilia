@@ -18,6 +18,13 @@ import net.rowf.sigilia.game.component.visual.PeriodicAnimation;
 import net.rowf.sigilia.game.entity.Prototype;
 import net.rowf.sigilia.game.entity.StandardEntity;
 
+/**
+ * Invisible object used to keep track of the number of enemies and, 
+ * when all are defeated, to signal success.
+ *  
+ * @author woeltjen
+ *
+ */
 public class VictorySentinel implements Prototype, Intellect, Liveness {
 	public static final Name VICTORY_ANIMATION = new Name("VICTORY_ANIMATION");
 	private static final float VICTORY_TIME = 3f;

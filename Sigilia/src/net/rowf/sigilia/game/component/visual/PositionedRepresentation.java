@@ -7,6 +7,12 @@ import net.rowf.sigilia.game.component.physical.Vector;
 import net.rowf.sigilia.renderer.PerspectiveRenderer.Renderable;
 import android.opengl.Matrix;
 
+/**
+ * Superclass for Representation forms which follow a normal 
+ * positioning pattern (translate to position, rotate to orientation)
+ * @author woeltjen
+ *
+ */
 public abstract class PositionedRepresentation implements Representation {
 
 	@Override

@@ -6,6 +6,12 @@ import net.rowf.sigilia.game.Engine;
 import net.rowf.sigilia.game.Entity;
 import net.rowf.sigilia.game.component.mental.Intellect;
 
+/**
+ * Triggers AI (Intellect) behaviors of entities.
+ * 
+ * @author woeltjen
+ *
+ */
 public class IntelligenceEngine implements Engine {
 	@Override
 	public void runCycle(List<Entity> entities, float timeStamp) {

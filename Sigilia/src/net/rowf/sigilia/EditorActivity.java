@@ -30,6 +30,12 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 
+/**
+ * Provides an activity useful for editing meshes of 'cut-out' style models (i.e. enemies).
+ * Not exposed to players.
+ * @author woeltjen
+ *
+ */
 public class EditorActivity extends Activity implements RenderableProvider, RenderableInitializer, OnTouchListener {
 	public static final String VERTEX_KEY = EditorActivity.class.getPackage().getName() + ".vertex_key";
 	public static final String TRIANGLE_KEY = EditorActivity.class.getPackage().getName() + ".triangle_key";

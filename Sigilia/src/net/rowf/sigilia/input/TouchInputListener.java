@@ -1,17 +1,21 @@
 package net.rowf.sigilia.input;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Queue;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 import net.rowf.sigilia.renderer.PerspectiveRenderer;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 
+/**
+ * Observes touch events communicated via Android views, and converts 
+ * them to touch input events meaningful as game inputs. 
+ * 
+ * @author woeltjen
+ *
+ */
 public class TouchInputListener implements OnTouchListener, TouchInput {
 	private PerspectiveRenderer perspectiveRenderer;
 	private Touch latest;

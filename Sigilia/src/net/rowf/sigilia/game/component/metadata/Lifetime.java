@@ -5,6 +5,13 @@ import java.util.List;
 import net.rowf.sigilia.game.Entity;
 import net.rowf.sigilia.game.component.mental.Intellect;
 
+/**
+ * A component used to indicates, as a Liveness that an entity is alive, 
+ * but only for a finite period of time, as counted down by its Intellect. 
+ * 
+ * @author woeltjen
+ *
+ */
 public class Lifetime implements Liveness, Intellect {
 	private float lifetime;
 	private float timeOfDeath = Float.NaN;	

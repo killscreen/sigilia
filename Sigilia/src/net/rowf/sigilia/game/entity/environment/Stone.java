@@ -5,6 +5,11 @@ import net.rowf.sigilia.game.component.metadata.PhysicalType;
 import net.rowf.sigilia.game.component.physical.Size;
 import net.rowf.sigilia.game.entity.NamedPrototype;
 
+/**
+ * Describes a stone, as seen on the ground of the first scenario
+ * @author woeltjen
+ *
+ */
 public class Stone extends NamedPrototype {
 	@Override
 	protected void applyAdditional(Entity e) {

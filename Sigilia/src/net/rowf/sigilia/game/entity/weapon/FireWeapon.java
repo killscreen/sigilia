@@ -11,6 +11,13 @@ import net.rowf.sigilia.game.entity.Player;
 import net.rowf.sigilia.input.gesture.DeltaSequence;
 import net.rowf.sigilia.input.gesture.StaticDeltaSequence;
 
+/**
+ * The player's 'fire' magic. Deals damage of the fire type, so it can be 
+ * used to destroy trees and ice shields.
+ * 
+ * @author woeltjen
+ *
+ */
 public class FireWeapon extends Weapon {
 	
 	@Override

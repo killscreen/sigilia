@@ -2,6 +2,14 @@ package net.rowf.sigilia.input.gesture;
 
 import net.rowf.sigilia.input.gesture.DirectionSet.Direction;
 
+/**
+ * A sequence of orientations in a shape, along with their relative 
+ * magnitude. Used to describe both pre-defined sigils and shapes that 
+ * are being actively drawn in a scale-invariant manner. 
+ * 
+ * @author woeltjen
+ *
+ */
 public abstract class DeltaSequence {
 	public abstract Direction[] getSampledDelta(int count);
 	public abstract Delta getTail(int index);

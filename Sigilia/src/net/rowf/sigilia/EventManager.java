@@ -5,8 +5,15 @@ import net.rowf.sigilia.game.engine.EventEngine.EventListener;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Vibrator;
-import android.util.Log;
 
+/**
+ * Handles events which are issued by the game engine, and converts 
+ * them to device-specific representations (for instance, damage to 
+ * the player becomes a vibration here)
+ * 
+ * @author woeltjen
+ *
+ */
 public class EventManager implements EventListener {
 	private Handler handler;
 	private Vibrator vibrator;

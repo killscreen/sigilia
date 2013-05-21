@@ -13,8 +13,15 @@ import net.rowf.sigilia.game.component.visual.Representation;
 import net.rowf.sigilia.renderer.PerspectiveRenderer.Camera;
 import net.rowf.sigilia.renderer.PerspectiveRenderer.Renderable;
 import net.rowf.sigilia.renderer.PerspectiveRenderer.RenderableProvider;
-import android.util.Log;
 
+/**
+ * Handles the rendering of in-game objects. In practice, this means 
+ * producing a series of Renderable objects which are processed by 
+ * the actual renderer on a separate thread. 
+ * 
+ * @author woeltjen
+ *
+ */
 public class RenderingEngine implements Engine, RenderableProvider {
 	private static final float MAXIMUM_FPS = 120f; 
 	

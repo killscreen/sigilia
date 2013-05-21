@@ -15,6 +15,12 @@ import net.rowf.sigilia.renderer.model.Model;
 import net.rowf.sigilia.renderer.shader.ParameterizedProgram;
 import net.rowf.sigilia.renderer.texture.Texture;
 
+/**
+ * A representation which exhibits non-key frame animated behavior.
+ * 
+ * @author woeltjen
+ *
+ */
 public class PeriodicRepresentation extends PositionedRepresentation implements Decorator<Representation> {
 	private Deferred<ParameterizedProgram>     program;
 	private Deferred<Texture>     texture;

@@ -3,7 +3,12 @@ package net.rowf.sigilia.renderer.model;
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
 
-
+/**
+ * Describes the geometry of the background of a typical scenario 
+ * 
+ * @author woeltjen
+ *
+ */
 public class Backdrop implements Model {
 	public static final float SIZE = 15f;
 	

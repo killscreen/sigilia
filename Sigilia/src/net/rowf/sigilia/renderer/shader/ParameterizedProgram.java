@@ -9,6 +9,19 @@ import java.util.Set;
 
 import android.opengl.GLES20;
 
+/**
+ * A shader program that accepts certain well defined parameters. Provides 
+ * methods to allow users of the program to invoke simple "set" methods, 
+ * without having to know the specific text name or integer location 
+ * of the parameter being communicated.
+ * 
+ * Note that this also permits shaders to be defined by providing only 
+ * the inner part of the shader code - boilerplate such as "main" and 
+ * definitions for parameters are handled automatically.
+ * 
+ * @author woeltjen
+ *
+ */
 public class ParameterizedProgram extends Program {
 	private Set<ShaderParameter<?>> parameters = new HashSet<ShaderParameter<?>>();
 	private Map<ShaderParameter<?>, Integer> activeParameters = 

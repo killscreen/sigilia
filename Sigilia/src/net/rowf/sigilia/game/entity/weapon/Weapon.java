@@ -12,6 +12,13 @@ import net.rowf.sigilia.game.entity.NamedPrototype;
 import net.rowf.sigilia.input.gesture.DeltaSequence;
 import android.util.FloatMath;
 
+/**
+ * A 'weapon' describes some spell that can be cast by tapping the 
+ * screen (as a prototype for the entities produced); also has information 
+ * about the sigil shape used to cast the spell, if necessary. 
+ * @author woeltjen
+ *
+ */
 public abstract class Weapon extends NamedPrototype {
 	public static final String SIGIL_SUFFIX = "Sigil";
 	

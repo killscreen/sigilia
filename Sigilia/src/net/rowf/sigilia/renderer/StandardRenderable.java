@@ -10,6 +10,13 @@ import net.rowf.sigilia.renderer.texture.Texture;
 import android.opengl.GLES20;
 import android.opengl.Matrix;
 
+/**
+ * Handles rendering using a common set of parameters 
+ * (shader program, model, texture, and transformation). Typically 
+ * used for non-animated objects in scene 
+ * 
+ * @author woeltjen
+ */
 public class StandardRenderable implements Renderable {
 	private ParameterizedProgram     program;
 	private Model       model;

@@ -15,6 +15,11 @@ import net.rowf.sigilia.game.component.physical.Position;
 import net.rowf.sigilia.game.component.visual.Animation;
 import net.rowf.sigilia.game.component.visual.PeriodicAnimation;
 
+/**
+ * The player's entity within in the context of the game world.
+ * @author woeltjen
+ *
+ */
 public class Player extends NamedPrototype {
 	public static final Name DEATH_ANIMATION = new Name("DEATH_ANIMATION");
 	private static final float DEATH_TIME = 3f;

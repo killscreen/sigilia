@@ -4,6 +4,14 @@ import android.graphics.Bitmap;
 import android.opengl.GLES20;
 import android.opengl.GLUtils;
 
+/**
+ * Describes an OpenGL texture, based on a supplied Bitmap object.
+ * Performs OpenGL initialization in the constructor, so these objects 
+ * should not be made unless there is an OpenGL context available.
+ * 
+ * @author woeltjen
+ *
+ */
 public class Texture {
 	public final int handle;
 	

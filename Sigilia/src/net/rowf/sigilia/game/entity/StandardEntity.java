@@ -6,6 +6,12 @@ import java.util.Map;
 import net.rowf.sigilia.game.Component;
 import net.rowf.sigilia.game.Entity;
 
+/**
+ * Base implementation of the Entity class. Maintains its components 
+ * in a HashMap.
+ * @author woeltjen
+ *
+ */
 public class StandardEntity implements Entity {
 
 	private Map<Class, Object> components = new HashMap<Class, Object>();

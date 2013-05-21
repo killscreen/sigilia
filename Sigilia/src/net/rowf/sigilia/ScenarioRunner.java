@@ -8,6 +8,11 @@ import net.rowf.sigilia.game.Entity;
 import net.rowf.sigilia.scenario.Scenario;
 import android.os.SystemClock;
 
+/**
+ * Runs game logic for a scenario on a background thread. 
+ * @author woeltjen
+ *
+ */
 public class ScenarioRunner implements Runnable {
 	private Scenario scenario;
 	private Engine engine;

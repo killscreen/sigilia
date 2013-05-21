@@ -3,6 +3,14 @@ package net.rowf.sigilia.game.entity;
 import net.rowf.sigilia.game.Entity;
 import net.rowf.sigilia.game.component.metadata.Name;
 
+/**
+ * Convenience superclass for named entities. A NamedPrototype will 
+ * attach its run-time simple class name as a Name object to 
+ * the entity it is used to create. 
+ * 
+ * @author woeltjen
+ *
+ */
 public abstract class NamedPrototype extends Name implements Prototype {
 	
 	public NamedPrototype() {

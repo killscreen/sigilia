@@ -6,7 +6,10 @@ import net.rowf.sigilia.game.Component;
 import net.rowf.sigilia.game.Entity;
 
 /**
- * Handles the "intelligence" of the entity
+ * Handles the "intelligence" of an entity - deciding how to move, 
+ * when to attack, et cetera.
+ * 
+ * @see net.rowf.sigilia.engine.IntelligenceEngine
  * 
  * @author woeltjen
  *

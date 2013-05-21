@@ -8,6 +8,11 @@ import net.rowf.sigilia.renderer.shader.SamplerParameter;
 import net.rowf.sigilia.renderer.shader.ShaderParameter;
 import net.rowf.sigilia.renderer.shader.VertexParameter;
 
+/**
+ * As FlatTextureShader, but multiplied by some color
+ * @author woeltjen
+ *
+ */
 public class ColorizedFlatTextureShader extends ParameterizedProgram {
 	private static final String VERTEX_SHADER = 
 		"  vCoord = vec2(/*???*/abs("+ VertexParameter.TEXTURE_COORD.getName() + ".x)," +

@@ -31,6 +31,13 @@ import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.util.FloatMath;
 
+/**
+ * A scenario in which a number of archers hide behind trees, 
+ * firing arrows at the player.
+ * 
+ * @author woeltjen
+ *
+ */
 public class ArcherScenario extends BaseScenario {
 
 	@Override

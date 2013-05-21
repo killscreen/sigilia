@@ -11,6 +11,12 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
 
+/**
+ * Shows a hint to the user (a hand drawing a sigil over a scenario's 
+ * parchment.)
+ * @author woeltjen
+ *
+ */
 public class HintActivity extends FullscreenActivity implements Runnable {
 	public static final String HINT_KEY = "HINT_KEY";
 	

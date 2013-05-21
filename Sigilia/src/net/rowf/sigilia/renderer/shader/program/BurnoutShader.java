@@ -10,6 +10,11 @@ import net.rowf.sigilia.renderer.shader.ShaderParameter;
 import net.rowf.sigilia.renderer.shader.VectorParameter;
 import net.rowf.sigilia.renderer.shader.VertexParameter;
 
+/**
+ * Handles "burn out" effect, as used by trees when destroyed by fire.
+ * @author woeltjen
+ *
+ */
 public class BurnoutShader extends ParameterizedProgram {
 	private static final String VERTEX_SHADER = 
 			"  vCoord = vec2(abs("+ VertexParameter.TEXTURE_COORD.getName() + ".x)," +

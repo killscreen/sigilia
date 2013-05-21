@@ -3,6 +3,11 @@ package net.rowf.sigilia.renderer.shader;
 import android.opengl.GLES20;
 import android.util.Log;
 
+/**
+ * An OpenGL shader (either vertex or fragment, as specified in constructor)
+ * @author woeltjen
+ *
+ */
 public abstract class Shader {
 	private int[] resultCode = { GLES20.GL_TRUE };
 	public final int shader;

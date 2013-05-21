@@ -4,6 +4,13 @@ import net.rowf.sigilia.game.Entity;
 import net.rowf.sigilia.game.engine.DecorationEngine.Decorator;
 import net.rowf.sigilia.renderer.PerspectiveRenderer.Renderable;
 
+/**
+ * A composite representation behaves as though one or more 
+ * representations were drawn consecutively. 
+ * 
+ * @author woeltjen
+ *
+ */
 public class CompositeRepresentation implements Representation, Decorator<Representation> {
 	private Representation[] representations;
 	

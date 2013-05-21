@@ -11,6 +11,12 @@ import net.rowf.sigilia.renderer.shader.ShaderParameter;
 import android.opengl.GLES20;
 import android.opengl.Matrix;
 
+/**
+ * Handles general purpose rendering using a specific shader program, 
+ * and a varying set of parameters for that program.
+ *  
+ * @author woeltjen
+ */
 public class GenericRenderable implements Renderable {
 	private Deferred<ParameterizedProgram> program;
 	private float[]     transform; // TODO: Define Transform class, with apply(float[])

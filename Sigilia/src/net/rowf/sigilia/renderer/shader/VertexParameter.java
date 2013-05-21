@@ -4,6 +4,14 @@ import java.nio.FloatBuffer;
 
 import android.opengl.GLES20;
 
+/**
+ * Describes parameters that are communicated as a sequence of 2- or 
+ * 3- element groups in a FloatBuffer, such as model vertexes and 
+ * texture coordinates. 
+ * 
+ * @author woeltjen
+ *
+ */
 public enum VertexParameter implements ShaderParameter<FloatBuffer> {
 	VERTEX ("attribute vec4", "vPosition", true, false, 3),
 	NORMAL ("attribute vec4", "vNormal", true, false, 3),

@@ -15,6 +15,13 @@ import net.rowf.sigilia.game.component.visual.PeriodicAnimation;
 import net.rowf.sigilia.game.entity.Player;
 import net.rowf.sigilia.input.gesture.DeltaSequence;
 
+/**
+ * The player's default weapon; does minimal damage and has no 
+ * particularly special effects.
+ * 
+ * @author woeltjen
+ *
+ */
 public class DefaultWeapon extends Weapon {
 	private static final Motion MOTION = new ConstantMotion(new Vector(0,0,15f));
 	

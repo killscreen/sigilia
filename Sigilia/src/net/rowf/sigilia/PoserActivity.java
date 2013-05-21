@@ -45,6 +45,12 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+/**
+ * Provides an activity for 'posing' paper cutouts. Used for asset creation; 
+ * not exposed to players.
+ * @author woeltjen
+ *
+ */
 public class PoserActivity extends Activity implements RenderableProvider, RenderableInitializer, OnTouchListener, Model {
 	private float[] locatorMatrix = new float[16];
 	private Renderable r;

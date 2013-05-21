@@ -13,6 +13,14 @@ import net.rowf.sigilia.input.gesture.DynamicDeltaSequence;
 import net.rowf.sigilia.input.gesture.StaticDeltaSequence;
 import android.util.Log;
 
+/**
+ * Observes touch input events and issues the appropriate weapon reactions, 
+ * including firing the active weapon, or changing the active weapon 
+ * if a new sigil has been drawn. 
+ * 
+ * @author woeltjen
+ *
+ */
 public class WeaponInput implements InputElement {
 	private Weapon defaultWeapon;
 	private Weapon weapon;

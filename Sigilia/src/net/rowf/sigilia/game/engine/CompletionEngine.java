@@ -8,6 +8,15 @@ import net.rowf.sigilia.game.Engine;
 import net.rowf.sigilia.game.Entity;
 import net.rowf.sigilia.game.entity.Prototype;
 
+/**
+ * Detects whether or not a scenario has reached a completion state 
+ * (such as success or failure) and, if so, delivers a corresponding 
+ * result to some callback.
+ * 
+ * @author woeltjen
+ *
+ * @param <T> the type used to describe the scenario result
+ */
 public class CompletionEngine<T> implements Engine {
 	private CompletionCallback<T> callback;
 	private List<CompletionCriterion<T>> criteria = new ArrayList<CompletionCriterion<T>>();

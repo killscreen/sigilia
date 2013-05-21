@@ -13,6 +13,13 @@ import net.rowf.sigilia.game.component.physical.Vector;
 import net.rowf.sigilia.game.entity.NamedPrototype;
 import net.rowf.sigilia.game.entity.StandardEntity;
 
+/**
+ * Abstract superclass of various things thrown or launched by enemies.
+ * Attaches common components to these entities.
+ * 
+ * @author woeltjen
+ *
+ */
 public abstract class Projectile extends NamedPrototype implements Component {
 	private static final Splat SPLAT = new Splat();
 	

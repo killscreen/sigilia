@@ -1,5 +1,15 @@
 package net.rowf.sigilia.renderer.decorator;
 
+/**
+ * Used to represent an object that needs to be lazily initialized. 
+ * (For instance, shaders and textures need to be initialized after 
+ * a GL context has been created, but scenario objects are created before 
+ * this happens.) 
+ * 
+ * @author woeltjen
+ *
+ * @param <T> the type of object produced lazily
+ */
 public abstract class Deferred<T>  {
 	private Getter getter = new Getter();
 	

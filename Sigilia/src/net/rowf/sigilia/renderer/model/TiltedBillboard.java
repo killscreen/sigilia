@@ -5,9 +5,11 @@ import java.nio.ShortBuffer;
 
 
 /**
- * For simplicity, it is assumed that all billboard are parallel to the 
- * XY-plane, and facing in the negative-Z direction (effectively, camera 
- * is assumed to face positive-Z) 
+ * As a Billboard, but tilted slightly such that the top is slightly 
+ * positive on the Z axis, and the other is significantly negative. 
+ * This is used for special purposes by some shaders (for instance, 
+ * the bolt shader clamps negative-Z coordinates to the top of the 
+ * screen.) 
  * 
  * @author woeltjen
  *

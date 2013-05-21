@@ -2,6 +2,13 @@ package net.rowf.sigilia.renderer.shader;
 
 import android.opengl.GLES20;
 
+/**
+ * Describes parameters that are represented as a single scalar 
+ * value (that is, as a float)
+ * 
+ * @author woeltjen
+ *
+ */
 public enum ScalarParameter implements ShaderParameter<Float> {
 	SECONDS ("uSeconds"),
 	

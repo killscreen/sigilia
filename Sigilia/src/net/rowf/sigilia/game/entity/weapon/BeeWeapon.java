@@ -12,6 +12,11 @@ import net.rowf.sigilia.game.entity.Player;
 import net.rowf.sigilia.input.gesture.DeltaSequence;
 import net.rowf.sigilia.input.gesture.StaticDeltaSequence;
 
+/**
+ * A swarm of bees, unleashed by the player. (not fully implemented)
+ * @author woeltjen
+ *
+ */
 public class BeeWeapon extends Weapon {
 	private static final Vector[] BEE_POINTS = {
 		new Vector (0, 0, 0),

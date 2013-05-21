@@ -8,6 +8,13 @@ import net.rowf.sigilia.renderer.shader.SamplerParameter;
 import net.rowf.sigilia.renderer.shader.ShaderParameter;
 import net.rowf.sigilia.renderer.shader.VertexParameter;
 
+/**
+ * Basic shader that draws a texture upon a model using a supplied transformation, 
+ * with no special effects.
+ * 
+ * @author woeltjen
+ *
+ */
 public class FlatTextureShader extends ParameterizedProgram {
 	private static final String VERTEX_SHADER = 
 		"  vCoord = vec2(abs("+ VertexParameter.TEXTURE_COORD.getName() + ".x)," +

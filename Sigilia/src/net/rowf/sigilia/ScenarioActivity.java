@@ -44,6 +44,13 @@ import net.rowf.sigilia.scenario.Scenario;
 import android.opengl.GLSurfaceView;
 import android.util.Log;
 
+/**
+ * Runs a game scenario to completion. This is the activity used for 
+ * main gameplay sequences. 
+ * 
+ * @author woeltjen
+ *
+ */
 public class ScenarioActivity extends FullscreenActivity implements CompletionCallback<Boolean> {
 	public static final String SCENARIO_KEY = ScenarioActivity.class.getPackage().getName() + ".scenario_class";
 

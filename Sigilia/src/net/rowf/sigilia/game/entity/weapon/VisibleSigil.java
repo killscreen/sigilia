@@ -11,6 +11,12 @@ import net.rowf.sigilia.game.component.visual.PeriodicAnimation;
 import net.rowf.sigilia.game.entity.Prototype;
 import net.rowf.sigilia.game.entity.StandardEntity;
 
+/**
+ * A simple entity used to display a sigil just cast on screen. Does 
+ * not interact with other entities.
+ * @author woeltjen
+ *
+ */
 public class VisibleSigil implements Prototype {
 	public static final float SIGIL_VISIBLE_DURATION = 0.75f;
 	private Name name;

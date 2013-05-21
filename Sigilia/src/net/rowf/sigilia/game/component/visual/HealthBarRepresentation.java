@@ -12,6 +12,12 @@ import net.rowf.sigilia.renderer.shader.VertexParameter;
 import net.rowf.sigilia.renderer.shader.program.HealthBarShader;
 import android.opengl.GLES20;
 
+/**
+ * Represents a health bar drawn on screen. (Note: This could 
+ * probably be removed in favor of using an equivalent GenericRepresentation)
+ * @author woeltjen
+ *
+ */
 public class HealthBarRepresentation implements Representation {
 	private DeferredProgram program = HealthBarShader.deferredForm();
 

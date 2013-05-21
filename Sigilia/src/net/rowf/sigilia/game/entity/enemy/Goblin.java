@@ -13,6 +13,13 @@ import net.rowf.sigilia.game.component.physical.Vector;
 import net.rowf.sigilia.game.component.visual.Animation;
 import net.rowf.sigilia.game.component.visual.Animator;
 
+/**
+ * Describes an Goblin (enemy in the first scenario)
+ * Goblins throw rocks and wander about.
+ * 
+ * @author woeltjen
+ *
+ */
 public class Goblin extends Enemy {
 	private static final Vector ORIGIN = new Vector(0,0,1);
 	private static final Projectile projectile = new Rock();

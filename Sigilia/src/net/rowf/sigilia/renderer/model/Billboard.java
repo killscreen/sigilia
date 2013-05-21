@@ -5,6 +5,9 @@ import java.nio.ShortBuffer;
 
 
 /**
+ * Describes a flat square on the XY plane (so, one that faces the 
+ * player.)
+ * 
  * For simplicity, it is assumed that all billboard are parallel to the 
  * XY-plane, and facing in the negative-Z direction (effectively, camera 
  * is assumed to face positive-Z) 

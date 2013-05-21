@@ -12,6 +12,12 @@ import net.rowf.sigilia.game.component.physical.ProjectileImpact;
 import net.rowf.sigilia.game.component.physical.Vector;
 import android.util.FloatMath;
 
+/**
+ * Describes a thrown rock (weapon used by Goblins, enemies in the 
+ * first scenario)
+ * @author woeltjen
+ *
+ */
 public class Rock extends Projectile {
 	private static final float SPEED = 7.5f;
 	@Override

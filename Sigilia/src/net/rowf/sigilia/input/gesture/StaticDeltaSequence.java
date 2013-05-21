@@ -3,6 +3,12 @@ package net.rowf.sigilia.input.gesture;
 import android.util.FloatMath;
 import net.rowf.sigilia.game.component.physical.Vector;
 
+/**
+ * A DeltaSequence which is entirely pre-defined (for instance, 
+ * because it represents a sigil)
+ * @author woeltjen
+ *
+ */
 public class StaticDeltaSequence extends DynamicDeltaSequence {
 	// TODO: Where do these belong?
 	private static final Vector[] BOLT_POINTS = {

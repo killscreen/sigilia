@@ -4,7 +4,7 @@ import net.rowf.sigilia.game.Entity;
 import android.util.Log;
 
 /**
- * Implements gravity
+ * Implements motion effected by gravity
  * 
  * @author woeltjen
  *

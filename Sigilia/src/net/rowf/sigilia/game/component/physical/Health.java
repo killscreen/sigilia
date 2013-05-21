@@ -4,6 +4,13 @@ import net.rowf.sigilia.game.Component;
 import net.rowf.sigilia.game.Entity;
 import net.rowf.sigilia.game.component.metadata.Liveness;
 
+/**
+ * Describes the health of an entity (such as a player or enemy) and 
+ * responds to damage taken.
+ * 
+ * @author woeltjen
+ *
+ */
 public class Health implements Component {
 	private float initialHealth;
 	private float health;

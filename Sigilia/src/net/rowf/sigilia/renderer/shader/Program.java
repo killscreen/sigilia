@@ -5,7 +5,11 @@ import net.rowf.sigilia.renderer.shader.Shader.VertexShader;
 import android.opengl.GLES20;
 import android.util.Log;
 
-
+/**
+ * A complete shader program. Compiled on construction.
+ * @author woeltjen
+ *
+ */
 public class Program {
 	public final int program;
 	

@@ -2,6 +2,13 @@ package net.rowf.sigilia.renderer.shader;
 
 import android.opengl.GLES20;
 
+/**
+ * Describes parameters communicated to shader programs as matrixes
+ * (for instance, transformation)
+ * 
+ * @author woeltjen
+ *
+ */
 public enum MatrixParameter implements ShaderParameter<float[]> {
 	TRANSFORMATION ("uniform mat4", "uTransform", true, false);
 	;

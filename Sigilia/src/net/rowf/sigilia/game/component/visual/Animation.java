@@ -1,7 +1,15 @@
 package net.rowf.sigilia.game.component.visual;
 
+import net.rowf.sigilia.game.Component;
 
-public class Animation implements Transition {
+/**
+ * Describes the current animated state of an entity, typically between 
+ * two key frames.
+ * 
+ * @author woeltjen
+ *
+ */
+public class Animation implements Component {
 	private String DEFAULT_FRAME_NAME = "base";
 	
 	private String currentFrame = DEFAULT_FRAME_NAME;
