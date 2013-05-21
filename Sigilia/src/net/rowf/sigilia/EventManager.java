@@ -40,7 +40,7 @@ public class EventManager implements EventListener {
 		@Override
 		public void run() {
 			if (vibrator != null) {
-				Log.d(EventManager.class.getName(), "Trigger vibration for " + time);
+				//Log.d(EventManager.class.getName(), "Trigger vibration for " + time);
 				vibrator.vibrate(time);
 			}
 		}
