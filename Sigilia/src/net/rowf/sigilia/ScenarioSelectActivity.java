@@ -81,10 +81,11 @@ public class ScenarioSelectActivity extends FullscreenActivity {
 				Intent runScenario = new Intent(this, ScenarioActivity.class);			
 				runScenario.putExtra(ScenarioActivity.SCENARIO_KEY, scenario);
 				startActivityForResult(runScenario, ScenarioActivity.SCENARIO_REQUEST);
-			} else {
-				Intent runScenario = new Intent(this, ECSDemoActivity.class);//ScenarioActivity.class);
-				startActivity(runScenario);
-			}
+			} 
+//			else {
+//				Intent runScenario = new Intent(this, ECSDemoActivity.class);//ScenarioActivity.class);
+//				startActivity(runScenario);
+//			}
 		}
 	}
 
