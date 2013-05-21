@@ -9,7 +9,7 @@ import net.rowf.sigilia.game.component.physical.ModifiedHealth;
 import net.rowf.sigilia.game.component.physical.Motion;
 import net.rowf.sigilia.game.component.physical.NewtonianMotion;
 import net.rowf.sigilia.game.component.physical.ProjectileImpact;
-import net.rowf.sigilia.geometry.Vector;
+import net.rowf.sigilia.game.component.physical.Vector;
 import android.util.FloatMath;
 
 public class Rock extends Projectile {

@@ -8,9 +8,9 @@ import net.rowf.sigilia.game.component.physical.Motion;
 import net.rowf.sigilia.game.component.physical.NewtonianMotion;
 import net.rowf.sigilia.game.component.physical.Orientation;
 import net.rowf.sigilia.game.component.physical.ProjectileImpact;
+import net.rowf.sigilia.game.component.physical.Vector;
 import net.rowf.sigilia.game.component.physical.Velocity;
 import net.rowf.sigilia.game.entity.environment.Tree;
-import net.rowf.sigilia.geometry.Vector;
 import android.util.FloatMath;
 
 public class Arrow extends Projectile {

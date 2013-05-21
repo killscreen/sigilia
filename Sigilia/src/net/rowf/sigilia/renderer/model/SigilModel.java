@@ -7,7 +7,6 @@ import android.util.FloatMath;
 
 import net.rowf.sigilia.input.gesture.DeltaSequence;
 import net.rowf.sigilia.input.gesture.DirectionSet.Direction;
-import net.rowf.sigilia.util.BufferUtil;
 
 public class SigilModel implements Model {
 	private final ShortBuffer order;

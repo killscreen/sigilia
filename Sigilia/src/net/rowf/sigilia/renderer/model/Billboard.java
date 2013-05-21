@@ -3,7 +3,6 @@ package net.rowf.sigilia.renderer.model;
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
 
-import net.rowf.sigilia.util.BufferUtil;
 
 /**
  * For simplicity, it is assumed that all billboard are parallel to the 

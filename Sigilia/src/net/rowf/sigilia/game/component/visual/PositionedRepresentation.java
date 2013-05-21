@@ -1,9 +1,9 @@
 package net.rowf.sigilia.game.component.visual;
 
 import net.rowf.sigilia.game.Entity;
-import net.rowf.sigilia.game.component.Position;
 import net.rowf.sigilia.game.component.physical.Orientation;
-import net.rowf.sigilia.geometry.Vector;
+import net.rowf.sigilia.game.component.physical.Position;
+import net.rowf.sigilia.game.component.physical.Vector;
 import net.rowf.sigilia.renderer.PerspectiveRenderer.Renderable;
 import android.opengl.Matrix;
 

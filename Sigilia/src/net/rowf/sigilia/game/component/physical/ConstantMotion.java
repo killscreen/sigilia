@@ -1,8 +1,6 @@
 package net.rowf.sigilia.game.component.physical;
 
 import net.rowf.sigilia.game.Entity;
-import net.rowf.sigilia.game.component.Position;
-import net.rowf.sigilia.geometry.Vector;
 
 public class ConstantMotion implements Motion {
 	private Vector velocity;

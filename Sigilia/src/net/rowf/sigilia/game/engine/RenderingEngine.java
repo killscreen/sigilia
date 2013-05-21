@@ -7,9 +7,9 @@ import java.util.List;
 
 import net.rowf.sigilia.game.Engine;
 import net.rowf.sigilia.game.Entity;
-import net.rowf.sigilia.game.component.Position;
+import net.rowf.sigilia.game.component.physical.Position;
+import net.rowf.sigilia.game.component.physical.Vector;
 import net.rowf.sigilia.game.component.visual.Representation;
-import net.rowf.sigilia.geometry.Vector;
 import net.rowf.sigilia.renderer.PerspectiveRenderer.Camera;
 import net.rowf.sigilia.renderer.PerspectiveRenderer.Renderable;
 import net.rowf.sigilia.renderer.PerspectiveRenderer.RenderableProvider;

@@ -5,9 +5,9 @@ import java.util.List;
 
 import net.rowf.sigilia.game.Engine;
 import net.rowf.sigilia.game.Entity;
-import net.rowf.sigilia.game.component.Position;
 import net.rowf.sigilia.game.component.metadata.Liveness;
-import net.rowf.sigilia.geometry.Vector;
+import net.rowf.sigilia.game.component.physical.Position;
+import net.rowf.sigilia.game.component.physical.Vector;
 
 public class RemovalEngine implements Engine {
 	private List<Criterion> criteria = new ArrayList<Criterion>();

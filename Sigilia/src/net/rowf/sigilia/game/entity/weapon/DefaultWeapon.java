@@ -9,10 +9,10 @@ import net.rowf.sigilia.game.component.physical.Motion;
 import net.rowf.sigilia.game.component.physical.Orientation;
 import net.rowf.sigilia.game.component.physical.ProjectileImpact;
 import net.rowf.sigilia.game.component.physical.Spinning;
+import net.rowf.sigilia.game.component.physical.Vector;
 import net.rowf.sigilia.game.component.visual.Animation;
 import net.rowf.sigilia.game.component.visual.PeriodicAnimation;
 import net.rowf.sigilia.game.entity.Player;
-import net.rowf.sigilia.geometry.Vector;
 import net.rowf.sigilia.input.gesture.DeltaSequence;
 
 public class DefaultWeapon extends Weapon {

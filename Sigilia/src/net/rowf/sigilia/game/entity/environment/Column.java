@@ -3,9 +3,9 @@ package net.rowf.sigilia.game.entity.environment;
 import java.util.Random;
 
 import net.rowf.sigilia.game.Entity;
-import net.rowf.sigilia.game.component.Position;
 import net.rowf.sigilia.game.component.metadata.PhysicalType;
 import net.rowf.sigilia.game.component.physical.Motion;
+import net.rowf.sigilia.game.component.physical.Position;
 import net.rowf.sigilia.game.component.physical.Size;
 import net.rowf.sigilia.game.entity.NamedPrototype;
 import android.util.FloatMath;

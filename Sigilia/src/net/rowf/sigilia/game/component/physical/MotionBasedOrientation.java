@@ -1,8 +1,6 @@
 package net.rowf.sigilia.game.component.physical;
 
 import net.rowf.sigilia.game.Entity;
-import net.rowf.sigilia.game.component.Position;
-import net.rowf.sigilia.geometry.Vector;
 
 public class MotionBasedOrientation extends Vector implements Orientation {
 	public static final Vector NONE = new Vector(0,0,0);

@@ -3,7 +3,6 @@ package net.rowf.sigilia.renderer.model;
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
 
-import net.rowf.sigilia.util.BufferUtil;
 
 public class Backdrop implements Model {
 	public static final float SIZE = 15f;

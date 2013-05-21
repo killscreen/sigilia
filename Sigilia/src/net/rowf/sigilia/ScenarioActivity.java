@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.rowf.sigilia.game.Engine;
+import net.rowf.sigilia.game.component.physical.Vector;
 import net.rowf.sigilia.game.component.visual.Representation;
 import net.rowf.sigilia.game.engine.AnimationEngine;
 import net.rowf.sigilia.game.engine.CollisionEngine;
@@ -33,7 +34,6 @@ import net.rowf.sigilia.game.entity.weapon.FireWeapon;
 import net.rowf.sigilia.game.entity.weapon.IceWeapon;
 import net.rowf.sigilia.game.entity.weapon.LightningWeapon;
 import net.rowf.sigilia.game.entity.weapon.Weapon;
-import net.rowf.sigilia.geometry.Vector;
 import net.rowf.sigilia.input.TouchInputListener;
 import net.rowf.sigilia.input.WeaponInput;
 import net.rowf.sigilia.renderer.PerspectiveRenderer;

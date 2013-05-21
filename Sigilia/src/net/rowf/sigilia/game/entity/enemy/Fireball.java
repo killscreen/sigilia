@@ -6,9 +6,9 @@ import net.rowf.sigilia.game.component.physical.ConstantMotion;
 import net.rowf.sigilia.game.component.physical.Impact;
 import net.rowf.sigilia.game.component.physical.Motion;
 import net.rowf.sigilia.game.component.physical.ProjectileImpact;
+import net.rowf.sigilia.game.component.physical.Vector;
 import net.rowf.sigilia.game.component.visual.Animation;
 import net.rowf.sigilia.game.component.visual.PeriodicAnimation;
-import net.rowf.sigilia.geometry.Vector;
 import android.util.FloatMath;
 
 public class Fireball extends Projectile {

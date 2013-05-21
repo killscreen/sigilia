@@ -6,11 +6,11 @@ import java.util.List;
 
 import net.rowf.sigilia.game.Engine;
 import net.rowf.sigilia.game.Entity;
-import net.rowf.sigilia.game.component.Boundary;
-import net.rowf.sigilia.game.component.Position;
 import net.rowf.sigilia.game.component.metadata.Name;
+import net.rowf.sigilia.game.component.physical.Boundary;
 import net.rowf.sigilia.game.component.physical.Impact;
-import net.rowf.sigilia.geometry.Vector;
+import net.rowf.sigilia.game.component.physical.Position;
+import net.rowf.sigilia.game.component.physical.Vector;
 import android.util.Log;
 
 public class CollisionEngine implements Engine {

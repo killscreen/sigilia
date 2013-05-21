@@ -1,11 +1,11 @@
 package net.rowf.sigilia.game.entity.weapon;
 
 import net.rowf.sigilia.game.Entity;
-import net.rowf.sigilia.game.component.Position;
 import net.rowf.sigilia.game.component.mental.Intellect;
 import net.rowf.sigilia.game.component.metadata.Lifetime;
 import net.rowf.sigilia.game.component.metadata.Liveness;
 import net.rowf.sigilia.game.component.metadata.Name;
+import net.rowf.sigilia.game.component.physical.Position;
 import net.rowf.sigilia.game.component.visual.Animation;
 import net.rowf.sigilia.game.component.visual.PeriodicAnimation;
 import net.rowf.sigilia.game.entity.Prototype;

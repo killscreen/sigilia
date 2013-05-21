@@ -8,10 +8,10 @@ import java.util.Collections;
 import java.util.List;
 
 import net.rowf.sigilia.game.Entity;
-import net.rowf.sigilia.game.component.Position;
 import net.rowf.sigilia.game.component.physical.Orientation;
+import net.rowf.sigilia.game.component.physical.Position;
+import net.rowf.sigilia.game.component.physical.Vector;
 import net.rowf.sigilia.game.engine.DecorationEngine.Decorator;
-import net.rowf.sigilia.geometry.Vector;
 import net.rowf.sigilia.renderer.GenericRenderable;
 import net.rowf.sigilia.renderer.GenericRenderable.CompositeRenderingElement;
 import net.rowf.sigilia.renderer.GenericRenderable.RenderingElement;

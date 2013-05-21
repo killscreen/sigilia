@@ -1,6 +1,5 @@
 package net.rowf.sigilia.game.component.physical;
 
-import net.rowf.sigilia.geometry.Vector;
 
 /**
  * Accumulates acceleration 

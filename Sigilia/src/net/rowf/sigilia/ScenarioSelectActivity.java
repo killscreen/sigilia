@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.rowf.sigilia.scenario.ArcherScenario;
-import net.rowf.sigilia.scenario.SampleScenario;
+import net.rowf.sigilia.scenario.GoblinScenario;
 import net.rowf.sigilia.scenario.WizardScenario;
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,7 +30,7 @@ public class ScenarioSelectActivity extends FullscreenActivity {
 			highestScenarioAvailable = savedInstanceState.getInt(HIGHEST_SCENARIO_KEY);
 		}
 		
-		scenarioMap.put(R.id.scenario_1, SampleScenario.class.getName());
+		scenarioMap.put(R.id.scenario_1, GoblinScenario.class.getName());
 		scenarioMap.put(R.id.scenario_2, ArcherScenario.class.getName());
 		scenarioMap.put(R.id.scenario_3, WizardScenario.class.getName());
 		

@@ -1,7 +1,6 @@
 package net.rowf.sigilia.game.entity.enemy;
 
 import net.rowf.sigilia.game.Entity;
-import net.rowf.sigilia.game.component.Position;
 import net.rowf.sigilia.game.component.mental.Intellect;
 import net.rowf.sigilia.game.component.metadata.Lifetime;
 import net.rowf.sigilia.game.component.metadata.Liveness;
@@ -9,6 +8,7 @@ import net.rowf.sigilia.game.component.metadata.Name;
 import net.rowf.sigilia.game.component.metadata.PhysicalType;
 import net.rowf.sigilia.game.component.metadata.Spawn;
 import net.rowf.sigilia.game.component.physical.Health;
+import net.rowf.sigilia.game.component.physical.Position;
 import net.rowf.sigilia.game.component.physical.Size;
 import net.rowf.sigilia.game.component.visual.Animation;
 import net.rowf.sigilia.game.entity.NamedPrototype;

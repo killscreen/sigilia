@@ -1,8 +1,6 @@
 package net.rowf.sigilia.game.entity;
 
 import net.rowf.sigilia.game.Entity;
-import net.rowf.sigilia.game.component.Boundary;
-import net.rowf.sigilia.game.component.Position;
 import net.rowf.sigilia.game.component.mental.Intellect;
 import net.rowf.sigilia.game.component.metadata.Event;
 import net.rowf.sigilia.game.component.metadata.Lifetime;
@@ -10,8 +8,10 @@ import net.rowf.sigilia.game.component.metadata.Liveness;
 import net.rowf.sigilia.game.component.metadata.Name;
 import net.rowf.sigilia.game.component.metadata.PhysicalType;
 import net.rowf.sigilia.game.component.metadata.Spawn;
+import net.rowf.sigilia.game.component.physical.Boundary;
 import net.rowf.sigilia.game.component.physical.BoundingBox;
 import net.rowf.sigilia.game.component.physical.Health;
+import net.rowf.sigilia.game.component.physical.Position;
 import net.rowf.sigilia.game.component.visual.Animation;
 import net.rowf.sigilia.game.component.visual.PeriodicAnimation;
 

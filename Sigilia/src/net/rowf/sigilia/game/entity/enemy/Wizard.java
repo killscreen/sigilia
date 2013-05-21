@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Random;
 
 import net.rowf.sigilia.game.Entity;
-import net.rowf.sigilia.game.component.Position;
 import net.rowf.sigilia.game.component.mental.Intellect;
 import net.rowf.sigilia.game.component.metadata.Lifetime;
 import net.rowf.sigilia.game.component.metadata.Liveness;
@@ -14,13 +13,14 @@ import net.rowf.sigilia.game.component.physical.BoundingBox;
 import net.rowf.sigilia.game.component.physical.Health;
 import net.rowf.sigilia.game.component.physical.ModifiedHealth;
 import net.rowf.sigilia.game.component.physical.Motion;
+import net.rowf.sigilia.game.component.physical.Position;
+import net.rowf.sigilia.game.component.physical.Vector;
 import net.rowf.sigilia.game.component.visual.Animation;
 import net.rowf.sigilia.game.component.visual.Animator;
 import net.rowf.sigilia.game.entity.Prototype;
 import net.rowf.sigilia.game.entity.StandardEntity;
 import net.rowf.sigilia.game.entity.weapon.IceWeapon;
 import net.rowf.sigilia.game.entity.weapon.VisibleSigil;
-import net.rowf.sigilia.geometry.Vector;
 import android.util.FloatMath;
 
 public class Wizard extends Enemy {	

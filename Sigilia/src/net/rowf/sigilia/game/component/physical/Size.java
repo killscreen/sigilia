@@ -1,7 +1,6 @@
 package net.rowf.sigilia.game.component.physical;
 
 import net.rowf.sigilia.game.Component;
-import net.rowf.sigilia.geometry.Vector;
 
 public class Size implements Component {
 	private Vector sz;

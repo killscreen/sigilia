@@ -1,6 +1,5 @@
 package net.rowf.sigilia.game.component.physical;
 
-import net.rowf.sigilia.game.component.Position;
 
 public class PriorPosition extends Position {
 	private float timestamp;

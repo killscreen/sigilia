@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.rowf.sigilia.renderer.model.AnimatedModel;
-import net.rowf.sigilia.util.BufferUtil;
+import net.rowf.sigilia.renderer.model.BufferUtil;
 
 public class KeyframeSequence {
 	private final FloatBuffer texCoords;

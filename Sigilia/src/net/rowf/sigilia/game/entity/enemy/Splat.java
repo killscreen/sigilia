@@ -1,16 +1,16 @@
 package net.rowf.sigilia.game.entity.enemy;
 
 import net.rowf.sigilia.game.Entity;
-import net.rowf.sigilia.game.component.Position;
 import net.rowf.sigilia.game.component.mental.Intellect;
 import net.rowf.sigilia.game.component.metadata.Lifetime;
 import net.rowf.sigilia.game.component.metadata.Liveness;
 import net.rowf.sigilia.game.component.metadata.Spawn;
+import net.rowf.sigilia.game.component.physical.Position;
+import net.rowf.sigilia.game.component.physical.Vector;
 import net.rowf.sigilia.game.component.visual.Animation;
 import net.rowf.sigilia.game.component.visual.PeriodicAnimation;
 import net.rowf.sigilia.game.entity.NamedPrototype;
 import net.rowf.sigilia.game.entity.StandardEntity;
-import net.rowf.sigilia.geometry.Vector;
 
 public class Splat extends NamedPrototype {
 	private static final float SPLAT_TIME = 0.33f;

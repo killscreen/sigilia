@@ -1,14 +1,14 @@
 package net.rowf.sigilia.game.entity.weapon;
 
 import net.rowf.sigilia.game.Entity;
-import net.rowf.sigilia.game.component.Boundary;
-import net.rowf.sigilia.game.component.Position;
+import net.rowf.sigilia.game.component.physical.Boundary;
 import net.rowf.sigilia.game.component.physical.BoundingBox;
 import net.rowf.sigilia.game.component.physical.ConstantMotion;
 import net.rowf.sigilia.game.component.physical.Motion;
+import net.rowf.sigilia.game.component.physical.Position;
 import net.rowf.sigilia.game.component.physical.Size;
+import net.rowf.sigilia.game.component.physical.Vector;
 import net.rowf.sigilia.game.entity.NamedPrototype;
-import net.rowf.sigilia.geometry.Vector;
 import net.rowf.sigilia.input.gesture.DeltaSequence;
 import android.util.FloatMath;
 

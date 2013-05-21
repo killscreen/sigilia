@@ -1,7 +1,7 @@
 package net.rowf.sigilia.input.gesture;
 
 import android.util.FloatMath;
-import net.rowf.sigilia.geometry.Vector;
+import net.rowf.sigilia.game.component.physical.Vector;
 
 public class StaticDeltaSequence extends DynamicDeltaSequence {
 	// TODO: Where do these belong?

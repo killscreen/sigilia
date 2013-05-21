@@ -2,7 +2,6 @@ package net.rowf.sigilia.game.component.physical;
 
 import net.rowf.sigilia.game.Entity;
 import net.rowf.sigilia.game.component.visual.Animation;
-import net.rowf.sigilia.geometry.Vector;
 
 public class Spinning implements Orientation {
 	private static final Vector NO_SPIN = new Vector(0,0,0);

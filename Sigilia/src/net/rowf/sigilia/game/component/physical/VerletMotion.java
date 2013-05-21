@@ -1,7 +1,6 @@
 package net.rowf.sigilia.game.component.physical;
 
 import net.rowf.sigilia.game.Entity;
-import net.rowf.sigilia.game.component.Position;
 
 /**
  * Time-corrected Verlet integrator

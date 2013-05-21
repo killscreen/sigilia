@@ -7,6 +7,7 @@ import java.util.Random;
 
 import net.rowf.sigilia.R;
 import net.rowf.sigilia.game.Entity;
+import net.rowf.sigilia.game.component.physical.Vector;
 import net.rowf.sigilia.game.component.visual.GenericRepresentation;
 import net.rowf.sigilia.game.component.visual.Representation;
 import net.rowf.sigilia.game.engine.DecorationEngine.Decorator;
@@ -14,7 +15,6 @@ import net.rowf.sigilia.game.entity.Prototype;
 import net.rowf.sigilia.game.entity.enemy.Archer;
 import net.rowf.sigilia.game.entity.enemy.Arrow;
 import net.rowf.sigilia.game.entity.environment.Tree;
-import net.rowf.sigilia.geometry.Vector;
 import net.rowf.sigilia.renderer.GenericRenderable.DeferredElement;
 import net.rowf.sigilia.renderer.GenericRenderable.RenderingElement;
 import net.rowf.sigilia.renderer.GenericRenderable.StaticElement;

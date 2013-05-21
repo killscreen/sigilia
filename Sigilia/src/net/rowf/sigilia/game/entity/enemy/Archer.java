@@ -4,14 +4,14 @@ import java.util.List;
 import java.util.Random;
 
 import net.rowf.sigilia.game.Entity;
-import net.rowf.sigilia.game.component.Position;
 import net.rowf.sigilia.game.component.mental.Intellect;
 import net.rowf.sigilia.game.component.metadata.Spawn;
 import net.rowf.sigilia.game.component.physical.Health;
 import net.rowf.sigilia.game.component.physical.Motion;
+import net.rowf.sigilia.game.component.physical.Position;
+import net.rowf.sigilia.game.component.physical.Vector;
 import net.rowf.sigilia.game.component.visual.Animation;
 import net.rowf.sigilia.game.component.visual.Animator;
-import net.rowf.sigilia.geometry.Vector;
 
 public class Archer extends Enemy {
 	private static final Vector ORIGIN = new Vector(0,0,1);

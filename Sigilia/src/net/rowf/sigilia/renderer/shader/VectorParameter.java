@@ -1,7 +1,7 @@
 package net.rowf.sigilia.renderer.shader;
 
 import android.opengl.GLES20;
-import net.rowf.sigilia.geometry.Vector;
+import net.rowf.sigilia.game.component.physical.Vector;
 
 public enum VectorParameter implements ShaderParameter<Vector> {
 	COLOR("uColor"),
