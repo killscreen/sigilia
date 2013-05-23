@@ -54,8 +54,8 @@ import android.util.Log;
 public class ScenarioActivity extends FullscreenActivity implements CompletionCallback<Boolean> {
 	public static final String SCENARIO_KEY = ScenarioActivity.class.getPackage().getName() + ".scenario_class";
 
-	public static final int SCENARIO_SUCCESS = 0;
-	public static final int SCENARIO_FAILURE = 1;
+	public static final int SCENARIO_SUCCESS = 1;
+	public static final int SCENARIO_FAILURE = 2;
 	
 	public static final int SCENARIO_REQUEST = 0;
 	
